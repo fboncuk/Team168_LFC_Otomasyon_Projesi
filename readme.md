@@ -6,7 +6,7 @@ Otomasyon projesini herhangi bir çakışma (conflict) olmadan yürütmek ve kod
 
 Test websitesi: https://qa.loyalfriendcare.com/en
 
-Proje kapsamındaki iletişim için Slack kanalını kullanılacaktır.
+Proje kapsamındaki iletişim için Slack kanalı kullanılacaktır.
 Bu dokümandaki bilgiler Proje sayfasında Readme dosyasına da kaydedilecektir.
 
 Team Lead 	 : Fatih
