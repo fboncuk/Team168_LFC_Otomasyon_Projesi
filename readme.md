@@ -10,4 +10,5 @@ Proje kapsamındaki iletişim için Slack kanalı kullanılacaktır.
 Bu dokümandaki bilgiler Proje sayfasında Readme dosyasına da kaydedilecektir.
 
 Team Lead 	 : Fatih
-Scrum Master : Kerim
+
+<br>Scrum Master : Kerim
