@@ -8,5 +8,7 @@ public class Deneme_01 {
         System.out.println("Elif Deneme");
 
         System.out.println("Sinem");
+
+        System.out.println("Kerim Test");
     }
 }
