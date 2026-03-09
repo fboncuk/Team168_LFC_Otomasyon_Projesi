@@ -6,5 +6,7 @@ public class Deneme_01 {
 
         System.out.println("Team-168 Otomasyon Projesi");
         System.out.println("Elif Deneme");
+
+        System.out.println("Sinem");
     }
 }
