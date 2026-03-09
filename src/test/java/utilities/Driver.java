@@ -5,7 +5,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
-//import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
@@ -36,14 +35,6 @@ public class Driver {
                 default:
                     driver = new ChromeDriver();
             }
-//            ChromeOptions options = new ChromeOptions();
-//
-//            // Temiz profil oluştur
-//            options.addArguments("--user-data-dir=/tmp/test-profile");
-//            // Google servislerini kapat
-//            options.addArguments("--guest");
-//
-//            driver = new ChromeDriver(options);
 
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
