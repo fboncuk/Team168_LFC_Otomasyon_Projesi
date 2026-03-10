@@ -19,8 +19,6 @@ public class US29 {
 
 
 
-
-
         System.out.println("Teşekkür ederim Fatih Bey:)");
         System.out.println("Halloldu");
 
