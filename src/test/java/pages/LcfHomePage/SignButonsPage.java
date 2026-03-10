@@ -16,6 +16,29 @@ public class SignButonsPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
+    @FindBy (xpath = "//*[@id='name']")
+    public WebElement userNameKutusu;
+
+    @FindBy (id = "email")
+    public WebElement registerEmailKutusu;
+
+    @FindBy (xpath = "//*[@id='password']")
+    public WebElement registerPasswordKutusu;
+
+    @FindBy (id = "password-confirm")
+    public WebElement passwordConfirmKutusu;
+
+    @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
+    public WebElement registerSignUpButonu;
+
+
+
+
+
+
+
+
+
 
     
 
