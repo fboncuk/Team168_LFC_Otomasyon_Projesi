@@ -16,20 +16,25 @@ public class SignButonsPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
+    //Kayıt formu username kutusu
     @FindBy (xpath = "//*[@id='name']")
-    public WebElement userNameKutusu;
+    public WebElement userNameBox;
 
+    //Kayıt formu email kutusu
     @FindBy (id = "email")
-    public WebElement registerEmailKutusu;
+    public WebElement registerEmailBox;
 
+    //Kayıt formu password kutusu
     @FindBy (xpath = "//*[@id='password']")
-    public WebElement registerPasswordKutusu;
+    public WebElement registerPasswordBox;
 
+    //Kayıt formu password confirm kutusu
     @FindBy (id = "password-confirm")
-    public WebElement passwordConfirmKutusu;
+    public WebElement passwordConfirmBox;
 
+    //Kayıt formu Sign Up butonu
     @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
-    public WebElement registerSignUpButonu;
+    public WebElement registerSignUpBox;
 
 
 
