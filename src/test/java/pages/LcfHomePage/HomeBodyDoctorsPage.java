@@ -14,11 +14,22 @@ public class HomeBodyDoctorsPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-<<<<<<< Updated upstream
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+    // Doktorlar sayfasındaki tüm doktorın kartları
+    @FindBy(xpath = "//div[@class='col-md-6']")
+    public List<WebElement> allDoctorCards;
 
+    // Doktorlar sayfasındaki tüm doktorların isimleri
+    @FindBy(xpath = "//div[@class='wrapper']/h3/a")
+    public List<WebElement> allDoctorNames;
+  
+    // Doktorlar sayfasındaki tüm doktorların bilgileri
+    @FindBy(xpath = "//div[@class='wrapper']/p")
+    public List<WebElement> allDoctorDetails;
+
+    // Doktorlar sayfasındaki tüm doktorların görselleri
+    @FindBy(xpath = "//div[@class='strip grid']//img")
+    public List<WebElement> allDoctorImages;
+  
     //Anasayfa Header alanında yer alan Doctors Başlığı
     @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Doctors'])[3]")
     public WebElement DoctorsButton;
@@ -54,7 +65,7 @@ public class HomeBodyDoctorsPage {
     //Anasayfa Header alanında yer alan Doctors Başlığı altındaki Dr. Sophia Kim butonu
     @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Doctors/meows'])[3]")
     public WebElement DrSophiaKimButton;
-=======
+
     // Doktorlar sayfasındaki tüm doktorın kartları
     @FindBy(xpath = "//div[@class='col-md-6']")
     public List<WebElement> allDoctorCards;
@@ -66,7 +77,7 @@ public class HomeBodyDoctorsPage {
     // Doktorlar sayfasındaki tüm doktorların bilgileri
     @FindBy(xpath = "//div[@class='wrapper']/p")
     public List<WebElement> allDoctorDetails;
->>>>>>> Stashed changes
+
 
     // Doktorlar sayfasındaki tüm doktorların görselleri
     @FindBy(xpath = "//div[@class='strip grid']//img")
