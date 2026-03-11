@@ -18,7 +18,7 @@ public class DashboardVaccinationsPage {
 
     //Dashboard açılır menüdeki Vaccinations linki
     @FindBy (xpath = "(//*[.='Vaccinations'])[2]")
-    public WebElement vaccinationsSideBar;
+    public WebElement dashboardVaccinationSideBar;
 
     //Aşı sayfasındaki aşı ekleme butonu
     @FindBy (xpath = "//*[@class='btn btn-tag btn-success btn-tag-rounded']")
@@ -26,27 +26,27 @@ public class DashboardVaccinationsPage {
 
     //Aşı ekleme formunun başlığı
     @FindBy (tagName = "h3")
-    public WebElement HeaderTitle;
+    public WebElement addVaccinationFormHeaderTitle;
 
     //Aşı ekleme formu title kutusu
     @FindBy (id = "Title_en")
-    public WebElement titleBox;
+    public WebElement addVaccinationFormTitleBox;
 
     //Aşı ekleme formu content kutusu
     @FindBy (id = "body_en")
-    public WebElement contentBox;
+    public WebElement addVaccinationFormContentBox;
 
     //Aşı ekleme formu price kutusu
     @FindBy (id = "price")
-    public WebElement priceBox;
+    public WebElement addVaccinationFormPriceBox;
 
     //Aşı ekleme sayfası save butonu
     @FindBy (xpath = "//*[*='save']")
-    public WebElement vaccinationSaveButton;
+    public WebElement addVaccinationSaveButton;
 
     //Aşı ekleme sayfası file drop box
     @FindBy (xpath = "//*[@class='dz-default dz-message']")
-    public WebElement fileDropBox;
+    public WebElement addVaccinationFileDropBox;
 
 
 
