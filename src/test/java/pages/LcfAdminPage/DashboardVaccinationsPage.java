@@ -12,17 +12,138 @@ public class DashboardVaccinationsPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+    // Admin dashboard sayfasında sidebar menü Vaccinations Linki
+    @FindBy(xpath = "//span[text()='Vaccinations']")
+    public WebElement dashboardVaccinations;
+
+    // Admin dashboard Vaccinations sayfasında Vaccinations Title
+    @FindBy(xpath = "//span[text()='Vaccinations']")
+    public WebElement dashboardVaccinationsTitle;
 
 
 
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[1]")
+    public WebElement dashboardVaccinationsUrun1;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[2]")
+    public WebElement dashboardVaccinationsUrun2;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[3]")
+    public WebElement dashboardVaccinationsUrun3;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[4]")
+    public WebElement dashboardVaccinationsUrun4;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[5]")
+    public WebElement dashboardVaccinationsUrun5;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[6]")
+    public WebElement dashboardVaccinationsUrun6;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[7]")
+    public WebElement dashboardVaccinationsUrun7;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[8]")
+    public WebElement dashboardVaccinationsUrun8;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[9]")
+    public WebElement dashboardVaccinationsUrun9;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi
+    @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[10]")
+    public WebElement dashboardVaccinationsUrun10;
+
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[1]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun1;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[2]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun2;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[3]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun3;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[4]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun4;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[5]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun5;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[6]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun6;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[7]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun7;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[8]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun8;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[9]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun9;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Edit Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[10]/td[4]")
+    public WebElement dashboardVaccinationsEditUrun10;
 
 
 
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[1]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun1;
 
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[2]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun2;
 
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[3]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun3;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[4]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun4;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[5]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun5;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[6]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun6;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[7]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun7;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[8]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun8;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[9]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun9;
+
+    // Admin dashboard Vaccinations sayfası Vaccination listesi Delete Butonu
+    @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[10]/td[5]")
+    public WebElement dashboardVaccinationsDeleteUrun10;
 
 }
 
