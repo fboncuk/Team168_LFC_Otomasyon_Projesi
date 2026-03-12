@@ -69,7 +69,7 @@ public class AdminBodyPage {
 
     // Sağ üstteki profil ikonu; tıklandığında Settings, Edit Profile ve Logout seçeneklerini açar
     @FindBy(className = "profile-dropdown-toggle")
-    public WebElement profileDropdownButon;
+    public WebElement profileDropdownButton;
 
     // Profil dropdown menüsü açıldıktan sonra görünen "Settings" seçeneği
     @FindBy(xpath = "//*[@class='dropdown-item'][1]")
