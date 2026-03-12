@@ -35,6 +35,14 @@ public class AdminBodyPage {
     @FindBy(xpath = "//*[text()='Learn More at Google Advertisement']")
     public WebElement learnMoreAtGoogleAdvertisementLink;
 
+    // Admin ana sayfasındaki "Medicines" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Medicines']")
+    public WebElement learnMoreAtMedicinesLink;
+
+    // Admin ana sayfasındaki "Bed Managers" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Bed managers']")
+    public WebElement learnMoreAtBedManagersLink;
+
     // Sayfanın alt kısmındaki Facebook ikonuna tıklar ve Facebook sayfasına yönlendirir
     @FindBy(xpath = "//*[@class='fab fa-facebook-square']")
     public WebElement facebookIconLink;
