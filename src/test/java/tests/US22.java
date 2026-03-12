@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LcfAdminPage.AdminBodyPage;
 import pages.LcfAdminPage.DashboardMedicinesPage;
-import pages.LcfHomePage.HomeBodyDoctorsPage;
+import pages.LcfHomePage.DoctorsMainPage;
 import pages.LcfHomePage.HomeBodyPage;
 import utilities.ConfigReader;
 import utilities.Driver;
