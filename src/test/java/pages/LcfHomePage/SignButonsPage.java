@@ -36,6 +36,43 @@ public class SignButonsPage {
     @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
     public WebElement registerPageSignUpBox;
 
+    // Anasayfada sisteme giriş yapmak için kullanilacak olan Sign In linki
+    @FindBy(xpath = "Sign In")
+    public WebElement signInLinki;
+
+    // Sisteme giris yapabilmek icin e-mail kutucugu
+    @FindBy(id = "email")
+    public WebElement emailKutucusu;
+
+    // Sisteme giris yapabilmek icin password kutucugu
+    @FindBy(id = "password")
+    public WebElement passwordKutucusu;
+
+    // Remember Me Kutucusu
+    @FindBy(id = "checkbox1")
+    public WebElement rememberMeKutusu;
+
+    // Forgot Password Linki
+    @FindBy(xpath = "text-info small")
+    public WebElement forgotPasswordLink;
+
+    // Sign In onay butonu
+    @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
+    public WebElement signInButtonOnay;
+
+    // Sitenin giris sayfasina donmek icin kullanilacak Sign Out linki
+    @FindBy( id = "logout-form")
+    public WebElement adminSignOutlinki;
+
+
+
+
+
+
+
+
+
+
 
 
 
