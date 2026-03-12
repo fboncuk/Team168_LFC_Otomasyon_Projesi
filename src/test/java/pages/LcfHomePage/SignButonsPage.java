@@ -16,20 +16,62 @@ public class SignButonsPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
+    //Kayıt formu username kutusu
     @FindBy (xpath = "//*[@id='name']")
-    public WebElement userNameKutusu;
+    public WebElement registerPageUserNameBox;
 
+    //Kayıt formu email kutusu
     @FindBy (id = "email")
-    public WebElement registerEmailKutusu;
+    public WebElement registerPageEmailBox;
 
+    //Kayıt formu password kutusu
     @FindBy (xpath = "//*[@id='password']")
-    public WebElement registerPasswordKutusu;
+    public WebElement registerPagePasswordBox;
 
+    //Kayıt formu password confirm kutusu
     @FindBy (id = "password-confirm")
-    public WebElement passwordConfirmKutusu;
+    public WebElement registerPagePasswordConfirmBox;
 
+    //Kayıt formu Sign Up butonu
     @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
-    public WebElement registerSignUpButonu;
+    public WebElement registerPageSignUpBox;
+
+    // Anasayfada sisteme giriş yapmak için kullanilacak olan Sign In linki
+    @FindBy(xpath = "Sign In")
+    public WebElement signInLinki;
+
+    // Sisteme giris yapabilmek icin e-mail kutucugu
+    @FindBy(id = "email")
+    public WebElement emailKutucusu;
+
+    // Sisteme giris yapabilmek icin password kutucugu
+    @FindBy(id = "password")
+    public WebElement passwordKutucusu;
+
+    // Remember Me Kutucusu
+    @FindBy(id = "checkbox1")
+    public WebElement rememberMeKutusu;
+
+    // Forgot Password Linki
+    @FindBy(xpath = "text-info small")
+    public WebElement forgotPasswordLink;
+
+    // Sign In onay butonu
+    @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
+    public WebElement signInButtonOnay;
+
+    // Sitenin giris sayfasina donmek icin kullanilacak Sign Out linki
+    @FindBy( id = "logout-form")
+    public WebElement adminSignOutlinki;
+
+
+
+
+
+
+
+
+
 
 
 

@@ -12,9 +12,50 @@ public class DashboardUsersPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+    // --- 1. SOL MENÜ (Sidebar) ---
+    @FindBy(xpath = "//span[text()='Users']")
+    public WebElement usersMenuButton;
+
+    @FindBy(xpath = "//a[contains(text(),'Create User')]")
+    public WebElement createUsersSubMenu;
+
+    // --- 2. CREATE USER FORMU (Görsellerdeki Sırayla) ---
+
+    // Name alanı
+    @FindBy(id = "name")
+    public WebElement nameBox;
+
+    // Phone alanı
+    @FindBy(id = "Phone")
+    public WebElement phoneBox;
+
+
+    // Role / User Type
+    @FindBy(xpath = "//div[contains(@class,'nice-select')]")
+    public WebElement roleDropdownKutusu;
+
+    // Password alanı
+    @FindBy(id = "password")
+    public WebElement passwordBox;
+
+    // Password Confirmation alanı
+
+    @FindBy(id = "password_confirmation")
+    public WebElement passwordConfirmationBox;
+
+    // E-mail alanı
+    @FindBy(id = "email")
+    public WebElement emailBox;
+
+    // Avatar / Dosya Yükleme
+    @FindBy(xpath = "//input[@type='file']")
+    public WebElement avatarUploadInput;
+
+    // --- 3. İŞLEM BUTONU ---
+
+    // Kaydet (Save) Butonu
+    @FindBy(xpath = "//button[@type='submit']")
+    public WebElement saveButton;
 
 
 
