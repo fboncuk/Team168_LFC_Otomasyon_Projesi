@@ -12,13 +12,17 @@ public class DashboardMedicinesPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Sol menüde yer alan "Medicines" sayfasına yönlendirme linki
+    // Sol menüde yer alan "Medicines" ana menü (Açılır menü için)
     @FindBy(xpath = "//span[@class='title' and text()='Medicines']")
-    public WebElement sidebarMedicinesLink;
+    public WebElement sidebarMedicinesMainMenu;
 
-    // İlaçlar sayfasında yeni ilaç eklemek için kullanılan "Create Medicines" butonu
-    @FindBy(xpath = "//a[text()='Create Medicines']")
-    public WebElement medicinesPageCreateButton;
+    // Ana menüye tıkladıktan sonra açılan alt menüdeki "Medicines" linki
+    @FindBy(xpath = "//ul[@class='sub-menu']//a[contains(text(), 'Medicines')]")
+    public WebElement sidebarMedicinesSubMenuLink;
+
+    // Ana menüye tıkladıktan sonra açılan alt menüdeki "Create Medicines" linki
+    @FindBy(xpath = "//ul[@class='sub-menu']//a[contains(text(), 'Create Medicines')]")
+    public WebElement sidebarCreateMedicinesSubMenuLink;
 
     // İlaç eklerken ilacın adının girildiği "Title" veri kutusu
     @FindBy(xpath = "//input[@id='Title_en']")
