@@ -22,23 +22,25 @@ public class AppointmentBookingPage {
 
     // 3. Departman Seçimi (Department Dropdown)
 
-    // Önce kutuyu açmak için buna tıkla
-    @FindBy(xpath = "(//div[@class='nice-select form-control'])[1]")
+    // Önce kutuyu açmak için
+    @FindBy(xpath = "//span[text()='Wellness']")
     public WebElement departmentDropdownKutusu;
 
-    // Açılan listeden Dermatology'ı(Wellness vb. seçilecekse locatedeki kısmı değişin) seçmek için buna tıkla
-    @FindBy(xpath = "//ul[@class='list']//li[text()='Dermatology']")
-    public WebElement DermatologySecenegi;
+    // Listeden seçim yapmak için
+    @FindBy(xpath = "//li[text()='Dermatology']")
+    public WebElement dermatologySecenegi;
+
 
     // 4. Doktor Seçimi (Doctor Dropdown)
 
-    // Önce kutuyu açmak için buna tıkla
-    @FindBy(xpath = "(//div[@class='nice-select form-control'])[2]")
+    // Önce kutuyu açmak için
+    @FindBy(xpath = "//span[contains(text(),'Dr. Alejandro')]")
     public WebElement doctorDropdownKutusu;
 
-    // Açılan listeden doktoru seçmek için buna tıkla
-    @FindBy(xpath = "//ul[@class='list']//li[text()='Dr. Alejandro Martinez']")
+    // Listeden doktor seçmek için
+    @FindBy(xpath = "//li[text()='Dr. Marcus Rodriguez']")
     public WebElement doktorSecenegi;
+
 
     // 5. Mesaj Kutusu (Message Box)
     @FindBy(name = "problem")

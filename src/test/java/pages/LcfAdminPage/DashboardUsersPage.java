@@ -19,7 +19,7 @@ public class DashboardUsersPage {
     @FindBy(xpath = "//a[contains(text(),'Create User')]")
     public WebElement createUsersSubMenu;
 
-    // --- 2. CREATE USER FORMU (Görsellerdeki Sırayla) ---
+    // --- 2. CREATE USER FORMU (Form Sıralamasıyla) ---
 
     // Name alanı
     @FindBy(id = "name")
