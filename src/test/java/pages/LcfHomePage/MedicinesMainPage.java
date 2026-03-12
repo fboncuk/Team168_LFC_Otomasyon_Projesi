@@ -5,81 +5,149 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class MedicinesMainPage {
+public class DoctorsMainPage {
 
-    public MedicinesMainPage(){
+    public DoctorsMainPage(){
 
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // 1. Wellness
-    @FindBy(xpath = "//h3[text()='Wellness']")
-    public WebElement WelnessDepartments;
+    // Aşağıdaki locator ornektir
+    @FindBy(id = "global-search")
+    public WebElement aramaKutusu;
 
-    // 2. Dental Care
-    @FindBy(xpath = "//h3[text()='Dental Care']")
-    public WebElement DentalCare;
+    //Home header bölümü medicines linki
+    @FindBy (xpath = "(//a[.='Medicines'])[3]")
+    public WebElement HomePageDdmMedicinesLink;
 
-    // 3. Anaesthesia
-    @FindBy(xpath = "//h3[text()='Anaesthesia']")
-    public WebElement Anaesthesia;
+    //Medicines dropdownmenüsü Rimadly ilacı linki
+    @FindBy (xpath = "(//a[contains(., 'Rimadyl')])[2]")
+    public WebElement HomePageDdmRimadlyLink;
 
-    // 4. Dermatology
-    @FindBy(xpath = "//h3[text()='Dermatology']")
-    public WebElement Dermatology;
+    //Medicines dropdownmenüsü Revolution ilacı linki
+    @FindBy (xpath ="(//a[contains(., 'Revolution')])[4]" )
+    public WebElement HomePageDdmRevolutionLink;
 
-    // 5. Diagnostics
-    @FindBy(xpath = "//h3[text()='Diagnostics']")
-    public WebElement Diagnostics;
+    //Medicines dropdownmenüsü Baytril ilacı linki
+    @FindBy (xpath ="(//a[contains(., 'Baytril')])[2]" )
+    public WebElement HomePageDdmBaytrilLink;
 
-    // 6. Vaccinations
-    @FindBy(xpath = "//h3[text()='Vaccinations']")
-    public WebElement Vaccinations;
+    //Medicines dropdownmenüsü Apoquel ilacı linki
+    @FindBy (xpath ="(//a[contains(., 'Apoquel')])[2]" )
+    public WebElement HomePageDdmApoquelLink;
 
-    // 7. Pain Control
-    @FindBy(xpath = "//h3[text()='Pain Control']")
-    public WebElement PainControl;
+    //Medicines dropdownmenüsü Metacam ilacı linki
+    @FindBy (xpath ="(//a[contains(., 'Metacam')])[2]" )
+    public WebElement HomePageDdmMetacamLink;
 
-    // 8. Boarding
-    @FindBy(xpath = "//h3[text()='Boarding']")
-    public WebElement Boarding;
+    //Medicines dropdown menüdeki tüm ilaçları içeren liste
+    @FindBy (xpath = "//li[.//a[text()='Medicines']]//ul/li/a")
+    public WebElement HomePageDdmMedicineSubLinksList;
 
-    
-    // Anasayfa Header alanında yer alan Departments Butonu
-    @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Departments'])[3]")
-    public WebElement DepartmentsMainButton;
+//===================================================================================
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Wellness Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/wellness'])[2]")
-    public WebElement WellnesLinkButton;
+    //İlaç detay sayfasında Rimadly ilacı için başlık linki
+    @FindBy (xpath = "(//h1[contains(., 'Rimadyl')])[2]")
+    public WebElement medicinesRimadlyTitle;
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Dental Care Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/dental-care'])[2]")
-    public WebElement DentalCareLinkButton;
+    //İlaç detay sayfasında Revolution ilacı için başlık linki
+    @FindBy (xpath = "(//h1[contains(., 'Revolution')])[2]")
+    public WebElement medicinesRevolutionTitle;
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Anaesthesia Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/anaesthesia'])[2]")
-    public WebElement AnaesthesiaLinkButton;
+    //İlaç detay sayfasında Baytril ilacı için başlık linki
+    @FindBy (xpath = "(//h1[contains(., 'Baytril')])[2]")
+    public WebElement medicinesBaytrilTitle;
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Dermatology Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/dermatology'])[2]")
-    public WebElement DermatologyLinkButton;
+    //İlaç detay sayfasında Apoquel ilacı için başlık linki
+    @FindBy (xpath = "(//h1[contains(., 'Apoquel')])[2]")
+    public WebElement medicinesApoquelTitle;
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Diagnostics Linki
-    @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Departments/diagnostics'])[2]")
-    public WebElement DiagnosticsLinkButton;
+    //İlaç detay sayfasında Metacam ilacı için başlık linki
+    @FindBy (xpath = "(//h1[contains(., 'Metacam')])[2]")
+    public WebElement medicinesMetacamTitle;
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Vaccinations Linki
-    @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Departments/vaccinations'])[1]")
-    public WebElement VaccinationsLinkButton;
+//===================================================================================
+    /*
+    İlaç detaylarının text locator'larının aynı olması sayfa yapısından kaynaklı.
+    Herhangi bir hata yok
+     */
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Pain Control Linki
-    @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Departments/pain-control'])[1]")
-    public WebElement PainControlLinkButton;
+    //İlaç detay sayfasında Rimadly ilacı için bilgiler linki
+    @FindBy (xpath = "//section[div[@class='detail_title_1']]/p")
+    public WebElement medicinesRimadlyDetailText;
 
-    //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Boarding Linki
-    @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Departments/boarding'])[1]")
-    public WebElement BoardingLinkButton;
+    //İlaç detay sayfasında Revolution ilacı için bilgiler linki
+    @FindBy (xpath = "//section[div[@class='detail_title_1']]/p")
+    public WebElement medicinesRevolutionDetailText;
+
+    //İlaç detay sayfasında Baytril ilacı için bilgiler linki
+    @FindBy (xpath = "//section[div[@class='detail_title_1']]/p")
+    public WebElement medicinesBaytrilDetailText;
+
+    //İlaç detay sayfasında Apoquel ilacı için bilgiler linki
+    @FindBy (xpath = "//section[div[@class='detail_title_1']]/p")
+    public WebElement medicinesApoquelDetailText;
+
+    //İlaç detay sayfasında Metacam ilacı için bilgiler linki
+    @FindBy (xpath = "//section[div[@class='detail_title_1']]/p")
+    public WebElement medicinesMetacamDetailText;
+
+//===================================================================================
+    //Medicines sayfası sidebar bölümündeki Rimadly ilacı için link
+    @FindBy (xpath = "(//a[contains(., 'Rimadyl')])[2]")
+    public WebElement medicinesRimadlySideBarLink;
+
+    //Medicines sayfası sidebar bölümündeki Revolution ilacı için link
+    @FindBy (xpath ="(//a[contains(., 'Revolution')])[2]" )
+    public WebElement medicinesRevolutionSideBarLink;
+
+    //Medicines sayfası sidebar bölümündeki Baytril ilacı için link
+    @FindBy (xpath ="(//a[contains(., 'Baytril')])[2]" )
+    public WebElement medicinesBaytrilSideBarLink;
+
+    //Medicines sayfası sidebar bölümündeki Apoquel ilacı için link
+    @FindBy (xpath ="(//a[contains(., 'Apoquel')])[2]" )
+    public WebElement medicinesApoquelSideBarLink;
+
+    //Medicines sayfası sidebar bölümündeki Metacam ilacı için link
+    @FindBy (xpath ="(//a[contains(., 'Metacam')])[2]" )
+    public WebElement medicinesMetacamSideBarLink;
+
+//===================================================================================
+
+    //Medicines sayfası body bölümündeki Rimadly ilacı linki
+    @FindBy (xpath = "(//a[contains(., 'Rimadyl')])[3]")
+    public WebElement medicinesBodyRimadlyLink;
+
+    //Medicines sayfası body bölümündeki Revolution ilacı linki
+
+    @FindBy (xpath ="(//a[contains(., 'Revolution')])[3]" )
+    public WebElement medicinesBodyRevolutionLink;
+
+    //Medicines sayfası body bölümündeki Baytril ilacı linki
+
+    @FindBy (xpath ="(//a[contains(., 'Baytril')])[3]" )
+    public WebElement medicinesBodyBaytrilLink;
+
+    //Medicines sayfası body bölümündeki Apoquel ilacı linki
+
+    @FindBy (xpath ="(//a[contains(., 'Apoquel')])[3]" )
+    public WebElement medicinesBodyApoquelLink;
+
+    //Medicines sayfası body bölümündeki Metacam ilacı linki
+    @FindBy (xpath ="(//a[contains(., 'Metacam')])[3]" )
+    public WebElement medicinesBodyMetacamLink;
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
