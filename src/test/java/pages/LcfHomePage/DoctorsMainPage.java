@@ -5,9 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class HomeBodyMedicinesPage {
+public class DoctorsMainPage {
 
-    public HomeBodyMedicinesPage(){
+    public DoctorsMainPage(){
 
         PageFactory.initElements(Driver.getDriver(),this);
     }

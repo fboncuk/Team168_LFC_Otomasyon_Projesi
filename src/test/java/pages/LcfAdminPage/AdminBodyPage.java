@@ -15,10 +15,6 @@ public class AdminBodyPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
-
     // Admin ana sayfasındaki "Users" kartı içerisinde yer alan yönlendirme linki
     @FindBy(xpath = "//*[text()='Learn More at Users']")
     public WebElement learnMoreAtUsersLink;

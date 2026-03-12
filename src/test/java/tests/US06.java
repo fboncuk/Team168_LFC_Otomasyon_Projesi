@@ -1,7 +1,9 @@
 package tests;
 
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LcfHomePage.HomeBodyPage;
+import pages.LcfHomePage.VacinationsMainPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
@@ -38,7 +40,13 @@ public class US06 {
 
     @Test
     public void US06_TC04_FooterTiklamaTesti(){
+        VacinationsMainPage vacinationsMainPage = new VacinationsMainPage();
+        Driver.getDriver().get("https://qa.loyalfriendcare.com/en/Pets/xatem-mitrum-facen");
+        String text = vacinationsMainPage.detailedTitleRabiesVaccine.getText();
+        System.out.println(text);
+        Assert.assertTrue(text.contains("Rabies"));
 
+        Driver.quitDriver();
 
     }
 

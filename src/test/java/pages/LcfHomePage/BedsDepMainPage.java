@@ -5,9 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class HomeBodyBedsDepPage {
+public class BedsDepMainPage {
 
-    public HomeBodyBedsDepPage(){
+    public BedsDepMainPage(){
 
         PageFactory.initElements(Driver.getDriver(),this);
     }
