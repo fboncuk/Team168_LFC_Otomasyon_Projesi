@@ -27,8 +27,8 @@ public class US22 {
 
         // Geçerli admin bilgileriyle giriş yapılır
         SignButonsPage signButonsPage = new SignButonsPage();
-        signButonsPage.emailKutucusu.sendKeys(ConfigReader.getProperty("T11AdminMail"));
-        signButonsPage.passwordKutucusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
+        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T11AdminMail"));
+        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
         signButonsPage.signInButtonOnay.click();
 
         adminBodyPage = new AdminBodyPage();

@@ -16,6 +16,21 @@ public class DashboardTicketsPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
+    // Sidebar header menüsünü açma
+    @FindBy(xpath ="//*[@class ='page-sidebar']")
+    public WebElement sidebarMenu;
+
+    // Tickets Linki
+    @FindBy (xpath = "(//*[.='Tickets'])[2]")
+    public WebElement ticketsLink;
+
+    // Randevu olusturulduguna dair bilgi ekrani
+    @FindBy (xpath ="(//*[@class = 'card-header clearfix'])[1]")
+    public WebElement randevuKayitBilgiEkrani;
+
+
+
+
 
 
 

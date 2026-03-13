@@ -46,13 +46,13 @@ public class SignButonsPage {
 
     // Sisteme giris yapabilmek icin e-mail kutucugu
     @FindBy(id = "email")
-    public WebElement emailKutucusu;
+    public WebElement emailKutusu;
 
     // Sisteme giris yapabilmek icin password kutucugu
     @FindBy(id = "password")
-    public WebElement passwordKutucusu;
+    public WebElement passwordKutusu;
 
-    // Remember Me Kutucusu
+    // Remember Me Kutusu
     @FindBy(id = "checkbox1")
     public WebElement rememberMeKutusu;
 
