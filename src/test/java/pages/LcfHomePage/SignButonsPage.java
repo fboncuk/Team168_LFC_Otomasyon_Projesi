@@ -90,6 +90,38 @@ public class SignButonsPage {
 
 
 
+    //Kerim TIRPAN US9 için
+    //Reset Password sayfasındaki header logo yerine bulunan yazı
+    @FindBy (className = "navbar-brand")
+    public  WebElement passwordResetPageTextInsteadOfLogo;
+
+    //Reset Password sayfasindaki email text box
+    @FindBy (id ="email")
+    public  WebElement registerEmailPageEmailTextBox;
+
+    //Reset Password sayfasindaki "Send Password Reset Link"
+    @FindBy (xpath = "//*[@class='btn btn-primary']")
+    public  WebElement ResetPasswordPageSendPasswordResetButton;
+
+    //Reset Password hatalı email uyarı mesajı
+    @FindBy (className = "invalid-feedback")
+    public  WebElement feedbackMessageInvalidEmailInResetPageTextBox;
+
+    //Reset Email hata popup
+    @FindBy(xpath = "//*[contains(text(),'Email could not be sent')]")
+    WebElement passwordResetErrorPopup;
+
+    //Reset email hata popup alternatif
+    @FindBy(css = ".modal-content")
+    WebElement getPasswordResetErrorPopup;
+
+    //Reset password sayfası Login Link
+    @FindBy(xpath = "(//*[@class='nav-link'])[1]")
+    WebElement passwordResetPAgeLoginLink;
+
+    //Reset password sayfası Register Link
+    @FindBy(xpath = "(//*[@class='nav-link'])[2]")
+    WebElement passwordResetPAgeRegisterLink;
 
 
 
