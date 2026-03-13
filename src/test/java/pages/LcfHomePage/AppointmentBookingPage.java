@@ -50,6 +50,13 @@ public class AppointmentBookingPage {
     @FindBy(id = "submit-contact-detail")
     public WebElement appointmentBookingButton;
 
+
+
+    //Appointment formunun tamamı
+    @FindBy (xpath = "//*[@class='box_detail booking']")
+    public WebElement appointmentFormContainer;
+
+
     
 
 

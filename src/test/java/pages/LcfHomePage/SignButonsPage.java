@@ -36,6 +36,26 @@ public class SignButonsPage {
     @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
     public WebElement registerPageSignUpBox;
 
+    //AnaSayfa header bölümü username butonu
+    @FindBy (xpath = "(//*[@class='btn_add'])[1]")
+    public WebElement headerUserName;
+
+    //Anasayfa signout butonu
+    @FindBy (xpath = "(//*[@class='btn_add'])[2]")
+    public WebElement homePageSignOut;
+
+    @FindBy (xpath = "//*[.='The email has already been taken.']")
+    public WebElement emailTakenErrorMessage;
+
+    //Ana sayfadaki SignUp Butonu
+    @FindBy (xpath = "(//*[@class='btn_add'])[2]")
+    public WebElement homePageSignUpButton;
+
+
+
+
+
+
     // Anasayfada sisteme giriş yapmak için kullanilacak olan Sign In linki
     @FindBy(xpath = "(//*[@class='btn_add'])[1]")
     public WebElement signInLinki;
