@@ -15,10 +15,6 @@ public class AdminBodyPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
-
     // Admin ana sayfasındaki "Users" kartı içerisinde yer alan yönlendirme linki
     @FindBy(xpath = "//*[text()='Learn More at Users']")
     public WebElement learnMoreAtUsersLink;
@@ -38,6 +34,14 @@ public class AdminBodyPage {
     // Admin ana sayfasındaki "Google Advertisement" kartı içerisinde yer alan yönlendirme linki
     @FindBy(xpath = "//*[text()='Learn More at Google Advertisement']")
     public WebElement learnMoreAtGoogleAdvertisementLink;
+
+    // Admin ana sayfasındaki "Medicines" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Medicines']")
+    public WebElement learnMoreAtMedicinesLink;
+
+    // Admin ana sayfasındaki "Bed Managers" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Bed managers']")
+    public WebElement learnMoreAtBedManagersLink;
 
     // Sayfanın alt kısmındaki Facebook ikonuna tıklar ve Facebook sayfasına yönlendirir
     @FindBy(xpath = "//*[@class='fab fa-facebook-square']")
@@ -69,7 +73,7 @@ public class AdminBodyPage {
 
     // Sağ üstteki profil ikonu; tıklandığında Settings, Edit Profile ve Logout seçeneklerini açar
     @FindBy(className = "profile-dropdown-toggle")
-    public WebElement profileDropdownButon;
+    public WebElement profileDropdownButton;
 
     // Profil dropdown menüsü açıldıktan sonra görünen "Settings" seçeneği
     @FindBy(xpath = "//*[@class='dropdown-item'][1]")
@@ -82,6 +86,8 @@ public class AdminBodyPage {
     // Profil dropdown menüsü açıldıktan sonra görünen "Logout" seçeneği
     @FindBy(xpath = "//*[.='Logout']")
     public WebElement profileLogoutOption;
+
+
 
 
 

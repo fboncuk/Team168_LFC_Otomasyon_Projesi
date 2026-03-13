@@ -139,6 +139,9 @@ public class HomeBodyPage {
     @FindBy(xpath = "//h3[contains(text(), 'Surgical Procedure')]")
     public WebElement bodyVaccinationSurgicalLink;
 
+    // Giriş yaptıktan sonra sağ üstte çıkan turuncu Dashboard/Profil butonu
+    @FindBy(xpath = "//a[contains(@class,'btn_add')]")
+    public WebElement dashboardGirisButonu;
 
     
 

@@ -5,6 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
 import java.io.File;
 import java.io.IOException;
@@ -208,6 +209,26 @@ public class ReusableMethods {
         }
     }
     // *********************************
+
+    /*
+     * Dashboard üzerindeki 'Learn More' linklerinin fonksiyonelliğini test eder.
+     * Verilen elemente tıklar, yönlendirme yapılan URL'in beklenen içeriği
+     * barındırıp barındırmadığını kontrol eder.
+     * @param linkElement ---> Tıklanacak olan 'Learn More' butonu (WebElement)
+     * @param ExpectedUrlIcerik ---> URL içinde geçmesi beklenen anahtar kelime (String)
+     */
+    public static void adminDashboardLinkKontrol(WebElement linkElement, String ExpectedUrlIcerik) {
+
+        // Linke tıkla
+        linkElement.click();
+
+        // URL'i al
+        String actualUrl = Driver.getDriver().getCurrentUrl();
+
+        // URL doğrula
+        Assert.assertTrue(actualUrl.contains(ExpectedUrlIcerik),
+                "HATA: " + ExpectedUrlIcerik + " modülüne yönlendirme yapılamadı! Gidilen URL: " + actualUrl);
+    }
 
 
 
