@@ -12,9 +12,9 @@ public class VacinationsMainPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+//    // Vaccines Main sayfasında Rabies Vaccine linki
+//    @FindBy(xpath = "(//a[normalize-space()='Rabies Vaccine'])[2]")
+//    public WebElement vaccinesMainPageRabies;
 
     // Vaccines Main sayfasında Rabies Vaccine linki
     @FindBy(xpath = "(//div[@class='wrapper'])[1]")
@@ -23,7 +23,7 @@ public class VacinationsMainPage {
     // Vaccines Main sayfasında DHPP Vaccine
     // (Distemper, Hepatitis, Parainfluenza, Parvovirus Vaccine) linki
     @FindBy(xpath = "(//div[@class='wrapper'])[2]")
-    public WebElement vaccinesMainPageDHHP;
+    public WebElement vaccinesMainPageDHPP;
 
     // Vaccines Main sayfasında Feline Leukemia Vaccine linki
     @FindBy(xpath = "(//div[@class='wrapper'])[3]")
@@ -43,11 +43,11 @@ public class VacinationsMainPage {
 
     // Vaccines Main sayfasında Feline Herpesvirus Vaccine linki
     @FindBy(xpath = "(//div[@class='wrapper'])[7]")
-    public WebElement vaccinesMainPageRabiesVaccine;
+    public WebElement vaccinesMainPageFelineHerpesvirus;
 
     // Vaccines Main sayfasında Surgical Procedure: Spaying (Ovariohysterectomy) linki
     @FindBy(xpath = "(//div[@class='wrapper'])[8]")
-    public WebElement vaccinesMainPageFelineHerpesvirus;
+    public WebElement vaccinesMainPageSurgicalProcedure;
 
     // Vaccines Main sayfasında Feline Viral Rhinotracheitis linki
     @FindBy(xpath = "(//div[@class='wrapper'])[9]")
