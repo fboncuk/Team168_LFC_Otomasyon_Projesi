@@ -70,7 +70,6 @@ public class HomeBodyFooterLinksPage {
     @FindBy(xpath = "//h3[@data-target='#collapse_ft_3']")
     public WebElement footerContactsTitle;
 
-
     // Anasayfa altındaki Footerde yer alan Adres metni
     @FindBy(xpath = "(//ul[@class='contacts']/li)[1]")
     public WebElement footerAdressText;
