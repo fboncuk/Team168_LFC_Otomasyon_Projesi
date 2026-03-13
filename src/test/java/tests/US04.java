@@ -43,9 +43,9 @@ public class US04 {
 
         loginPage.signInLinki
                 .click();
-        loginPage.emailKutucusu
+        loginPage.emailKutusu
                 .sendKeys(ConfigReader.getProperty("T04UserMail"));
-        loginPage.passwordKutucusu
+        loginPage.passwordKutusu
                 .sendKeys(ConfigReader.getProperty("T04UserPassword"));
         loginPage.signInButtonOnay
                 .click();
