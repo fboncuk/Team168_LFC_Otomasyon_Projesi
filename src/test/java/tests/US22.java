@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.LcfAdminPage.AdminBodyPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
@@ -18,6 +19,7 @@ import java.util.List;
 public class US22 {
 
     AdminBodyPage adminBodyPage;
+    SoftAssert softAssert;
 
     @BeforeMethod
     public void setup(){
@@ -32,6 +34,7 @@ public class US22 {
         signButonsPage.signInButtonOnay.click();
 
         adminBodyPage = new AdminBodyPage();
+        softAssert = new SoftAssert();
     }
 
     @AfterMethod
@@ -71,11 +74,12 @@ public class US22 {
         for (WebElement eachSummaryCard : dashboardSummaryCardList) {
 
             // Görünürlüğü test eder
-            Assert.assertTrue(eachSummaryCard.isDisplayed(),
+            softAssert.assertTrue(eachSummaryCard.isDisplayed(),
                     "HATA: Dashboard özet kartı/linki görünmüyor!");
             // Konsolda hangi kartın başarıyla geçtiğini takip eder
             System.out.println("Görünürlük doğrulandı: " + eachSummaryCard.getText());
         }
+        softAssert.assertAll();
     }
 
     @Test(priority = 1)
@@ -171,13 +175,14 @@ public class US22 {
         for (WebElement eachSocialMediaIcon : dashboardSocialMediaIconList) {
 
             // Görünürlüğünü kontrol eder
-            Assert.assertTrue(eachSocialMediaIcon.isDisplayed(),
+            softAssert.assertTrue(eachSocialMediaIcon.isDisplayed(),
                     "HATA: Sosyal medya ikonu görünmüyor!");
 
             // Tıklanabilir olduğunu kontrol eder
-            Assert.assertTrue(eachSocialMediaIcon.isEnabled(),
+            softAssert.assertTrue(eachSocialMediaIcon.isEnabled(),
                     "HATA: Sosyal medya ikonu tıklanabilir değil!");
         }
+        softAssert.assertAll();
 
     }
 
