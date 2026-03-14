@@ -202,6 +202,10 @@ public class DashboardPage {
     @FindBy(linkText= "Vaccinations")
     public WebElement DashboardPageLeftMenuSubmenuVaccinations;
 
+    // Admin dashboard'da sol menününün locator'ı
+    @FindBy(className = "sidebar-menu")
+    public WebElement dashboardPageSideBarMenu;
+
 
 
 
