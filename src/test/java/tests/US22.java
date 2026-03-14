@@ -138,7 +138,7 @@ public class US22 {
         int expectedMessageCountFromDashboard = Integer.parseInt(fullText.replaceAll("[^0-9]", ""));
         System.out.println("Dashboard'da beklenen mesaj sayısı: " + expectedMessageCountFromDashboard);
 
-        // 4. Mesajlar sayfasına gider ticketlari sayar
+        // Mesajlar sayfasına gider ticketlari sayar
         adminBodyPage.learnMoreAtMessagesLink.click();
 
         List<WebElement> actualMessageTicketList = Driver.getDriver().findElements(
@@ -148,7 +148,7 @@ public class US22 {
         int actualMessageCountOnMessagesPage = actualMessageTicketList.size();
         System.out.println("Mesajlar sayfasında bulunan gerçek sayı: " + actualMessageCountOnMessagesPage);
 
-        // 5. KARŞILAŞTIRMA
+        // Dashboard'da gözüken ve aslında olan ticket sayılarını karşılaştırır
         Assert.assertEquals(actualMessageCountOnMessagesPage, expectedMessageCountFromDashboard,
                 "HATA: Dashboard rakamı ile sayfadaki ticket sayısı uyuşmuyor!");
     }

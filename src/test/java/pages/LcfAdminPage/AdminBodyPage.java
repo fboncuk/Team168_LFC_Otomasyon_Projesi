@@ -87,6 +87,10 @@ public class AdminBodyPage {
     @FindBy(xpath = "//*[.='Logout']")
     public WebElement profileLogoutOption;
 
+    // Admin kullanıcısının isminin olduğu yer
+    @FindBy(className = "semi-bold")
+    public WebElement profileNameText;
+
 
 
 
