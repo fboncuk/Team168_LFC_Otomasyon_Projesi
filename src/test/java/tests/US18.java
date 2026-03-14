@@ -38,9 +38,9 @@ public class US18 {
 
         signButonsPage.signInLinki
                 .click();
-        signButonsPage.emailKutucusu
+        signButonsPage.emailKutusu
                 .sendKeys(ConfigReader.getProperty("T07UserMail"));
-        signButonsPage.passwordKutucusu
+        signButonsPage.passwordKutusu
                 .sendKeys(ConfigReader.getProperty("T07UserPassword"));
         signButonsPage.signInButtonOnay
                 .click();
