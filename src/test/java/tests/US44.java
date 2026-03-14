@@ -13,6 +13,7 @@ import utilities.ReusableMethods;
 
 public class US44 {
     AdminBodyPage adminBodyPage;
+    SoftAssert softAssert;
 
     @BeforeMethod
     public void setup(){
@@ -27,6 +28,7 @@ public class US44 {
         signButonsPage.signInButtonOnay.click();
 
         adminBodyPage = new AdminBodyPage();
+        softAssert = new SoftAssert();
     }
 
     @AfterMethod
@@ -79,7 +81,9 @@ public class US44 {
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
         // URL doğrulaması yapılır eşleşmeme durumunda hata mesajı raporlanır
-        Assert.assertEquals(actualUrl,expectedUrl, "HATA: Logout işlemi sonrası ana sayfaya yönlendirme yapılamadı!");
+        softAssert.assertEquals(actualUrl,expectedUrl, "HATA: Logout işlemi sonrası ana sayfaya yönlendirme yapılamadı!");
+
+        softAssert.assertAll();
 
     }
     @Test
@@ -98,8 +102,9 @@ public class US44 {
 
         // Eğer sistem güvenliyse, geri basıldığında URL "/admin" İÇERMEMELİDİR.
         // Eğer actualUrl hala "/admin" içeriyorsa bu test FAIL verecek ve mesajını yazacaktır.
-        Assert.assertFalse(actualUrl.toLowerCase().contains("/admin"),
+        softAssert.assertFalse(actualUrl.toLowerCase().contains("/admin"),
                 "BUG: Kullanıcı çıkış yaptıktan sonra geri butonu ile admin sayfasına tekrar erişebiliyor!");
+        softAssert.assertAll();
 
     }
 
