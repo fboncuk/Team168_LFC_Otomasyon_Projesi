@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class MedicinesMainPage {
 
     public MedicinesMainPage(){
@@ -42,7 +44,7 @@ public class MedicinesMainPage {
 
     //Medicines dropdown menüdeki tüm ilaçları içeren liste
     @FindBy (xpath = "//li[.//a[text()='Medicines']]//ul/li/a")
-    public WebElement HomePageDdmMedicineSubLinksList;
+    public List<WebElement> HomePageDdmMedicineSubLinksList;
 
 //===================================================================================
 
@@ -112,6 +114,10 @@ public class MedicinesMainPage {
     //Medicines sayfası sidebar bölümündeki Metacam ilacı için link
     @FindBy (xpath ="(//a[contains(., 'Metacam')])[2]" )
     public WebElement medicinesMetacamSideBarLink;
+
+    //Medicines sayfası sidebar bölümündeki tüm ilaçları içeren liste
+    @FindBy (xpath = "//div[@class='filter_type']//a")
+    public List<WebElement> medicinesSideBarList;
 
 //===================================================================================
 

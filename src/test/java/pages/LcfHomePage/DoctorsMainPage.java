@@ -14,7 +14,7 @@ public class DoctorsMainPage {
     }
 
 
-    // Doktorlar sayfasındaki tüm doktorın kartları
+    // Doktorlar sayfasındaki tüm doktorların kartları
     @FindBy(xpath = "//div[@class='col-md-6']")
     public List<WebElement> allDoctorCards;
 
