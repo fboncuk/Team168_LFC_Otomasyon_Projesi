@@ -16,7 +16,7 @@ public class DashboardBedManagersPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
-<<<<<<< HEAD
+
     //BedManager sayfasi taitl text
     @FindBy(tagName = "h3")
     public WebElement bedMenegersPageTitleText;
@@ -24,11 +24,11 @@ public class DashboardBedManagersPage {
     //Bedmanagers Page Edit butonu
     @FindBy(xpath = "(//a[@class='btn btn-complete btn-cons btn-animated from-left fa fa-edit'])[1]")
     public WebElement bedManegerPageEditButon;
-=======
+
     // Admin dashboard Bed Managers sidebar link
     @FindBy(xpath = "//span[text()='Bed managers']")
     public WebElement bedManagersSidebarLink;
->>>>>>> main
+
 
     // Admin dashboard Bed Managers sidebar sublink
     @FindBy(xpath = "//a[text()='Bed managers']")
@@ -38,7 +38,7 @@ public class DashboardBedManagersPage {
     @FindBy(xpath = "//a[text()='Create Bed managers']")
     public WebElement addBedManagersSidebarSubLink;
 
-<<<<<<< HEAD
+
     //BedManegers Page Title List
     @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[*]/td[2]/p")
     public WebElement bedMenegerPageListTitle;
@@ -56,11 +56,11 @@ public class DashboardBedManagersPage {
     @FindBy(xpath = "    //*[@id=\"tableWithSearch\"]/tbody/tr[*]/td[1]/span\n")
     public WebElement bedMenegerPageImageList;
 
-=======
+
     // Admin dashboard Create Bed Managers Title
     @FindBy(xpath = "//h3[text()=' Create Bed managers ']")
     public WebElement dashboardCreateBedManagerTitle;
->>>>>>> main
+
 
     // Admin dashboard Create Bed Managers Title Kutusu
     @FindBy(xpath = "//input[@id=\"Title_en\"]")
