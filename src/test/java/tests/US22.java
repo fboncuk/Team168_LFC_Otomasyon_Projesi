@@ -23,7 +23,6 @@ import java.util.List;
 public class US22 {
 
     AdminBodyPage adminBodyPage;
-    SoftAssert softAssert;
 
     @BeforeMethod
     public void setup(){
@@ -38,7 +37,6 @@ public class US22 {
         signButonsPage.signInButtonOnay.click();
 
         adminBodyPage = new AdminBodyPage();
-        softAssert = new SoftAssert();
     }
 
     @AfterMethod
@@ -49,17 +47,21 @@ public class US22 {
     // Devre dışı bırakmak için (enabled = false) kullan
     @Test(priority = -2)
     public void US22_TC01_AdminPaneliGoruntulemeTesti(){
+        SoftAssert softAssert = new SoftAssert();
 
         // Mevcut URL'in admin Dashboard içerdiği doğrulanır
         String expectedUrlContent = "/admin";
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
-        Assert.assertTrue(actualUrl.contains(expectedUrlContent), "HATA: Admin paneline yönlendirme başarısız!");
+        softAssert.assertTrue(actualUrl.contains(expectedUrlContent), "HATA: Admin paneline yönlendirme başarısız!");
+        softAssert.assertAll();
     }
 
     // Devre dışı bırakmak için (enabled = false) kullan
     @Test(priority = -1)
     public void US_22_TC02_DashboardOzetKartlariGorunurlukTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
         // Dashboard üzerindeki tüm kartlarda linkler de olduğundan,
         // linklerle kartların görünür olduğu doğrulanır.
 
@@ -133,6 +135,8 @@ public class US22 {
     // Tüm kartlar aynı CSS sınıf yapısını paylaştığı için görsellerin veya ikonların varlığı programatik olarak birbirinden ayırt edilememektedir.
     @Test(priority = 8)
     public void US22_TC04_DashboardMesajTutarlilikTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
         // Elementi dinamik metinle bulur
         WebElement dashboardMessageElement = Driver.getDriver().findElement(
                 By.xpath("//*[contains(text(),'Messages in your Database')]")
@@ -157,12 +161,14 @@ public class US22 {
         System.out.println("Mesajlar sayfasında bulunan gerçek sayı: " + actualMessageCountOnMessagesPage);
 
         // Dashboard'da gözüken ve aslında olan ticket sayılarını karşılaştırır
-        Assert.assertEquals(actualMessageCountOnMessagesPage, expectedMessageCountFromDashboard,
+        softAssert.assertEquals(actualMessageCountOnMessagesPage, expectedMessageCountFromDashboard,
                 "HATA: Dashboard rakamı ile sayfadaki ticket sayısı uyuşmuyor!");
+        softAssert.assertAll();
     }
 
     @Test(priority = 9)
     public void US_22_TC_05_SosyalMedyaIkonlariGorunurlukVeTiklanabilirlikTesti(){
+        SoftAssert softAssert = new SoftAssert();
 
         // Tüm ikonları bir listeye toplar
         List<WebElement> dashboardSocialMediaIconList = Arrays.asList(
