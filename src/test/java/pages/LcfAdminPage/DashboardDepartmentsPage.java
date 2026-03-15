@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class DashboardDepartmentsPage {
 
     public DashboardDepartmentsPage(){
@@ -26,7 +28,7 @@ public class DashboardDepartmentsPage {
 
     //Department sayfasında yer alan 10 departmanı içeren liste
     @FindBy (xpath = "//table[@id='tableWithSearch']/tbody/tr/td[3]/p")
-    public WebElement departmentsSidebarList;
+    public List<WebElement> departmentsSidebarList;
 
     //Departments sayfası search kutusu
     @FindBy (id = "search-table")
@@ -45,7 +47,7 @@ public class DashboardDepartmentsPage {
     public WebElement departmentsNextButton;
 
     //Departments sayfası previous butonu
-    @FindBy (className = "flex justify-between")
+    @FindBy (xpath = "//span[contains(text(),'Previous')]")
     public WebElement departmentsPreviousButton;
 
     //Admin anasayfasında yer alan side bar
@@ -87,6 +89,46 @@ public class DashboardDepartmentsPage {
     //Create Departments başlığı içinde yer alan Create Your Departments alanındaki  File Drop Box alanı
     @FindBy(xpath = "(//div[@class='dz-default dz-message']")
     public WebElement FileDropBox;
+
+    //Dashboard açılır menü departments ikonu
+    @FindBy (xpath = "(//*[@class='fas fa-hotel'])[1]")
+    public WebElement sideBarDashboardDepartmentsIcon;
+
+    //Departments ana sayfa Departments başlığı
+    @FindBy (tagName = "h3")
+    public WebElement departmentsMainTitle;
+
+    //Admin Departman sayfası departman isimlerini içeren Liste
+    @FindBy (xpath = "//table[@id='tableWithSearch']//tr/td[3][@class='v-align-middle semi-bold']/p")
+    public List<WebElement> departmentNamesList;
+
+    //departments detay sayfası wellness elementi
+    @FindBy (xpath = "//p[.='Wellness']")
+    public WebElement departmantsDetailPageWellness;
+
+    //Arama sonucu bulunamadı yazısı
+    @FindBy (className = "odd")
+    public WebElement noResultText;
+
+    @FindBy (xpath = "//span[.='Departments']")
+    public WebElement dashboardDepartmentText;
+
+    //Edit butonları listesi
+    @FindBy(xpath = "//tbody//td[@class='v-align-middle text-right']//a[contains(.,'Edit')]")
+    public List<WebElement> departmentsEditButtonList;
+
+    //Delete butonları listesi
+    @FindBy(xpath = "//tbody//td[@class='v-align-middle text-right']//a[contains(.,'Delete')]")
+    public List<WebElement> departmentsDeleteButtonList;
+
+    //Edit ve delete için satır sayısı listesi
+    @FindBy(xpath = "//tbody/tr")
+    public List<WebElement> departmentRowsList;
+
+
+
+
+
 
 
 
