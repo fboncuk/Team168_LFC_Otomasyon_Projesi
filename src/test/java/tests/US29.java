@@ -39,6 +39,7 @@ public class US29 {
                 .sendKeys(ConfigReader.getProperty("T07AdminPassword"));
         signButonsPage.signInButtonOnay
                 .click();
+
     }
 
 
@@ -51,6 +52,7 @@ public class US29 {
     @Test (priority = 1)
 
     public void US29_TC01_DepartmantsVeAltMenuErisilebilirlikKontrolu (){
+
 
         //Admin sayfasında sol açılır dashboard alanına hover over edin.
         Actions actions = new Actions(Driver.getDriver());
