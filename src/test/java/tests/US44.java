@@ -13,7 +13,6 @@ import utilities.ReusableMethods;
 
 public class US44 {
     AdminBodyPage adminBodyPage;
-    SoftAssert softAssert;
 
     @BeforeMethod
     public void setup(){
@@ -28,7 +27,6 @@ public class US44 {
         signButonsPage.signInButtonOnay.click();
 
         adminBodyPage = new AdminBodyPage();
-        softAssert = new SoftAssert();
     }
 
     @AfterMethod
@@ -38,6 +36,7 @@ public class US44 {
 
     @Test
     public void US44_TC01_ProfilMenusuTetiklemeTutarlilikTesti() {
+
         SoftAssert softAssert = new SoftAssert();
 
         // Admin kullanıcısı isim alanına tıklanarak dropdown menünün açıldığı doğrulanır (Beklenen davranış)
@@ -71,6 +70,8 @@ public class US44 {
     @Test
     public void US44_TC02_AdminLogoutVeAnaSayfaYonlendirmeTesti() {
 
+        SoftAssert softAssert = new SoftAssert();
+
         // Profil menüsünü tetiklemek için dropdown alanına boşluk alanına tıklanır
         adminBodyPage.profileDropdownButton.click();
         // Açılan menüden 'Logout' seçeneği seçilerek oturum sonlandırılır
@@ -88,6 +89,8 @@ public class US44 {
     }
     @Test
     public void US44_TC03_LogoutSonrasiGeriButonuIleYetkisizErisimTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
 
         // Profil menüsünü tetiklemek için dropdown alanına boşluk alanına tıklanır
         adminBodyPage.profileDropdownButton.click();

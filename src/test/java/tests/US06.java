@@ -18,26 +18,23 @@ import java.util.List;
 
 public class US06 {
 
-    // US06 Bir ziyaretçi olarak,
+    // US06- Bir ziyaretçi olarak,
     // Home page sayfasının footer bölümündeki tüm textlerin okunabilir olduğunu ve
     // butonların/linklerin aktif çalıştığını görmek istiyorum.
 
-    HomeBodyFooterLinksPage homeBodyFooterLinksPage = new HomeBodyFooterLinksPage();
-    SoftAssert softAssert = new SoftAssert();
-    Actions actions = new Actions(Driver.getDriver());
+    HomeBodyFooterLinksPage homeBodyFooterLinksPage;
 
     @BeforeClass
-    public void setup() {
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
-    }
+    public void setup() {Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));}
 
 
     @Test(priority = 1)
     public void US06_TC01_FooterGorunurlukTesti() {
+        // Home page açıldığında, footer bölümünün sayfanın alt kısmında görünür olduğunu doğrulamak.
+        SoftAssert softAssert = new SoftAssert();
+        homeBodyFooterLinksPage = new HomeBodyFooterLinksPage();
 
-        // Footer bölümündeki metin ve linklerin imla doğruluğu ve görünürlüğünün test edilmesi.
-
-        // Footer bölümündeki textlerin listesi
+        // Footer bölümündeki Department linkleri WebElement listesi yapılır
         List<WebElement> footerTextElements = Arrays.asList(
                 homeBodyFooterLinksPage.departmentsTitle,
                 homeBodyFooterLinksPage.departmentsWellnessLink,
@@ -52,18 +49,23 @@ public class US06 {
                 homeBodyFooterLinksPage.emailText
         );
 
-        // Beklenen Text Listesi
+        // Footer bölümündeki Department linklerinin expectedText'leri StringList yapılır.
         List<String> expectedTextList = Arrays.asList(
                 "departments", "wellness", "dental care", "anaesthesia", "dermatology", "diagnostics",
                 "follow us",
                 "contacts", "7634 S Reed Ave, Reedley, CA 93654", "+15596938754", "info@loyalfriendcare.com"
         );
 
+        // Her bir footerTextElementin Beklenen Text ile aynı olduğunu bir döngü ile kontrol eder
         for (int i = 0; i < footerTextElements.size(); i++) {
             WebElement actualTextElement = footerTextElements.get(i);
+
+            // WebElementteki texti alır küçük harfe çevirir
             String actualalTextString = actualTextElement.getText().toLowerCase();
+            // Beklenen metni küçük harfe çevirir
             String expectedText = expectedTextList.get(i).toLowerCase();
 
+            // Karşılaştırma yapar
             softAssert.assertEquals(actualalTextString, expectedText, expectedText + " metni hatalı!");
             softAssert.assertTrue(actualTextElement.isDisplayed(), expectedText + " metni görünmüyor!");
         }
@@ -82,8 +84,12 @@ public class US06 {
 
     @Test(priority = 3)
     public void US06_TC03_FooterHoverTesti() {
+        // Footer bölümündeki Department metinlerin hover durumunda renk ve hareket geri bildiriminin test edilmesi.
+        Actions actions = new Actions(Driver.getDriver());
+        SoftAssert softAssert = new SoftAssert();
+        homeBodyFooterLinksPage = new HomeBodyFooterLinksPage();
 
-        // Footer bölümündeki Department metinlerin hover durumunda renk ve hareket geri bildiriminin test edilmesi
+        // Footerdaki Text Elementleri WebElement listesi yapılır
         List<WebElement> footerTextElements = Arrays.asList(
                 homeBodyFooterLinksPage.departmentsWellnessLink,
                 homeBodyFooterLinksPage.departmentsDentalCareLink,
@@ -92,21 +98,25 @@ public class US06 {
                 homeBodyFooterLinksPage.departmentsDiagnosticsLink
         );
 
+        // FooterTextElementlerin hover öncesi sonrası geribildirim karşılaştırması yapar
         for (int i = 0; i < footerTextElements.size(); i++) {
 
             // Hover öncesi renk ve pozisyon bilgisi alma
             WebElement footerElement = footerTextElements.get(i);
             ReusableMethods.bekle(1);
 
+            // Renk ve pozisyon bilgisini değişkene atar
             String beforeHoverColor = footerElement.getCssValue("color");
             Point beforeHoverPosition = footerElement.getLocation();
 
+            // FooterTextElementlerin üzerine fare ile hover yapar.
             actions.moveToElement(footerElement).perform();
 
             // Hover sonrası renk ve pozisyon bilgisi alma
             String afterHoverColor = footerElement.getCssValue("color");
             Point afterHoverPosition = footerElement.getLocation();
 
+            // Hover öncesi ve sonraso renk ve hareket bilgilerini karşılaştırır
             softAssert.assertNotEquals(beforeHoverColor, afterHoverColor
                     , "Hover sonrası " + footerElement.getText()+ " metni rengi değişmedi!");
             softAssert.assertNotEquals(beforeHoverPosition, afterHoverPosition
@@ -116,6 +126,7 @@ public class US06 {
 
         // Footer bölümündeki sosyal medya ikonlarının hover durumunda renk geri bildiriminin test edilmesi
 
+        // Footerdaki media linklerinin locaterleri WebElement listesi yapılır
         List<WebElement> footerMediaElements = Arrays.asList(
                 homeBodyFooterLinksPage.facebookIconLinki,
                 homeBodyFooterLinksPage.twitterIconLinki,
@@ -124,6 +135,7 @@ public class US06 {
                 homeBodyFooterLinksPage.instagramIconLinki
         );
 
+        // FooterMediaElementlerinin hover durumunda geribildirim kontrolu bir döngi ile yapılır
         for (int j = 0; j < footerMediaElements.size(); j++) {
 
             // Hover öncesi renk bilgisi alma
@@ -148,8 +160,11 @@ public class US06 {
 
     @Test(priority = 4)
     public void US06_TC04_FooterLinkTiklamaTesti() {
+        // Footer linklerinin hatasız olduğunu ve tıklandıktan sonra beklenen sayfanın açıldığının doğrulaması.
+        SoftAssert softAssert = new SoftAssert();
+        homeBodyFooterLinksPage = new HomeBodyFooterLinksPage();
 
-        // Footer linklerinin hatasız olduğunu ve tıklandıktan sonra beklenen sayfanın açıldığını doğrulama
+        // Footerdaki media linkleri WebElement listesi yapılır
         List<WebElement> footermediaLinks = Arrays.asList(
                 homeBodyFooterLinksPage.facebookIconLinki,
                 homeBodyFooterLinksPage.twitterIconLinki,
@@ -158,7 +173,7 @@ public class US06 {
                 homeBodyFooterLinksPage.instagramIconLinki
         );
 
-        // Beklenen Url listesi
+        // Footerdaki media linklerinin Url'leri StringList yapılır
         List<String> expectedUrlList = Arrays.asList(
                 "facebook.com", "twitter.com", "youtube.com", "pinterest.com", "instagram.com"
         );
