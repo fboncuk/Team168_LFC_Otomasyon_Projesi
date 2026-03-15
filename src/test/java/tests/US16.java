@@ -1,5 +1,6 @@
 package tests;
 
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import pages.LcfHomePage.SignButonsPage;
@@ -26,24 +27,26 @@ public class US16 {
     public void setup() {
         Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
 
-        signButonsPage=new SignButonsPage();
+        signButonsPage = new SignButonsPage();
+        signButonsPage.signInLinki.click();
+        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T05UserMail"));
+        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T05UserPassword"));
+        signButonsPage.signInButtonOnay.click();
+    }
+    @Test
+    public void US16_TC01_DoktorlarErisimTest(){
+        //Kayıtlı kullanıcının
+        //Home Page’den Doctors sayfasına erişimini doğrulama
 
+        Driver.getDriver().get(ConfigReader.getProperty("DocUrl"));
 
     }
 
 
 
-
-
-    @Test
-
-    //Kayıtlı kullanıcının
-    //Home Page’den Doctors sayfasına erişimini doğrulama
-
-
-
-
-
-
+    @AfterClass
+    public void tearDown() {
+        Driver.quitDriver();
+    }
 }
 

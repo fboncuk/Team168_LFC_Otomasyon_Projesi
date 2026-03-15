@@ -61,12 +61,6 @@ public class AppointmentBookingPage {
     public WebElement appointmentFormContainer;
 
 
-    
-
-
-
-
-
 
 }
 
