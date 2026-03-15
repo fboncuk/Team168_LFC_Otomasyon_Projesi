@@ -12,9 +12,49 @@ public class AppointmentBookingPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+    // 1. Tarih Seçimi (Date)
+    @FindBy(id = "Date")
+    public WebElement dateInput;
+
+    // 2. Telefon Numarası (Phone)
+    @FindBy(id = "serial")
+    public WebElement phoneBox;
+
+    // 3. Departman Seçimi (Department Dropdown)
+
+    // Önce kutuyu açmak için
+    @FindBy(xpath = "//span[text()='Wellness']")
+    public WebElement departmentDropdownKutusu;
+
+    // Listeden seçim yapmak için
+    @FindBy(xpath = "//li[text()='Dermatology']")
+    public WebElement dermatologySecenegi;
+
+
+    // 4. Doktor Seçimi (Doctor Dropdown)
+
+    // Önce kutuyu açmak için
+    @FindBy(xpath = "//span[contains(text(),'Dr. Alejandro')]")
+    public WebElement doctorDropdownKutusu;
+
+    // Listeden doktor seçmek için
+    @FindBy(xpath = "//li[text()='Dr. Marcus Rodriguez']")
+    public WebElement doktorSecenegi;
+
+
+    // 5. Mesaj Kutusu (Message Box)
+    @FindBy(name = "problem")
+    public WebElement messageBox;
+
+    // 6. Randevu Al Butonu (Submit Button)
+    @FindBy(id = "submit-contact-detail")
+    public WebElement appointmentBookingButton;
+
+
+
+    //Appointment formunun tamamı
+    @FindBy (xpath = "//*[@class='box_detail booking']")
+    public WebElement appointmentFormContainer;
 
 
     

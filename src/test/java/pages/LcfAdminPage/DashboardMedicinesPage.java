@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class DashboardMedicinesPage {
 
     public DashboardMedicinesPage(){
@@ -12,9 +14,65 @@ public class DashboardMedicinesPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+    // Sol menüde yer alan "Medicines" ana menü (Açılır menü için)
+    @FindBy(xpath = "//span[@class='title' and text()='Medicines']")
+    public WebElement sidebarMedicinesMainMenu;
+
+    // Ana menüye tıkladıktan sonra açılan alt menüdeki "Medicines" linki
+    @FindBy(xpath = "//ul[@class='sub-menu']//a[contains(text(), 'Medicines')]")
+    public WebElement sidebarMedicinesSubMenuLink;
+
+    // Ana menüye tıkladıktan sonra açılan alt menüdeki "Create Medicines" linki
+    @FindBy(xpath = "//ul[@class='sub-menu']//a[contains(text(), 'Create Medicines')]")
+    public WebElement sidebarCreateMedicinesSubMenuLink;
+
+    // İlaç eklerken ilacın adının girildiği "Title" veri kutusu
+    @FindBy(xpath = "//input[@id='Title_en']")
+    public WebElement medicinesPageTitleInput;
+
+    // İlaç eklerken ilacın açıklamasının yazıldığı "Content" metin kutusu
+    @FindBy(xpath = "//input[@id='body_en']")
+    public WebElement medicinesPageContentTextMessage;
+
+    // İlacın dosyasının/fotoğrafının yüklendiği "File Drop Box" alanı
+    @FindBy(xpath = "//form[@id='dropzone']")
+    public WebElement medicinesPageFileDropBox;
+
+    // Girilen ilaç bilgilerini sisteme kaydetmek için kullanılan "Save Medicines" butonu
+    @FindBy(xpath = "//span[text()='Save Medicines']")
+    public WebElement medicinesPageSaveButton;
+
+    // Medicines sayfasındaki arama kutusunu temsil eder
+    @FindBy(id = "search-table")
+    public WebElement medicineSearchBox;
+
+    // Medicines sayfasındaki tablonun tüm veri satırlarını temsil eder
+    @FindBy(xpath = "//tbody/tr[@role='row']")
+    public List<WebElement> allMedicineRows;
+
+    // Tablodaki ilaçlara ait küçük görsellerin listesidir
+    @FindBy(xpath = "//tr[@role='row']//img")
+    public List<WebElement> allMedicineImages;
+
+    // İlaç isimlerinin bulunduğu sütundaki elementleri döndürür
+    @FindBy(xpath = "//tr[@role='row']/td[2]/p")
+    public List<WebElement> allMedicineTitles;
+
+    // İlaçların detaylı açıklama metinlerini içeren hücrelerdir
+    @FindBy(xpath = "//tr[@role='row']/td[3]")
+    public List<WebElement> allMedicineContents;
+
+    // Her bir ilaç satırında bulunan 'Edit' butonlarının listesidir
+    @FindBy(xpath = "//*[@class='btn btn-complete btn-cons btn-animated from-left fa fa-edit']")
+    public List<WebElement> allEditButtons;
+
+    // Her bir ilaç satırında bulunan 'Delete' butonlarının listesidir
+    @FindBy(xpath = "//*[@class='btn btn-danger btn-cons btn-animated from-top fa  fa-remove']")
+    public List<WebElement> allDeleteButtons;
+
+
+
+
 
 
 

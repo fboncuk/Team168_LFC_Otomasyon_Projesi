@@ -75,6 +75,7 @@ Projede yer alan tüm ekip üyelerinin kendi test ortamlarında aynı klasör ya
 Proje ismi şimdilik T168_LFC_Otomasyon_Projesi olarak yazıldı.
 
 
+
 T168_LFC_Otomasyon_Projesi
 │
 ├── src
@@ -84,20 +85,20 @@ T168_LFC_Otomasyon_Projesi
 │	│
 │	└── test
 │		 └── java
-│		 │	 └── pages
-│		 │	 │	 └── LfcHomePage
-│		 │	 │	 └── LfcLoginPage
-│		 │	 │	 └── LfcDashboardPage
-│		 │	 │	 └── LfcOtherPage
-│		 │	 │
-│		 │	 └── tests
-│		 │	 	 └── US01.java
-│		 │	 	 └──  ...
-│		 │	 	 └── US06.java
-│		 │	 	 └──  ...
-│		 │	 	 └── US44.java
-│		 │
-│		 └── utilities
+│			 │	 └── pages
+│			 │	 └── LfcHomePage
+│		 	 │	 └── LfcLoginPage
+│		 	 │	 └── LfcDashboardPage
+│			 │	 └── LfcOtherPage
+│		 	 │
+│		 	 └── tests
+│		 	 │	 └── US01.java
+│		 	 │	 └──  ...
+│		 	 │	 └── US06.java
+│		 	 │	 └──  ...
+│		 	 │	 └── US44.java
+│		 	 │
+│		 	 └── utilities
 │				 └── ConfigReader
 │				 └── Driver
 │				 └── ReusableMethods

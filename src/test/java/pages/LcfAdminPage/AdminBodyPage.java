@@ -1,5 +1,6 @@
 package pages.LcfAdminPage;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,9 +15,91 @@ public class AdminBodyPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+    // Admin ana sayfasındaki "Users" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Users']")
+    public WebElement learnMoreAtUsersLink;
+
+    // Admin ana sayfasındaki "Messages" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Messages']")
+    public WebElement learnMoreAtMessagesLink;
+
+    // Admin ana sayfasındaki "Roles" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Roles']")
+    public WebElement learnMoreAtRolesLink;
+
+    // Admin ana sayfasındaki "Settings" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Settings']")
+    public WebElement learnMoreAtSettingsLink;
+
+    // Admin ana sayfasındaki "Google Advertisement" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Google Advertisement']")
+    public WebElement learnMoreAtGoogleAdvertisementLink;
+
+    // Admin ana sayfasındaki "Medicines" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Medicines']")
+    public WebElement learnMoreAtMedicinesLink;
+
+    // Admin ana sayfasındaki "Bed Managers" kartı içerisinde yer alan yönlendirme linki
+    @FindBy(xpath = "//*[text()='Learn More at Bed managers']")
+    public WebElement learnMoreAtBedManagersLink;
+
+    // Sayfanın alt kısmındaki Facebook ikonuna tıklar ve Facebook sayfasına yönlendirir
+    @FindBy(xpath = "//*[@class='fab fa-facebook-square']")
+    public WebElement facebookIconLink;
+
+    // Sayfanın alt kısmındaki Twitter ikonuna tıklar ve Facebook sayfasına yönlendirir
+    @FindBy(xpath = "//*[@class='fab fa-twitter-square']")
+    public WebElement twitterIconLink;
+
+    // Sayfanın alt kısmındaki Pinterest ikonuna tıklar ve Facebook sayfasına yönlendirir
+    @FindBy(xpath = "//*[@class='fab fa-pinterest-square']")
+    public WebElement pinterestIconLink;
+
+    // Sayfanın alt kısmındaki Instagram ikonuna tıklar ve Facebook sayfasına yönlendirir
+    @FindBy(xpath = "//*[@class='fab fa-instagram-square']")
+    public WebElement instagramIconLink;
+
+    // Sayfanın alt kısmındaki Linkedin ikonuna tıklar ve Facebook sayfasına yönlendirir
+    @FindBy(xpath = "//*[@class='fab fa-linkedin-square']")
+    public WebElement linkedinIconLink;
+
+    // Sayfanın alt kısmındaki Tumblr ikonuna tıklar ve Facebook sayfasına yönlendirir
+    @FindBy(xpath = "//*[@class='fab fa-tumblr-square']")
+    public WebElement tumblrIconLink;
+
+    // Sayfanın alt kısmındaki Github ikonuna tıklar ve Facebook sayfasına yönlendirir
+    @FindBy(xpath = "//*[@class='fab fa-github']")
+    public WebElement githubIconLink;
+
+    // Sağ üstteki profil ikonu; tıklandığında Settings, Edit Profile ve Logout seçeneklerini açar
+    @FindBy(className = "profile-dropdown-toggle")
+    public WebElement profileDropdownButton;
+
+    // Profil dropdown menüsü açıldıktan sonra görünen "Settings" seçeneği
+    @FindBy(xpath = "//*[@class='dropdown-item'][1]")
+    public WebElement profileSettingsOption;
+
+    // Profil dropdown menüsü açıldıktan sonra görünen "Edit Profile" seçeneği
+    @FindBy(xpath = "//*[@class='dropdown-item'][2]")
+    public WebElement profileEditProfileOption;
+
+    // Profil dropdown menüsü açıldıktan sonra görünen "Logout" seçeneği
+    @FindBy(xpath = "//*[.='Logout']")
+    public WebElement profileLogoutOption;
+
+    // Admin kullanıcısının isminin olduğu yer
+    @FindBy(className = "semi-bold")
+    public WebElement profileNameText;
+
+
+
+
+
+
+
+
+
+
 
 
 
