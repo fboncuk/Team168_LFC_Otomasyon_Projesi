@@ -9,6 +9,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 import java.io.File;
 import java.io.IOException;
@@ -223,6 +224,7 @@ public class ReusableMethods {
      */
     public static void adminDashboardLinkKontrol(WebElement linkElement, String ExpectedUrlIcerik) {
 
+        SoftAssert softAssert = new SoftAssert();
         // Linke tıkla
         linkElement.click();
 
@@ -230,8 +232,9 @@ public class ReusableMethods {
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
         // URL doğrula
-        Assert.assertTrue(actualUrl.contains(ExpectedUrlIcerik),
+        softAssert.assertTrue(actualUrl.contains(ExpectedUrlIcerik),
                 "HATA: " + ExpectedUrlIcerik + " modülüne yönlendirme yapılamadı! Gidilen URL: " + actualUrl);
+        softAssert.assertAll();
     }
 
     public static WebElement waitForVisibility(WebElement element, int timeout) {

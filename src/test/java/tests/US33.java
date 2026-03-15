@@ -20,7 +20,6 @@ public class US33 {
     AdminBodyPage adminBodyPage;
     DashboardPage dashboardPage;
     DashboardMedicinesPage dashboardMedicinesPage;
-    SoftAssert softAssert;
 
     @BeforeMethod
     public void setup(){
@@ -35,18 +34,19 @@ public class US33 {
         signButonsPage.signInButtonOnay.click();
 
         adminBodyPage = new AdminBodyPage();
-        softAssert = new SoftAssert();
         dashboardPage = new DashboardPage();
         dashboardMedicinesPage = new DashboardMedicinesPage();
     }
 
     @AfterMethod
     public void tearDown() {
-//        Driver.quitDriver();
+        Driver.quitDriver();
     }
 
     @Test
     public void US33_TC01_SidebarMedicinesModuluGorunurlukVeTiklanabilirlikTesti(){
+
+        SoftAssert softAssert = new SoftAssert();
 
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
 
@@ -70,6 +70,8 @@ public class US33 {
     @Test
     public void US33_TC02_MedicinesSayfasiYonlendirmeVeURLDogrulamaTesti() {
 
+        SoftAssert softAssert = new SoftAssert();
+
         // Sidebar'ı aç ve Medicines alt menüsüne tıkla
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
         dashboardMedicinesPage.sidebarMedicinesMainMenu.click();
@@ -87,6 +89,8 @@ public class US33 {
 
     @Test
     public void US33_TC03_IlacListesiAlfabetikSiralamaliMiTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
 
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
         dashboardMedicinesPage.sidebarMedicinesMainMenu.click();
@@ -108,6 +112,8 @@ public class US33 {
 
     @Test
     public void US33_TC04_MedicinesAramaFonksiyonuDogrulamaTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
 
         // Medicines sayfasına gider
         Driver.getDriver().get(ConfigReader.getProperty("DasmedUrl"));
@@ -141,6 +147,8 @@ public class US33 {
 
     @Test
     public void US33_TC05_IlacDuzenlemeSayfasiErisimTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
 
         Driver.getDriver().get(ConfigReader.getProperty("DasmedUrl"));
 
