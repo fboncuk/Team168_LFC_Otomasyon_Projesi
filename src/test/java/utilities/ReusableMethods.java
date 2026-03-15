@@ -5,6 +5,7 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -242,5 +243,17 @@ public class ReusableMethods {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    public static void hover(WebElement targetElement) {
+        /*
+         * Parametre olarak gelen WebElement'in üzerine mouse imlecini götürür.
+         * Özellikle mouse hover (üzerine gelince açılan) menüleri tetiklemek için kullanılır.
+         * @param targetElement üzerine gidilecek olan WebElement
+         * Yüklenme zaman alırsa testinize bekleme methodu ekleyebilirsiniz.
+         */
+        Actions actions = new Actions(Driver.getDriver());
+        actions.moveToElement(targetElement).perform();
+    }
+
 
 }
