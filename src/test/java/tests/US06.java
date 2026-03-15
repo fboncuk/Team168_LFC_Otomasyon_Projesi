@@ -18,7 +18,7 @@ import java.util.List;
 
 public class US06 {
 
-    // US06 Bir ziyaretçi olarak,
+    // US06- Bir ziyaretçi olarak,
     // Home page sayfasının footer bölümündeki tüm textlerin okunabilir olduğunu ve
     // butonların/linklerin aktif çalıştığını görmek istiyorum.
 
@@ -27,15 +27,12 @@ public class US06 {
     Actions actions = new Actions(Driver.getDriver());
 
     @BeforeClass
-    public void setup() {
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
-    }
+    public void setup() {Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));}
 
 
     @Test(priority = 1)
     public void US06_TC01_FooterGorunurlukTesti() {
-
-        // Footer bölümündeki metin ve linklerin imla doğruluğu ve görünürlüğünün test edilmesi.
+        // Home page açıldığında, footer bölümünün sayfanın alt kısmında görünür olduğunu doğrulamak.
 
         // Footer bölümündeki textlerin listesi
         List<WebElement> footerTextElements = Arrays.asList(
@@ -82,8 +79,8 @@ public class US06 {
 
     @Test(priority = 3)
     public void US06_TC03_FooterHoverTesti() {
-
         // Footer bölümündeki Department metinlerin hover durumunda renk ve hareket geri bildiriminin test edilmesi
+
         List<WebElement> footerTextElements = Arrays.asList(
                 homeBodyFooterLinksPage.departmentsWellnessLink,
                 homeBodyFooterLinksPage.departmentsDentalCareLink,
@@ -148,8 +145,8 @@ public class US06 {
 
     @Test(priority = 4)
     public void US06_TC04_FooterLinkTiklamaTesti() {
-
         // Footer linklerinin hatasız olduğunu ve tıklandıktan sonra beklenen sayfanın açıldığını doğrulama
+
         List<WebElement> footermediaLinks = Arrays.asList(
                 homeBodyFooterLinksPage.facebookIconLinki,
                 homeBodyFooterLinksPage.twitterIconLinki,

@@ -16,6 +16,9 @@ public class HomeBodyHeaderSectionPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
+    @FindBy()
+    public WebElement vaccinationsLinki;
+
 
     
 
