@@ -11,6 +11,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -246,6 +249,25 @@ public class ReusableMethods {
         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(timeout));
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+
+    // Alert açıkken ekran görüntüsü alma
+    public static void alertVarkenScreenshot(String dosyaAdi) {
+        try {
+            LocalDateTime now = LocalDateTime.now();
+            String tarih = now.format(DateTimeFormatter.ofPattern("_yyMMdd_HHmmss"));
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            Rectangle rect = new Rectangle(screenSize);
+            BufferedImage image = new Robot().createScreenCapture(rect);
+            String dosyaYolu = "target/screenshots/" + dosyaAdi + tarih + ".png";
+            ImageIO.write(image, "png", new File(dosyaYolu));
+            System.out.println("Alert açıkken screenshot alindi: " + dosyaYolu);
+        } catch (Exception e) {
+            System.out.println("Alert anında screenshot alınamadı: " + e.getMessage());
+        }
+    }
+
+
 
     public static void hover(WebElement targetElement) {
         /*
