@@ -4,6 +4,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.*;
@@ -17,6 +18,9 @@ import java.time.format.DateTimeFormatter;
 
 import java.util.Arrays;
 import java.util.List;
+
+
+@Listeners(utilities.Listeners.class)
 
 public class US17 {
 
@@ -453,19 +457,23 @@ public class US17 {
         appointmentBookingPage.doctorDropdownKutusu.click(); // Doktor açılır menü tıklanır
         appointmentBookingPage.doktorSecenegi.click(); // Doktor seçilir
         appointmentBookingPage.messageBox.sendKeys(randevuMetni121); // Randevu metni girilir
-        ReusableMethods.tumSayfaResimCek(Driver.getDriver()
-                ,"US17_TC11_120 karakterden uzun randevu mesajı bilgisi");
+//        ReusableMethods.tumSayfaResimCek(Driver.getDriver()
+//                ,"US17_TC11_120 karakterden uzun randevu mesajı bilgisi");
 
         // Randevu için girilen metin html kodundan geri alınır
         String messageValue = appointmentBookingPage.messageBox.getAttribute("value");
 
-        // Sistem 120 karakterden daha uzun mesajları kabul etmişse ekran görüntüsü alınır
-        if (messageValue.length()>120) {
-            ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver()
-                    ,"US17_TC11_120 karakterden uzun randevu mesajı girilme hatası");
-        }
+        softAssert.assertFalse((messageValue.length() > 0)
+                , "US17_TC11_120 karakterden uzun randevu mesajı bilgisi");
 
-        softAssert.assertFalse((messageValue.length()>120)
+//        // Sistem 120 karakterden daha uzun mesajları kabul etmişse ekran görüntüsü alınır
+//        if (messageValue.length()>120) {
+//            ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver()
+//                    ,"US17_TC11_120 karakterden uzun randevu mesajı girilme hatası");
+//        }
+
+
+        softAssert.assertFalse((messageValue.length() > 120)
                 ,"US17_TC11_120 karakterden uzun randevu mesajı girilme hatası.");
 
         // Appointment Booking butonu tıklanır
@@ -478,11 +486,11 @@ public class US17 {
         // ekranda "Congratulations" ifadesinin gözükmemesi gerekir.
         String approvedRandevuAlertText = "Congratulations";
 
-        // Sistem randevu oluşurturursa hatalı randevu oluşturulduğundan ekran görüntüsü alınır
-        if (actualAletText.contains(approvedRandevuAlertText)) {
-            ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver()
-                    ,"US17_TC11_120 karakterden uzun mesajla randevu alma");
-        }
+//        // Sistem randevu oluşurturursa hatalı randevu oluşturulduğundan ekran görüntüsü alınır
+//        if (actualAletText.contains(approvedRandevuAlertText)) {
+//            ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver()
+//                    ,"US17_TC11_120 karakterden uzun mesajla randevu alma");
+//        }
 
         // Geçersiz telefon numarası ile randevu oluşturulamadığı doğrulanır
         softAssert.assertFalse(actualAletText.contains(approvedRandevuAlertText)
