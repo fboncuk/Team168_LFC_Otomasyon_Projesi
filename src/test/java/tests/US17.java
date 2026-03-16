@@ -1,6 +1,8 @@
 package tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -11,12 +13,15 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import java.util.Arrays;
 import java.util.List;
+
+// import static utilities.Driver.driver;
 
 public class US17 {
 
@@ -112,7 +117,7 @@ public class US17 {
                 vacinationsMainPage.detailedTitleFelineViral
         );
 
-        // Aşıların tıklanan linkteki adları ile aşılan sayfadaki adları döngü ile karşılaştırılır
+        // Aşıların tıklanan linkteki adları ile açılan sayfadaki adları döngü ile karşılaştırılır
         for (int i = 0; i < vaccinesLists.size(); i++) {
 
             // VaccinesMainPage'de bulunan aşoların expectedTitle'leri alınır.
@@ -152,6 +157,66 @@ public class US17 {
         ReusableMethods.bekle(1);
 
         // Geçerli tarih için girmek maksadıyla 10 gün sonraki tarihe randevu alınır.
+        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        String gecerliDateRandevu = LocalDate.now().plusDays(10).format(format1);
+        System.out.println(gecerliDateRandevu);
+
+        // Rakamlardan oluşan geçerli bir telefon numarası oluşturulur.
+        String gecerliTelNumarasi = "0535" + (int)(Math.random() * 10000000);
+        System.out.println(gecerliTelNumarasi);
+
+        // Randevu metni
+        String randevuMetni = "Randevu oluşturma için yazılan mesaj.";
+        System.out.println(randevuMetni);
+
+        // Randevu kutularına bilgiler girilir.
+        appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // tarih girilir
+        appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
+        appointmentBookingPage.departmentDropdownKutusu.click(); // Department açılır menü tıklanır
+        appointmentBookingPage.dermatologySecenegi.click(); // Dermatology seçilir
+        appointmentBookingPage.doctorDropdownKutusu.click(); // Department açılır menü tıklanır
+        appointmentBookingPage.doktorSecenegi.click(); // Doktor seçilir
+        appointmentBookingPage.messageBox.sendKeys(randevuMetni); // Randevu metni girilir
+
+        // Appointment Booking butonu tıklanır
+        appointmentBookingPage.appointmentBookingButton.click();
+
+        // Ekrana çıkan alert mesajı kaydedilir
+        String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
+        System.out.println(actualAletText);
+
+        // Randevu oluşturulduğuna dair beklenen alert mesajı texti
+        String expectedRandevuAlertText = "Congratulations1";
+        System.out.println(expectedRandevuAlertText);
+
+
+        // Randevu oluşmazsa ekran görüntüsü alınır
+        if (!actualAletText.contains(expectedRandevuAlertText)) {
+            ReusableMethods.bekle(1);
+            ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(),"Randevu Hatası");
+        }
+
+        // Randevu oluşturulduğu doğrulanır
+        softAssert.assertTrue(actualAletText.contains(expectedRandevuAlertText)
+                ,  "Ekranda \"Congratulations on your well-deserved success.\" mesajı alınmadı.");
+
+        softAssert.assertAll();
+    }
+
+
+    @Test(priority = 7)
+    public void US17_TC07_SadeceTarihVeTelefonIleRandevuOlusturmaTesti() {
+        // Kayıtlı kullanıcı tarafından
+        // Vaccinations listesinde yer alan bir aşı detay sayfasından
+        // Geçerli randevu kaydı için tarih ve telefon numarasının yeterli olduğunu doğrulamak
+        appointmentBookingPage = new AppointmentBookingPage();
+        SoftAssert softAssert = new SoftAssert();
+
+        // Dermatology detay sayfasına gidilir
+        Driver.getDriver().get(ConfigReader.getProperty("DermUrl"));
+        ReusableMethods.bekle(1);
+
+        // Geçerli tarih için girmek maksadıyla 10 gün sonraki tarihe randevu alınır.
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String gecerliDateRandevu = LocalDate.now().plusDays(10).format(format);
         System.out.println(gecerliDateRandevu);
@@ -160,35 +225,27 @@ public class US17 {
         String gecerliTelNumarasi = "0535" + (int)(Math.random() * 10000000);
         System.out.println(gecerliTelNumarasi);
 
-        // Randevu metni
-        String randevuMetni = "Randevu oluşturma mesaj kutusu.";
-        System.out.println(randevuMetni);
+        // Department, Doktor ve Randevu metni girilmez
+        // Sadece Randevu kutularına bilgiler girilir.
+        appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // tarih girilir
+        appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
 
-        // Randevu oluşturulduğuna dair alert mesajı texti
-        String expectedRandevuAlertText = "Congratulations success.";
-        System.out.println(expectedRandevuAlertText);
-
-        // Randevu kutularına bilgiler girilir.
-        appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // tarih
-        appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası
-        appointmentBookingPage.departmentDropdownKutusu.click(); // Department açılır menü tıklanır
-        appointmentBookingPage.dermatologySecenegi.click(); // Dermatology seçilir
-        appointmentBookingPage.doctorDropdownKutusu.click(); // Department açılır menü tıklanır
-        appointmentBookingPage.doktorSecenegi.click(); // Doktor seçilir
-        appointmentBookingPage.messageBox.sendKeys(randevuMetni); // Randevu metni girilir
-
-        // Appointment Booking
+        // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
 
-        // Ekranaçıkan alert mesajı kaydedilir
+        // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
         System.out.println(actualAletText);
 
+        // Randevu oluşturulduğuna dair beklenen alert mesajı texti
+        String expectedRandevuAlertText = "Congratulations";
+        System.out.println(expectedRandevuAlertText);
+
         // Randevu oluşturulduğu doğrulanır
         softAssert.assertTrue(actualAletText.contains(expectedRandevuAlertText)
-                ,  "Ekranda randevu oluşturulduğu bilgi mesajı alınmadı.");
+                ,  "Ekranda \"Congratulations on your well-deserved success.\" mesajı alınmadı.");
 
-
+        softAssert.assertAll();
     }
 
 
