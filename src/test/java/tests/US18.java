@@ -1,22 +1,21 @@
 package tests;
 
-import com.github.javafaker.Faker;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.AppointmentBookingPage;
 import pages.LcfHomePage.MedicinesMainPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+@Listeners(utilities.Listeners.class)
 
 public class US18 {
     WebDriver driver;
@@ -25,7 +24,7 @@ public class US18 {
     MedicinesMainPage medicinesMainPage;
     AppointmentBookingPage appointmentBookingPage;
 
-    @BeforeMethod
+    @BeforeClass
     public void setUp() {
 
         Driver.getDriver().manage().deleteAllCookies();
@@ -75,10 +74,6 @@ public class US18 {
 
     public void US18_TC02_IlaclarBilgileriGorunurlukKontrolu() {
 
-        //Header Medicines bölümüne tıklayın
-        medicinesMainPage.HomePageDdmMedicinesLink.click();
-
-
         //Medicines sidebar listedeki ilaç bilgilerinin görünürlüğünü doğrulayın
 
         List<String> expectedMedicinesNames = Arrays.asList(
@@ -111,9 +106,6 @@ public class US18 {
 
     public void US18_TC03_IlacSecilebilirlikKontrolu() {
 
-        //Header Medicines bölümüne tıklayın
-
-        medicinesMainPage.HomePageDdmMedicinesLink.click();
 
         //Sidebar'dan "Revolution (Selamectin)" secin
 
@@ -135,9 +127,6 @@ public class US18 {
 
     public void US18_TC04_IlacIcinRandevuOlusturma() {
 
-        //Header Medicines bölümüne tıklayın
-
-        medicinesMainPage.HomePageDdmMedicinesLink.click();
 
         //Medicines Body'de "Baytril (Enrofloxacin)" tıklayın
 

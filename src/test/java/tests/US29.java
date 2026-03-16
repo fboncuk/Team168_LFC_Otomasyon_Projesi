@@ -2,10 +2,7 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.LcfAdminPage.DashboardDepartmentsPage;
 import pages.LcfAdminPage.DashboardPage;
@@ -15,7 +12,7 @@ import utilities.Driver;
 import utilities.ReusableMethods;
 import java.util.Arrays;
 import java.util.List;
-
+@Listeners(utilities.Listeners.class)
 public class US29 {
 
 
@@ -195,7 +192,7 @@ public class US29 {
 
 
     @Test (priority = 7)
-    public void US29_0_HerSatirdaSilmeButonuDogrulamaTesti (){
+    public void US29_07_HerSatirdaSilmeButonuDogrulamaTesti (){
 
         //Departmants liste elemanlarının bulunduğu her satırda edit butonunun
         // görünür ve aktif olduğunu doğrulayın
