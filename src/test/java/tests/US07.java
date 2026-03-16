@@ -2,14 +2,17 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
+
+@Listeners(utilities.Listeners.class)
 
 
 public class US07 {
@@ -55,8 +58,6 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.headerUserName.isDisplayed(),
                 "Geçerli bilgilerle kayıt yapılmasına rağmen kullanıcı ismi header bölümünde görüntülenemedi.");
-
-        //signButonsPage.homePageSignOut.click();
 
         softAssert.assertAll();
 
@@ -125,8 +126,11 @@ public class US07 {
         String actualText = signButonsPage.emailTakenErrorMessage.getText();
 
         softAssert.assertTrue(actualText.contains(expectedContent),
-                "Kayıtlı bir email adresi girilmesine rağmen sistem hata mesajı vermedi," +
-                        "kayıt işlemi gerçekleşti");
+                "Kayıtlı bir email adresi girilmesine rağmen sistem hata mesajı vermedi.");
+
+        //Kayıt işleminin gerçekleşmediğini doğrulayın
+
+        softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),"Kayıt işlemi gerçekleşti");
 
         softAssert.assertAll();
 
@@ -161,6 +165,7 @@ public class US07 {
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Sistem 8 karakterden az olan şifreyi kabul ederek kaydı tamamladı," +
                         "kayıt butonunun aktif kalması gerekiyordu.");
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
 
 
@@ -232,6 +237,7 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Şifre en az bir rakam içermediği halde sistem kayıt işlemini gerçekleştirdi.");
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
@@ -262,6 +268,7 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Şifre en az bir harf içermediği halde sistem kayıt işlemini gerçekleştirdi.");
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
@@ -322,7 +329,7 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem şifre uyuşmazlığına rağmen kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
     @Test (priority = 10)
@@ -342,7 +349,7 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem boş register form ile kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
@@ -375,7 +382,7 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem,user name 3 karakterden az olduğu halde kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
 
     }
@@ -409,7 +416,7 @@ public class US07 {
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem,user name 20 karakterden fazla olduğu halde kayıt işlemini gerçekleştirdi.");
 
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
 
     }
