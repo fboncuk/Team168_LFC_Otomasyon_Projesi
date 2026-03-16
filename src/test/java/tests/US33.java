@@ -1,5 +1,8 @@
 package tests;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -12,6 +15,7 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,7 +44,7 @@ public class US33 {
 
     @AfterMethod
     public void tearDown() {
-        Driver.quitDriver();
+        //Driver.quitDriver();
     }
 
     @Test
@@ -170,6 +174,134 @@ public class US33 {
         softAssert.assertAll();
 
     }
+
+    @Test
+    public void US33_TC06_IlacDuzenlemeSayfasiZorunluAlanTesti(){
+
+        SoftAssert softAssert = new SoftAssert();
+
+        Driver.getDriver().get(ConfigReader.getProperty("DasmedUrl"));
+        // Ilk edit butonuna tıklar
+        dashboardMedicinesPage.allEditButtons.get(0).click();
+
+        // Title alanını seç ve temizler
+        dashboardMedicinesPage.medicinesPageTitleInput.sendKeys(Keys.CONTROL + "a");
+        dashboardMedicinesPage.medicinesPageTitleInput.sendKeys(Keys.BACK_SPACE);
+        // Content alanını seç ve temizler
+        dashboardMedicinesPage.medicinesPageContentTextMessage.sendKeys(Keys.CONTROL + "a");
+        dashboardMedicinesPage.medicinesPageContentTextMessage.sendKeys(Keys.BACK_SPACE);
+
+        // Güncelle butonuna tıklar
+        dashboardMedicinesPage.medicineEditSaveButton.click();
+
+        // Testin başarısız olmasını yani sayfada kalmasını bekliyoruz
+        String currentUrl = Driver.getDriver().getCurrentUrl();
+        softAssert.assertTrue(currentUrl.contains("edit"),
+                "HATA: Zorunlu alan boş bırakılmasına rağmen güncelleme yapıldı ve sayfadan çıkıldı!");
+
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void US33_TC07_IlacDuzenlemeSayfasiOzelKarakterleGirisTesti(){
+
+        SoftAssert softAssert = new SoftAssert();
+
+        Driver.getDriver().get(ConfigReader.getProperty("DasmedUrl"));
+        // Ilk edit butonuna tıklar
+        dashboardMedicinesPage.allEditButtons.get(0).click();
+
+        // Title alanını seç ve özel karakterler gir
+        dashboardMedicinesPage.medicinesPageTitleInput.sendKeys(">#£>½$£½");
+        // Content alanını seç ve özel karakterler gir
+        dashboardMedicinesPage.medicinesPageContentTextMessage.sendKeys(">#£>½$£½");
+
+        // Güncelle butonuna tıklar
+        dashboardMedicinesPage.medicineEditSaveButton.click();
+
+        ReusableMethods.bekle(1);
+
+        boolean isSuccessAlertDisplayed;
+        try {
+            // success mesajını temsil eden locator'ı tanımlayıp gözüküp gözükmediğini sorgular
+            WebElement successAlert = Driver.getDriver().findElement(By.className("alert-success"));
+            isSuccessAlertDisplayed = successAlert.isDisplayed();
+        } catch (Exception e) {
+            // Element bulunamadıysa, mesaj çıkmadıysa isSuccessAlertDisplayed false olur
+            isSuccessAlertDisplayed = false;
+        }
+
+        // Beklentimiz: Mesajın GÖRÜNMEMESİ
+        softAssert.assertFalse(isSuccessAlertDisplayed,
+                "HATA/BUG: Özel karakterlerle giriş yapılmasına rağmen 'Medicines Updated successfully.' mesajı görüntülendi! " +
+                        "Sistem anlamsız karakterleri kabul ediyor.");
+
+        softAssert.assertAll();
+
+    }
+
+    @Test
+    public void US33_TC08_IlacDuzenlemeSayfasiCokluDilDestegiDogrulamaTesti(){
+
+        SoftAssert softAssert = new SoftAssert();
+
+        Driver.getDriver().get(ConfigReader.getProperty("DasmedUrl"));
+
+        String frenchTitle = "FR";
+        String frenchContent = "FRRR";
+        String arabicTitle = "AR";
+        String arabicContent = "ARRRR";
+
+        // Ilk edit butonuna tıklar
+        dashboardMedicinesPage.allEditButtons.get(0).click();
+        dashboardMedicinesPage.medicineEditFranceLanguageButton.click();
+
+        dashboardMedicinesPage.medicineEditFranceLanguageButtonTitle.sendKeys(frenchTitle);
+        dashboardMedicinesPage.medicineEditFranceLanguageButtonContent.sendKeys(frenchContent);
+        dashboardMedicinesPage.medicineEditArabicLanguageButton.click();
+        dashboardMedicinesPage.medicineEditArabicLanguageButtonTitle.sendKeys(arabicTitle);
+        dashboardMedicinesPage.medicineEditArabicLanguageButtonContent.sendKeys(arabicContent);
+
+        // "Sava" butonuna tıklar
+        dashboardMedicinesPage.medicineEditSaveButton.click();
+
+        // Verinin kaydedilip kaydedilmediğini "Edit" sayfasına girerek kutuların içini kontrol eder
+        Driver.getDriver().get(ConfigReader.getProperty("DasmedUrl"));
+        dashboardMedicinesPage.allEditButtons.get(0).click();
+
+        // --- Fransızca Kontrolü ---
+        dashboardMedicinesPage.medicineEditFranceLanguageButton.click();
+        String actualFrenchTitle = dashboardMedicinesPage.medicineEditFranceLanguageButtonTitle.getAttribute("value");
+        String actualFrenchContent = dashboardMedicinesPage.medicineEditFranceLanguageButtonContent.getAttribute("value");
+
+        softAssert.assertEquals(actualFrenchTitle, frenchTitle, "HATA: Fransızca TITLE alanı kaydedilmedi!");
+        softAssert.assertEquals(actualFrenchContent, frenchContent,
+                "BUG: Fransızca CONTENT alanı kaydedilmedi, boş geliyor!");
+
+        // --- Arapça Kontrolü ---
+        dashboardMedicinesPage.medicineEditArabicLanguageButton.click();
+        String actualArabicTitle = dashboardMedicinesPage.medicineEditArabicLanguageButtonTitle.getAttribute("value");
+        String actualArabicContent = dashboardMedicinesPage.medicineEditArabicLanguageButtonContent.getAttribute("value");
+
+        softAssert.assertEquals(actualArabicTitle, arabicTitle, "HATA: Arapça TITLE alanı kaydedilmedi!");
+        softAssert.assertEquals(actualArabicContent, arabicContent,
+                "BUG: Arapça CONTENT alanı kaydedilmedi, boş geliyor!");
+
+        softAssert.assertAll();
+
+    }
+
+//    @Test
+//    public void US33_TC09_gorselyukleme(){
+//
+//        SoftAssert softAssert = new SoftAssert();
+//        Driver.getDriver().get("https://qa.loyalfriendcare.com/en/Dashboard/Instagrams/resimsizz/edit");
+//
+//        dashboardMedicinesPage.medicinesPageFileDropBox.click();
+//
+//        softAssert.assertAll();
+//    }
+
 
 
 }

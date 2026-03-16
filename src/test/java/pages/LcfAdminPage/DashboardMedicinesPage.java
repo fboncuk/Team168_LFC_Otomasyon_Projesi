@@ -70,6 +70,37 @@ public class DashboardMedicinesPage {
     @FindBy(xpath = "//*[@class='btn btn-danger btn-cons btn-animated from-top fa  fa-remove']")
     public List<WebElement> allDeleteButtons;
 
+    // İlaç düzenleme sayfasındaki "Save" butonu
+    @FindBy(xpath = "//*[@class='btn btn-success btn-cons btn-animated from-left fa fa-save pull-right']")
+    public WebElement medicineEditSaveButton;
+
+    // İlaç düzenleme sayfasındaki "France Language" butonu
+    @FindBy(xpath = "//*[.=' France language']")
+    public WebElement medicineEditFranceLanguageButton;
+
+    // İlaç düzenleme sayfasındaki "France Title" içeriği
+    @FindBy(xpath = "//*[@name='Title_fr']")
+    public WebElement medicineEditFranceLanguageButtonTitle;
+
+    // İlaç düzenleme sayfasındaki "France Content" içeriği
+    @FindBy(xpath = "//*[@id=\"France\"]/div[2]/textarea")
+    public WebElement medicineEditFranceLanguageButtonContent;
+
+    // İlaç düzenleme sayfasındaki "Arabic Language" butonu
+    @FindBy(xpath = "//*[.=' Arabic language']")
+    public WebElement medicineEditArabicLanguageButton;
+
+    // İlaç düzenleme sayfasındaki "Arabic Title" içeriği
+    @FindBy(xpath = "//*[@name='Title_ar']")
+    public WebElement medicineEditArabicLanguageButtonTitle;
+
+    // İlaç düzenleme sayfasındaki "Arabic Content" içeriği
+    @FindBy(xpath = "//*[@id=\"Arabic\"]/div[2]/textarea")
+    public WebElement medicineEditArabicLanguageButtonContent;
+
+
+
+
 
 
 
