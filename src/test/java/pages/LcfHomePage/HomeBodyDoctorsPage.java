@@ -5,9 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
-public class HomeBodyHeaderSectionPage {
+public class HomeBodyDoctorsPage {
 
-    public HomeBodyHeaderSectionPage(){
+    public HomeBodyDoctorsPage(){
 
         PageFactory.initElements(Driver.getDriver(),this);
     }
@@ -15,7 +15,6 @@ public class HomeBodyHeaderSectionPage {
     // Aşağıdaki locator ornektir
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
-
 
 
     

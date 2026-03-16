@@ -86,7 +86,7 @@ public class SignButonsPage {
 
     // Sitenin giris sayfasina donmek icin kullanilacak Sign Out linki
     @FindBy(id = "logout-form")
-    public WebElement SignOutlinki;
+    public WebElement signOutlinki;
 
 
 

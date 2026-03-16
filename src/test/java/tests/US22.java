@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 import pages.LcfAdminPage.AdminBodyPage;
 import pages.LcfAdminPage.DashboardMedicinesPage;
 import pages.LcfHomePage.DoctorsMainPage;
@@ -46,17 +47,21 @@ public class US22 {
     // Devre dışı bırakmak için (enabled = false) kullan
     @Test(priority = -2)
     public void US22_TC01_AdminPaneliGoruntulemeTesti(){
+        SoftAssert softAssert = new SoftAssert();
 
         // Mevcut URL'in admin Dashboard içerdiği doğrulanır
         String expectedUrlContent = "/admin";
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
-        Assert.assertTrue(actualUrl.contains(expectedUrlContent), "HATA: Admin paneline yönlendirme başarısız!");
+        softAssert.assertTrue(actualUrl.contains(expectedUrlContent), "HATA: Admin paneline yönlendirme başarısız!");
+        softAssert.assertAll();
     }
 
     // Devre dışı bırakmak için (enabled = false) kullan
     @Test(priority = -1)
     public void US_22_TC02_DashboardOzetKartlariGorunurlukTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
         // Dashboard üzerindeki tüm kartlarda linkler de olduğundan,
         // linklerle kartların görünür olduğu doğrulanır.
 
@@ -75,11 +80,12 @@ public class US22 {
         for (WebElement eachSummaryCard : dashboardSummaryCardList) {
 
             // Görünürlüğü test eder
-            Assert.assertTrue(eachSummaryCard.isDisplayed(),
+            softAssert.assertTrue(eachSummaryCard.isDisplayed(),
                     "HATA: Dashboard özet kartı/linki görünmüyor!");
             // Konsolda hangi kartın başarıyla geçtiğini takip eder
             System.out.println("Görünürlük doğrulandı: " + eachSummaryCard.getText());
         }
+        softAssert.assertAll();
     }
 
     @Test(priority = 1)
@@ -129,6 +135,8 @@ public class US22 {
     // Tüm kartlar aynı CSS sınıf yapısını paylaştığı için görsellerin veya ikonların varlığı programatik olarak birbirinden ayırt edilememektedir.
     @Test(priority = 8)
     public void US22_TC04_DashboardMesajTutarlilikTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
         // Elementi dinamik metinle bulur
         WebElement dashboardMessageElement = Driver.getDriver().findElement(
                 By.xpath("//*[contains(text(),'Messages in your Database')]")
@@ -142,7 +150,7 @@ public class US22 {
         int expectedMessageCountFromDashboard = Integer.parseInt(fullText.replaceAll("[^0-9]", ""));
         System.out.println("Dashboard'da beklenen mesaj sayısı: " + expectedMessageCountFromDashboard);
 
-        // 4. Mesajlar sayfasına gider ticketlari sayar
+        // Mesajlar sayfasına gider ticketlari sayar
         adminBodyPage.learnMoreAtMessagesLink.click();
 
         List<WebElement> actualMessageTicketList = Driver.getDriver().findElements(
@@ -152,13 +160,15 @@ public class US22 {
         int actualMessageCountOnMessagesPage = actualMessageTicketList.size();
         System.out.println("Mesajlar sayfasında bulunan gerçek sayı: " + actualMessageCountOnMessagesPage);
 
-        // 5. KARŞILAŞTIRMA
-        Assert.assertEquals(actualMessageCountOnMessagesPage, expectedMessageCountFromDashboard,
+        // Dashboard'da gözüken ve aslında olan ticket sayılarını karşılaştırır
+        softAssert.assertEquals(actualMessageCountOnMessagesPage, expectedMessageCountFromDashboard,
                 "HATA: Dashboard rakamı ile sayfadaki ticket sayısı uyuşmuyor!");
+        softAssert.assertAll();
     }
 
     @Test(priority = 9)
     public void US_22_TC_05_SosyalMedyaIkonlariGorunurlukVeTiklanabilirlikTesti(){
+        SoftAssert softAssert = new SoftAssert();
 
         // Tüm ikonları bir listeye toplar
         List<WebElement> dashboardSocialMediaIconList = Arrays.asList(
@@ -175,13 +185,14 @@ public class US22 {
         for (WebElement eachSocialMediaIcon : dashboardSocialMediaIconList) {
 
             // Görünürlüğünü kontrol eder
-            Assert.assertTrue(eachSocialMediaIcon.isDisplayed(),
+            softAssert.assertTrue(eachSocialMediaIcon.isDisplayed(),
                     "HATA: Sosyal medya ikonu görünmüyor!");
 
             // Tıklanabilir olduğunu kontrol eder
-            Assert.assertTrue(eachSocialMediaIcon.isEnabled(),
+            softAssert.assertTrue(eachSocialMediaIcon.isEnabled(),
                     "HATA: Sosyal medya ikonu tıklanabilir değil!");
         }
+        softAssert.assertAll();
 
     }
 
