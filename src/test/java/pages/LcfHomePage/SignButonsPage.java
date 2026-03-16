@@ -86,22 +86,30 @@ public class SignButonsPage {
 
     // Sitenin giris sayfasina donmek icin kullanilacak Sign Out linki
     @FindBy(id = "logout-form")
-    public WebElement SignOutlinki;
+    public WebElement signOutlinki;
 
 
 
     //Kerim TIRPAN US9 için
+    //Reset Password sayfa başlığı
+    @FindBy (tagName = "title")
+    public WebElement passwordResetPageTitle;
+
     //Reset Password sayfasındaki header logo yerine bulunan yazı
     @FindBy (className = "navbar-brand")
     public  WebElement passwordResetPageTextInsteadOfLogo;
 
     //Reset Password sayfasindaki email text box
     @FindBy (id ="email")
-    public  WebElement registerEmailPageEmailTextBox;
+    public  WebElement resetPasswordPageEmailTextBox;
+
+    //Reset Password email box label text
+    @FindBy (xpath = "//label[@*='email']")
+    public  WebElement resetPasswordPageEmailTextBoxLabel;
 
     //Reset Password sayfasindaki "Send Password Reset Link"
-    @FindBy (xpath = "//*[@class='btn btn-primary']")
-    public  WebElement ResetPasswordPageSendPasswordResetButton;
+    @FindBy(xpath = "//button[@type='submit']")
+    public  WebElement resetPasswordPageSendPasswordResetButton;
 
     //Reset Password hatalı email uyarı mesajı
     @FindBy (className = "invalid-feedback")
@@ -116,12 +124,14 @@ public class SignButonsPage {
     WebElement getPasswordResetErrorPopup;
 
     //Reset password sayfası Login Link
-    @FindBy(xpath = "(//*[@class='nav-link'])[1]")
-    WebElement passwordResetPAgeLoginLink;
+    @FindBy(linkText = "Login")
+    public WebElement passwordResetPageLoginLink;
+
+
 
     //Reset password sayfası Register Link
-    @FindBy(xpath = "(//*[@class='nav-link'])[2]")
-    WebElement passwordResetPAgeRegisterLink;
+    @FindBy(linkText = "Register")
+    public WebElement passwordResetPageRegisterLink;
 
 
 

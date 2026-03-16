@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
 public class DepartmentsMainPage {
 
     public DepartmentsMainPage(){
@@ -43,7 +45,9 @@ public class DepartmentsMainPage {
     // 8. Boarding
     @FindBy(xpath = "//h3[text()='Boarding']")
     public WebElement Boarding;
-
+    //9.Departments Liste
+    @FindBy(xpath = "//h3")
+    public List<WebElement> allDepartments;
     
     // Anasayfa Header alanında yer alan Departments Butonu
     @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Departments'])[3]")
