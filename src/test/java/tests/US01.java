@@ -12,18 +12,17 @@ import utilities.ReusableMethods;
 public class US01 {
 
     HomeBodyPage homeBodyPage;
-    SoftAssert softAssert;
 
     @BeforeMethod
     public void setUp() {
-
         homeBodyPage = new HomeBodyPage();
-        softAssert = new SoftAssert();
         Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
     }
 
     @Test(priority = 1, groups = "smoke", description = "SMOKE: Ana sayfa yüklendiğinde sekme isminin kontrolü")
     public void US01_TC01_AnaSayfaTitleTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
 
         ReusableMethods.bekle(2);
 
@@ -32,12 +31,15 @@ public class US01 {
 
         softAssert.assertEquals(actualTitle, expectedTitle, "HATA: Sayfa başlığı beklenenden farklı!");
 
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
+        ReusableMethods.tumSayfaResimCek(Driver.getDriver(), "US01_TC01_AnaSayfa_Title_Basarili");
+
         softAssert.assertAll();
     }
 
     @Test(priority = 2, groups = "smoke", description = "SMOKE: Site adresinin HTTPS protokolü ile açıldığının kontrolü")
     public void US01_TC02_HttpsProtokolTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
 
         ReusableMethods.bekle(2);
 
@@ -45,12 +47,15 @@ public class US01 {
 
         softAssert.assertTrue(actualUrl.startsWith("https"), "HATA: Site güvenli bağlantı (https) içermiyor!");
 
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
+        ReusableMethods.tumSayfaResimCek(Driver.getDriver(), "US01_TC02_Https_Protokol_Basarili");
+
         softAssert.assertAll();
     }
 
     @Test(priority = 3, groups = "regression", description = "REGRESSION: Ana sayfa Body bölümündeki tüm elementlerin görünürlük kontrolü")
     public void US01_TC03_BodyEksiksizGorunurlukTesti() {
+
+        SoftAssert softAssert = new SoftAssert();
 
         ReusableMethods.bekle(2);
 
@@ -91,14 +96,13 @@ public class US01 {
         softAssert.assertTrue(homeBodyPage.bodyVaccinationHerpesvirusLink.isDisplayed(), "Herpesvirus aşısı görünmüyor!");
         softAssert.assertTrue(homeBodyPage.bodyVaccinationSurgicalLink.isDisplayed(), "Surgical Procedure görünmüyor!");
 
+        ReusableMethods.tumSayfaResimCek(Driver.getDriver(), "US01_TC03_Body_Elementleri_Basarili");
 
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
         softAssert.assertAll();
     }
 
     @AfterMethod
     public void teardown() {
-
         Driver.quitDriver();
     }
 }
