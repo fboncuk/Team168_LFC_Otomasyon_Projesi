@@ -33,7 +33,7 @@ public class US07 {
     }
 
 
-    @Test(priority = 1)
+    @Test
     public void US07_TC01_RegisterFormuPozitifTest() {
 
 
@@ -64,7 +64,7 @@ public class US07 {
     }
 
 
-    @Test(priority = 2)
+    @Test
 
     public void US07_TC02_UserNameBenzersizlikKontrolu() {
 
@@ -92,13 +92,13 @@ public class US07 {
                 "Sistemde zaten kayıtlı olan kullanıcı için tekrar kayıt yapılmasına izin verildi," +
                         "kayıt sayfasından çıkış yapılmamalıydı");
 
-
+        ReusableMethods.bekle(2);
         softAssert.assertAll();
 
 
     }
 
-    @Test(priority = 3)
+    @Test
 
     public void US07_TC03_EmailBenzersizlikKontrolu() {
 
@@ -136,7 +136,7 @@ public class US07 {
 
     }
 
-    @Test(priority = 4)
+    @Test
 
 
     public void US07_TC04_YetersizKarakterSayisiIlePasswordKontrolu() {
@@ -165,13 +165,13 @@ public class US07 {
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Sistem 8 karakterden az olan şifreyi kabul ederek kaydı tamamladı," +
                         "kayıt butonunun aktif kalması gerekiyordu.");
-        ReusableMethods.bekle(1);
+
         softAssert.assertAll();
 
 
     }
 
-    @Test (priority = 5)
+    @Test
 
     public void US07_TC05_LimitUstuPasswordKarakterKontrolu() {
 
@@ -208,7 +208,7 @@ public class US07 {
 
     }
 
-    @Test (priority = 6)
+    @Test
 
 
     public void US07_TC06_RakamIcermeyenPasswordKontrolu() {
@@ -241,7 +241,7 @@ public class US07 {
         softAssert.assertAll();
     }
 
-    @Test (priority = 7)
+    @Test
 
 
     public void US07_TC07_HarfIcermeyenPasswordKontrolu() {
@@ -272,7 +272,7 @@ public class US07 {
         softAssert.assertAll();
     }
 
-    @Test (priority = 8)
+    @Test
 
 
     public void US07_TC08_GecersizEmailFormatiKontrolu() {
@@ -307,7 +307,7 @@ public class US07 {
 
     }
 
-    @Test(priority = 9)
+    @Test
     public void US07_TC09_PasswordIlePasswordConfirmUyusmazlikKontrolu() {
 
 
@@ -332,7 +332,7 @@ public class US07 {
         ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
-    @Test (priority = 10)
+    @Test
 
 
     public void US07_TC_10_BosRegisterFormKontrolu() {
@@ -354,7 +354,7 @@ public class US07 {
     }
 
 
-    @Test (priority = 11)
+    @Test
 
 
     public void US07_TC_11_YetersizKarakterliUserNameKontrolu() {
@@ -387,7 +387,7 @@ public class US07 {
 
     }
 
-    @Test (priority = 12)
+    @Test
 
 
     public void US07_TC_12_LimitUstuKarakterliUserNameKontrolu() {
