@@ -98,6 +98,24 @@ public class DashboardMedicinesPage {
     @FindBy(xpath = "//*[@id=\"Arabic\"]/div[2]/textarea")
     public WebElement medicineEditArabicLanguageButtonContent;
 
+    // Medicines Updated Successfully mesaj içeriği
+    @FindBy(xpath = "//div[@class='alert alert-success']")
+    public WebElement successAlert;
+
+    // Medicines Deleted Successfully mesaj içeriği
+    @FindBy(xpath = "//*[@class='alert alert-danger']")
+    public WebElement deletedAlert;
+
+
+
+
+
+
+
+
+
+
+
 
 
 

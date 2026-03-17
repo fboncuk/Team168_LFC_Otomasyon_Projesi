@@ -4,15 +4,15 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.Listeners;
 import utilities.ReusableMethods;
 
-@Listeners(utilities.Listeners.class)
+@org.testng.annotations.Listeners(Listeners.class)
 
 
 public class US07 {

@@ -3,7 +3,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LcfAdminPage.DashboardDepartmentsPage;
@@ -11,7 +10,9 @@ import pages.LcfAdminPage.DashboardVaccinationsPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
-@Listeners(utilities.Listeners.class)
+import utilities.Listeners;
+
+@org.testng.annotations.Listeners(Listeners.class)
 
 public class US40 {
 
