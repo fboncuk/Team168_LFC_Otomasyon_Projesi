@@ -16,8 +16,21 @@ public class HomeBodyDoctorsPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
+   @FindBy(id = "div.doctors")
 
-    
+   public WebElement doctorCard;
+
+   @FindBy(id = "//a[contains(text(),'Doctors')]")
+    public WebElement doctorCard2;
+
+   @FindBy(id = "//div[contains(@class,'doctors')]")
+    public WebElement doctorCard3;
+
+   @FindBy(id = "//h3[contains(text(),'Alejandro Martinez')]")
+    public WebElement doctorCard4; //doktor ismi
+
+
+
 
 
 
