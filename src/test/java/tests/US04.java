@@ -32,7 +32,6 @@ public class US04 {
                 .click();
 
         ReusableMethods.bekle(2);
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
 
         Assert.assertTrue(homePage.resultText
                 .isDisplayed(), "Arama sonucu görüntülenemedi!");
@@ -43,9 +42,9 @@ public class US04 {
 
         loginPage.signInLinki
                 .click();
-        loginPage.emailKutucusu
+        loginPage.emailKutusu
                 .sendKeys(ConfigReader.getProperty("T04UserMail"));
-        loginPage.passwordKutucusu
+        loginPage.passwordKutusu
                 .sendKeys(ConfigReader.getProperty("T04UserPassword"));
         loginPage.signInButtonOnay
                 .click();
@@ -58,7 +57,6 @@ public class US04 {
                 .click();
 
         ReusableMethods.bekle(2);
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
 
         Assert.assertTrue(homePage.resultText.isDisplayed(), "Login sonrası arama sonucu gelmedi!");
     }
@@ -74,7 +72,7 @@ public class US04 {
         ReusableMethods.bekle(2);
         ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
 
-        Assert.assertTrue(homePage.errorMessageList.size() > 0, "BUG: Uyarı mesajı görüntülenemedi!");
+        Assert.assertTrue(homePage.errorMessageList.size() > 0, "BUG011: Uyarı mesajı görüntülenemedi!");
     }
 
     @Test(groups = "regression", description = "REGRESSION: Arama motoru harf duyarlılığı testi")
@@ -97,7 +95,6 @@ public class US04 {
 
 
         String ikinciSonuc = homePage.resultText.getText();
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
 
         Assert.assertEquals(ilkSonuc.toLowerCase(), ikinciSonuc.toLowerCase(),
                 "HATA: Büyük harf ('DEnTal') ve küçük harf ('dental') aramaları farklı sonuçlar döndürdü!");

@@ -50,10 +50,15 @@ public class AppointmentBookingPage {
     @FindBy(id = "submit-contact-detail")
     public WebElement appointmentBookingButton;
 
-    
 
+    // Randevu oluşturulduğuna dair alert mesajı
+    // Congratulations on your well-deserved success.
+    @FindBy(xpath = "//div[contains(@class,'alert-success')]")
+    public WebElement randevuAlertMesaji;
 
-
+    //Appointment formunun tamamı
+    @FindBy (xpath = "//*[@class='box_detail booking']")
+    public WebElement appointmentFormContainer;
 
 
 

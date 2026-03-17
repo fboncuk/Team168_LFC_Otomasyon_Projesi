@@ -31,7 +31,7 @@ public class DashboardUsersPage {
 
 
     // Role / User Type
-    @FindBy(xpath = "//div[contains(@class,'nice-select')]")
+    @FindBy(xpath = "(//input[@name='roles[]'])[1]")
     public WebElement roleDropdownKutusu;
 
     // Password alanı

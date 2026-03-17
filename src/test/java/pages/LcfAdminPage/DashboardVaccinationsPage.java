@@ -180,5 +180,10 @@ public class DashboardVaccinationsPage {
     @FindBy(xpath = "//*[@id=\"tableWithSearch\"]/tbody/tr[10]/td[5]")
     public WebElement dashboardVaccinationsDeleteUrun10;
 
+    //Admin dashboard vaccination ikonu
+    @FindBy (xpath = "(//*[@class='bg-complete icon-thumbnail'])[11]")
+    public WebElement sideBarDashboardvaccinationsIcon;
+
+
 }
 
