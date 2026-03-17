@@ -1,176 +1,147 @@
 package tests;
-import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.LcfAdminPage.DashboardDepartmentsPage;
-import pages.LcfAdminPage.DashboardPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 import java.util.Arrays;
 import java.util.List;
+
 @Listeners(utilities.Listeners.class)
+
 public class US29 {
 
-
-    WebDriver driver;
     SoftAssert softAssert;
     SignButonsPage signButonsPage;
     DashboardDepartmentsPage dashboardDepartmentsPage;
-    DashboardPage dashboardPage;
 
     @BeforeClass
-    public void setUpClass (){
-
+    public void setUpClass() {
         signButonsPage = new SignButonsPage();
         dashboardDepartmentsPage = new DashboardDepartmentsPage();
-        dashboardPage = new DashboardPage();
-
-        Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
+        Driver.getDriver()
+                .get(ConfigReader.getProperty("DasUrl"));
         signButonsPage.emailKutusu
                 .sendKeys(ConfigReader.getProperty("T07AdminMail"));
         signButonsPage.passwordKutusu
                 .sendKeys(ConfigReader.getProperty("T07AdminPassword"));
         signButonsPage.signInButtonOnay
                 .click();
-
     }
-
 
     @BeforeMethod
     public void setUp() {
-
         softAssert = new SoftAssert();
-
+        Driver.getDriver().get(ConfigReader.getProperty("DasdepUrl"));
     }
-    @Test (priority = 1)
 
-    public void US29_TC01_DepartmantsVeAltMenuErisilebilirlikKontrolu (){
+    @Test
+    public void US29_TC01_DepartmantsVeAltMenuErisilebilirlikKontrolu() {
 
+        Actions actions = new Actions(Driver.getDriver());
 
         //Admin sayfasında sol açılır dashboard alanına hover over edin.
-        Actions actions = new Actions(Driver.getDriver());
         actions.moveToElement(dashboardDepartmentsPage.sideBarDashboardDepartmentsIcon)
                 .perform();
 
         //Departments dropdown menüsünün görünür ve aktif olduğunu doğrulayın.
         softAssert.assertTrue(dashboardDepartmentsPage.dashboardDepartmentText
-                .isDisplayed()
-                ,"Departmants linki görüntülenemedi.");
+                        .isDisplayed(),
+                "Departmants linki görüntülenemedi.");
         softAssert.assertTrue(dashboardDepartmentsPage.dashboardDepartmentText
-                .isEnabled()
-                ,"Departmants linki aktif değil.");
+                        .isEnabled(),
+                "Departmants linki aktif değil.");
         softAssert.assertAll();
 
+        //Departmants alt menülerine erişilebildiğini doğrulayın.
+        dashboardDepartmentsPage.dashboardDepartmentText.click();
 
+        softAssert.assertTrue(dashboardDepartmentsPage.DepartmentsButon
+                .isEnabled());
+        softAssert.assertTrue(dashboardDepartmentsPage.sidebarCreateDepartments
+                .isEnabled());
+        softAssert.assertAll();
     }
 
-    @Test (priority = 2)
-    public void US29_02_DepartmantsSayfasininGoruntulenebilirlikKontrolu (){
+    @Test
+    public void US29_TC02_DepartmantsSayfasininGoruntulenebilirlikKontrolu() {
 
-        //Sol açılır menüden Departments menüsüne tıklayın.
-
-        Actions actions = new Actions(Driver.getDriver());
-        actions.moveToElement(dashboardDepartmentsPage.sideBarDashboardDepartmentsIcon)
-                .perform();
-        dashboardDepartmentsPage.dashboardDepartmentsSidebarHeader
-                .click();
-
-        //Departments alt menüsündeki departmants'a tıklayın
-        dashboardDepartmentsPage.dashboardDepartmentsSidebarListLink
-                .click();
-
-        //Departments sayfasının açıldığını ve sayfa başlığında
-        // “Departments” metninin görünür olduğunu doğrulayın.
-
-        softAssert.assertTrue(dashboardDepartmentsPage.departmentsMainTitle
-                .isDisplayed());
-
+        //Depatrments sayfasında olduğunuz doğrulayın.
+        softAssert.assertTrue(dashboardDepartmentsPage.departmentsMainTitle.isDisplayed(),
+                "Başlık görünmüyor.");
         //Sayfada departmanların listelendiğini doğrulayın.
-
         List<String> expectedDepartmentNames = Arrays.asList(
                 "Wellness",
                 "Dental Care",
                 "Anaesthesia",
                 "Dermatology",
-                "Diagnostics");
-
-
-        List<String> actualDepartmentsNames = ReusableMethods.stringListeDondur
-                                (dashboardDepartmentsPage.departmentNamesList);
-
+                "Diagnostics"
+        );
+        List<String> actualDepartmentsNames = ReusableMethods.stringListeDondur(dashboardDepartmentsPage.departmentNamesList);
 
         softAssert.assertTrue(actualDepartmentsNames.containsAll(expectedDepartmentNames),
                 "Mevcut liste beklenen tüm departmanları içermiyor");
-
         softAssert.assertAll();
     }
 
-    @Test (priority = 3)
-    public void US29_03_GecerliDepartmanAdiIleAramaFonksiyonuKontrolu (){
+    @Test
+    public void US29_T03_GecerliDepartmanAdiIleAramaFonksiyonuKontrolu() {
 
-
+        //Geçerli bir departman adıyla arama yapın
         dashboardDepartmentsPage.departmentsSearchBox
                 .sendKeys("Wellness");
-
-        //Arama sonucunda departmanın listelendiğini doğrulayın.
+        //Arama sonucu departmanın listelendiğini doğrulayın
         softAssert.assertTrue(dashboardDepartmentsPage.departmantsDetailPageWellness.isDisplayed(),
                 "Aranan departmant bulunamadı.");
         softAssert.assertAll();
-
     }
 
-    @Test (priority = 4)
-    public void US29_04_GecersizDepartmanAdiylaAramaFonksiyonuKontrolu (){
+    @Test
+    public void US29_04_GecersizDepartmanAdiylaAramaFonksiyonuKontrolu() {
 
-        //Search alanına tıklayarak geçerli bir departman adı girin.
-        dashboardDepartmentsPage.departmentsSearchBox
-                .clear();
+        //Geçersiz bir departman adıyla arama yapın
         dashboardDepartmentsPage.departmentsSearchBox
                 .sendKeys("Wellnesss");
-
-        //Arama sonucunda departmanın listelenmediğini doğrulayın.
-        softAssert.assertTrue(dashboardDepartmentsPage.noResultText.isDisplayed());
+        //Arama sonucu departmanın listelenmediğini doğrulayın
+        softAssert.assertTrue(dashboardDepartmentsPage.noResultText
+                .isDisplayed(), "Geçersiz aramada sonuç bulundu!");
         softAssert.assertAll();
-
     }
 
-    @Test (priority = 5)
-    public void US29_05_SayfalamadanBagimsizAramaFonksiyonuKontrolu (){
+    @Test
+    public void US29_05_SayfalamadanBagimsizAramaFonksiyonuKontrolu() {
 
         //Sayfa 1’de departmanın adını arayın
         dashboardDepartmentsPage.departmentsSearchBox
-                .clear();
-        dashboardDepartmentsPage.departmentsSearchBox
                 .sendKeys("Wellness");
-
         //Departmanın listelendiğini doğrulayın
-        softAssert.assertTrue(dashboardDepartmentsPage.departmantsDetailPageWellness.isDisplayed(),
-                "Aranan departmant bulunamadı.");
+        softAssert.assertTrue(dashboardDepartmentsPage.departmantsDetailPageWellness
+                .isDisplayed());
 
         //Next butonu ile Sayfa 2’ye geçin
         dashboardDepartmentsPage.departmentsNextButton
                 .click();
 
-        //Sayfa 1’de aradığınız departmanın adını tekrar arayın
+//Search alanını temizleyerek Sayfa 1’de aradığınız departmanın adını tekrar arayın
+        dashboardDepartmentsPage.departmentsSearchBox
+                .clear();
         dashboardDepartmentsPage.departmentsSearchBox
                 .sendKeys("Wellness");
-
         //Departmanın Sayfa 2’de de listelendiğini doğrulayın
-        softAssert.assertFalse(dashboardDepartmentsPage.noResultText.isDisplayed(),
-                "Aranan departmant bulunamadı.");
-
+        softAssert.assertFalse(dashboardDepartmentsPage.noResultText
+                .isDisplayed(),
+                "Sayfa 2'de aranan departmant bulunamadı.");
         softAssert.assertAll();
     }
-    @Test (priority = 6)
-    public void US29_06_HerSatirdaDuzenlemeButonuDogrulamaTesti (){
 
-        //Departmants detay sayfasına gidin
-
-        Driver.getDriver().get(ConfigReader.getProperty("DasdepUrl"));
+    @Test
+    public void US29_TC06_HerSatirdaDuzenlemeButonuDogrulamaTesti() {
 
         //Departmants liste elemanlarının bulunduğu her satırda edit butonunun
         // görünür ve aktif olduğunu doğrulayın
@@ -178,8 +149,8 @@ public class US29 {
         int expectedCount = dashboardDepartmentsPage.departmentNamesList.size();
         int actualEditCount = dashboardDepartmentsPage.departmentsEditButtonList.size();
 
-        softAssert.assertEquals(actualEditCount, expectedCount, "Edit buton sayısı eksik");
-
+        softAssert.assertEquals(actualEditCount, expectedCount,
+                "Edit buton sayısı eksik");
         for (WebElement editButton : dashboardDepartmentsPage.departmentsEditButtonList) {
             softAssert.assertTrue(editButton.isDisplayed(),
                     "Edit butonu görüntülenemiyor.");
@@ -189,22 +160,16 @@ public class US29 {
         softAssert.assertAll();
     }
 
+    @Test
+    public void US29_TC07_HerSatirdaSilmeButonuDogrulamaTesti() {
 
-
-    @Test (priority = 7)
-    public void US29_07_HerSatirdaSilmeButonuDogrulamaTesti (){
-
-        //Departmants liste elemanlarının bulunduğu her satırda edit butonunun
+        //Departmants liste elemanlarının bulunduğu her satırda delete butonunun
         // görünür ve aktif olduğunu doğrulayın
-
-        int expectedCount = dashboardDepartmentsPage.departmentNamesList
-                .size();
-        int actualDeleteCount = dashboardDepartmentsPage.departmentsDeleteButtonList
-                .size();
+        int expectedCount = dashboardDepartmentsPage.departmentNamesList.size();
+        int actualDeleteCount = dashboardDepartmentsPage.departmentsDeleteButtonList.size();
 
         softAssert.assertEquals(actualDeleteCount, expectedCount,
                 "Delete buton sayısı eksik");
-
         for (WebElement deleteButton : dashboardDepartmentsPage.departmentsDeleteButtonList) {
             softAssert.assertTrue(deleteButton.isDisplayed(),
                     "Delete butonu görüntülenemiyor.");
@@ -214,13 +179,8 @@ public class US29 {
         softAssert.assertAll();
     }
 
-
-        @AfterClass
-        public void tearDown () {
-            Driver.quitDriver();
-        }
-
-
+    @AfterClass
+    public void tearDown() {
+        Driver.quitDriver();
     }
-
-
+}

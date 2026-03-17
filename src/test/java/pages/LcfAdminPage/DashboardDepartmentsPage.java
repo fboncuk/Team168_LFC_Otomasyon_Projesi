@@ -125,6 +125,10 @@ public class DashboardDepartmentsPage {
     @FindBy(xpath = "//tbody/tr")
     public List<WebElement> departmentRowsList;
 
+    @FindBy (xpath = "//*[.='Create Departments']")
+    public WebElement sidebarCreateDepartments;
+
+
 
 
 
