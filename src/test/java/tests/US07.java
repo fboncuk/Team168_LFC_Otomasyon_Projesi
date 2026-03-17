@@ -2,7 +2,6 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,6 +9,10 @@ import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.Listeners;
+import utilities.ReusableMethods;
+
+@org.testng.annotations.Listeners(Listeners.class)
 
 
 public class US07 {
@@ -30,7 +33,7 @@ public class US07 {
     }
 
 
-    @Test(priority = 1)
+    @Test
     public void US07_TC01_RegisterFormuPozitifTest() {
 
 
@@ -56,14 +59,12 @@ public class US07 {
         softAssert.assertTrue(signButonsPage.headerUserName.isDisplayed(),
                 "Geçerli bilgilerle kayıt yapılmasına rağmen kullanıcı ismi header bölümünde görüntülenemedi.");
 
-        //signButonsPage.homePageSignOut.click();
-
         softAssert.assertAll();
 
     }
 
 
-    @Test(priority = 2)
+    @Test
 
     public void US07_TC02_UserNameBenzersizlikKontrolu() {
 
@@ -91,13 +92,13 @@ public class US07 {
                 "Sistemde zaten kayıtlı olan kullanıcı için tekrar kayıt yapılmasına izin verildi," +
                         "kayıt sayfasından çıkış yapılmamalıydı");
 
-
+        ReusableMethods.bekle(2);
         softAssert.assertAll();
 
 
     }
 
-    @Test(priority = 3)
+    @Test
 
     public void US07_TC03_EmailBenzersizlikKontrolu() {
 
@@ -125,14 +126,17 @@ public class US07 {
         String actualText = signButonsPage.emailTakenErrorMessage.getText();
 
         softAssert.assertTrue(actualText.contains(expectedContent),
-                "Kayıtlı bir email adresi girilmesine rağmen sistem hata mesajı vermedi," +
-                        "kayıt işlemi gerçekleşti");
+                "Kayıtlı bir email adresi girilmesine rağmen sistem hata mesajı vermedi.");
+
+        //Kayıt işleminin gerçekleşmediğini doğrulayın
+
+        softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),"Kayıt işlemi gerçekleşti");
 
         softAssert.assertAll();
 
     }
 
-    @Test(priority = 4)
+    @Test
 
 
     public void US07_TC04_YetersizKarakterSayisiIlePasswordKontrolu() {
@@ -161,12 +165,13 @@ public class US07 {
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Sistem 8 karakterden az olan şifreyi kabul ederek kaydı tamamladı," +
                         "kayıt butonunun aktif kalması gerekiyordu.");
+
         softAssert.assertAll();
 
 
     }
 
-    @Test (priority = 5)
+    @Test
 
     public void US07_TC05_LimitUstuPasswordKarakterKontrolu() {
 
@@ -203,7 +208,7 @@ public class US07 {
 
     }
 
-    @Test (priority = 6)
+    @Test
 
 
     public void US07_TC06_RakamIcermeyenPasswordKontrolu() {
@@ -232,10 +237,11 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Şifre en az bir rakam içermediği halde sistem kayıt işlemini gerçekleştirdi.");
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
-    @Test (priority = 7)
+    @Test
 
 
     public void US07_TC07_HarfIcermeyenPasswordKontrolu() {
@@ -262,10 +268,11 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Şifre en az bir harf içermediği halde sistem kayıt işlemini gerçekleştirdi.");
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
-    @Test (priority = 8)
+    @Test
 
 
     public void US07_TC08_GecersizEmailFormatiKontrolu() {
@@ -300,7 +307,7 @@ public class US07 {
 
     }
 
-    @Test(priority = 9)
+    @Test
     public void US07_TC09_PasswordIlePasswordConfirmUyusmazlikKontrolu() {
 
 
@@ -322,10 +329,10 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem şifre uyuşmazlığına rağmen kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
-    @Test (priority = 10)
+    @Test
 
 
     public void US07_TC_10_BosRegisterFormKontrolu() {
@@ -342,12 +349,12 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem boş register form ile kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
 
-    @Test (priority = 11)
+    @Test
 
 
     public void US07_TC_11_YetersizKarakterliUserNameKontrolu() {
@@ -375,12 +382,12 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem,user name 3 karakterden az olduğu halde kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
 
     }
 
-    @Test (priority = 12)
+    @Test
 
 
     public void US07_TC_12_LimitUstuKarakterliUserNameKontrolu() {
@@ -409,7 +416,7 @@ public class US07 {
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem,user name 20 karakterden fazla olduğu halde kayıt işlemini gerçekleştirdi.");
 
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
 
     }
