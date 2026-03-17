@@ -9,10 +9,11 @@ import pages.LcfAdminPage.DashboardPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.Listeners;
 import utilities.ReusableMethods;
 import java.util.Arrays;
 import java.util.List;
-@Listeners(utilities.Listeners.class)
+@org.testng.annotations.Listeners(Listeners.class)
 public class US29 {
 
 
@@ -111,7 +112,6 @@ public class US29 {
 
     @Test (priority = 3)
     public void US29_03_GecerliDepartmanAdiIleAramaFonksiyonuKontrolu (){
-
 
         dashboardDepartmentsPage.departmentsSearchBox
                 .sendKeys("Wellness");

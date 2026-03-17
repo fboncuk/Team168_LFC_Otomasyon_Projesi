@@ -11,11 +11,13 @@ import pages.LcfHomePage.MedicinesMainPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.Listeners;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Listeners(utilities.Listeners.class)
+@org.testng.annotations.Listeners(Listeners.class)
 
 public class US18 {
     WebDriver driver;

@@ -16,6 +16,10 @@ public class VacinationsMainPage {
 //    @FindBy(xpath = "(//a[normalize-space()='Rabies Vaccine'])[2]")
 //    public WebElement vaccinesMainPageRabies;
 
+    // Vaccines Main sayfasında LoyalFriendCare Logo linki
+    @FindBy(xpath = "(//img[@class='logo_sticky'])[2]")
+    public WebElement lfcLogo;
+
     // Vaccines Main sayfasında Rabies Vaccine linki
     @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[1]")
     public WebElement vaccinesRabies;
