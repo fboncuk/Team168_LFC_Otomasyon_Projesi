@@ -30,6 +30,10 @@ public class AppointmentBookingPage {
     @FindBy(xpath = "//li[text()='Dermatology']")
     public WebElement dermatologySecenegi;
 
+    // Listeden seçim yapmak için
+    @FindBy(xpath = "//li[text()='Wellness']")
+    public WebElement departmentDropDownWellness;
+
 
     // 4. Doktor Seçimi (Doctor Dropdown)
 

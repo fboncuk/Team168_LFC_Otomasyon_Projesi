@@ -48,6 +48,10 @@ public class DepartmentsMainPage {
     //9.Departments Liste
     @FindBy(xpath = "//h3")
     public List<WebElement> allDepartments;
+
+    // Diğer kartlardan arındırılmış bütün departman kartlarının listesi
+    @FindBy(xpath = "(//div[@class='row add_bottom_30'])[1]//h3")
+    public List<WebElement> allDepartmentCards;
     
     // Anasayfa Header alanında yer alan Departments Butonu
     @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Departments'])[3]")
