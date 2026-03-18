@@ -10,6 +10,9 @@ import pages.LcfAdminPage.DashboardVaccinationsPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.Listeners;
+
+@org.testng.annotations.Listeners(Listeners.class)
 
 public class US40 {
 
