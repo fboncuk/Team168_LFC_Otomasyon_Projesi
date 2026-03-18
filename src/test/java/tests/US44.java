@@ -98,7 +98,7 @@ public class US44 {
         adminBodyPage.profileLogoutOption.click();
         // Tarayıcıda 'Geri' butonuna basılarak önceki sayfaya dönülmeye çalışılır
         Driver.getDriver().navigate().back();
-        ReusableMethods.bekle(2);
+//        ReusableMethods.bekle(2);
 
 
         String actualUrl = Driver.getDriver().getCurrentUrl();

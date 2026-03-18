@@ -25,8 +25,8 @@ public class US23 {
         Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
 
         loginPage.signInLinki.click();
-        loginPage.emailKutucusu.sendKeys("beril.admin@loyalfriendcare.com");
-        loginPage.passwordKutucusu.sendKeys("Loyal.123123");
+        loginPage.emailKutusu.sendKeys("beril.admin@loyalfriendcare.com");
+        loginPage.passwordKutusu.sendKeys("Loyal.123123");
         loginPage.signInButtonOnay.click();
         ReusableMethods.bekle(2);
 

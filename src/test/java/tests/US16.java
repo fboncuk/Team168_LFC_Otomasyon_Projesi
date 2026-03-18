@@ -21,7 +21,6 @@ import java.util.List;
 
 
 
-
 public class US16 {
 
     // System.out.printf("Hadi BISMILLAH baslasinn >>>>>>>>>");
@@ -38,7 +37,9 @@ public class US16 {
 
     @BeforeClass
     public void setup() {
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        signButonsPage = new SignButonsPage();
+        // Homepage açılır
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
 
         signButonsPage = new SignButonsPage();
         signButonsPage.signInLinki.click();
@@ -61,7 +62,10 @@ public class US16 {
 
         Driver.getDriver().get(ConfigReader.getProperty("DocUrl"));
 
-        WebDriver driver = new ChromeDriver();
+
+
+          WebDriver driver = new ChromeDriver();
+
 
         // 2) Doctors sayfasına git
         driver.findElement(By.xpath("//a[contains(text(),'Doctors')]")).click();
@@ -128,7 +132,11 @@ public class US16 {
                 "Randevu talebi başarıyla gönderilmedi!");
 
 
+
+
+
+
+
     }
+
 }
-
-
