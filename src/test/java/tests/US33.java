@@ -219,7 +219,7 @@ public class US33 {
         // Güncelle butonuna tıklar
         dashboardMedicinesPage.medicineEditSaveButton.click();
 
-        ReusableMethods.bekle(1);
+        //ReusableMethods.bekle(1);
 
         boolean isSuccessAlertDisplayed;
         try {
@@ -303,7 +303,7 @@ public class US33 {
 
         // Dosyayı gönderir
         hiddenInput.sendKeys(dosyaYolu);
-        ReusableMethods.bekle(1); // Yükleme süresi için
+        //ReusableMethods.bekle(1); // Yükleme süresi için
 
         WebElement thumbnail = Driver.getDriver().findElement(By.className("thumbnail-wrapper"));
         softAssert.assertTrue(thumbnail.isDisplayed(), "HATA: Görsel yüklendi ancak önizleme (thumbnail) oluşmadı!");
@@ -330,13 +330,10 @@ public class US33 {
         // System.currentTimeMillis() o anki zamanı milisaniye olarak ekler
         String updatedTitle = "Test Medicine " + System.currentTimeMillis();
         dashboardMedicinesPage.medicinesPageTitleInput.clear();
-        ReusableMethods.bekle(4);
         dashboardMedicinesPage.medicinesPageTitleInput.sendKeys(updatedTitle);
-        ReusableMethods.bekle(4);
 
         // "Save" butonuna tıklar
         dashboardMedicinesPage.medicineEditSaveButton.click();
-        ReusableMethods.bekle(2);
 
         // Medicines Updated Successfully mesajı geliyor mu doğrulaması
         try {
