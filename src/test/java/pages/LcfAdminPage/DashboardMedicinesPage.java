@@ -70,13 +70,55 @@ public class DashboardMedicinesPage {
     @FindBy(xpath = "//*[@class='btn btn-danger btn-cons btn-animated from-top fa  fa-remove']")
     public List<WebElement> allDeleteButtons;
 
-    // Sayfa içerisindeki "Add Medicines" butonu
-    @FindBy(xpath = "//a[contains(text(), 'Add Medicines') or contains(@class, 'add')]")
-    public WebElement addMedicinesButtonOnPage;
+    // İlaç düzenleme sayfasındaki "Save" butonu
+    @FindBy(xpath = "//*[@class='btn btn-success btn-cons btn-animated from-left fa fa-save pull-right']")
+    public WebElement medicineEditSaveButton;
 
-    // Başarılı kayıt mesajı
-    @FindBy(xpath = "//*[@class='toast-message' or contains(text(), 'successfully')]")
-    public WebElement basariliEklendiMesaji;
+    // İlaç düzenleme sayfasındaki "France Language" butonu
+    @FindBy(xpath = "//*[.=' France language']")
+    public WebElement medicineEditFranceLanguageButton;
+
+    // İlaç düzenleme sayfasındaki "France Title" içeriği
+    @FindBy(xpath = "//*[@name='Title_fr']")
+    public WebElement medicineEditFranceLanguageButtonTitle;
+
+    // İlaç düzenleme sayfasındaki "France Content" içeriği
+    @FindBy(xpath = "//*[@id=\"France\"]/div[2]/textarea")
+    public WebElement medicineEditFranceLanguageButtonContent;
+
+    // İlaç düzenleme sayfasındaki "Arabic Language" butonu
+    @FindBy(xpath = "//*[.=' Arabic language']")
+    public WebElement medicineEditArabicLanguageButton;
+
+    // İlaç düzenleme sayfasındaki "Arabic Title" içeriği
+    @FindBy(xpath = "//*[@name='Title_ar']")
+    public WebElement medicineEditArabicLanguageButtonTitle;
+
+    // İlaç düzenleme sayfasındaki "Arabic Content" içeriği
+    @FindBy(xpath = "//*[@id=\"Arabic\"]/div[2]/textarea")
+    public WebElement medicineEditArabicLanguageButtonContent;
+
+    // Medicines Updated Successfully mesaj içeriği
+    @FindBy(xpath = "//div[@class='alert alert-success']")
+    public WebElement successAlert;
+
+    // Medicines Deleted Successfully mesaj içeriği
+    @FindBy(xpath = "//*[@class='alert alert-danger']")
+    public WebElement deletedAlert;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
