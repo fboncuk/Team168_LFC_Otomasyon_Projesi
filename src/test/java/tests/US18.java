@@ -9,22 +9,22 @@ import pages.LcfHomePage.MedicinesMainPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
-<<<<<<< gokcen
+
 import utilities.ReusableMethods;
-=======
+
 import utilities.Listeners;
 
->>>>>>> main
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-<<<<<<< gokcen
-@Listeners(utilities.Listeners.class)
-=======
+
+
+
 @org.testng.annotations.Listeners(Listeners.class)
 
->>>>>>> main
+
 public class US18 {
     SoftAssert softAssert;
     SignButonsPage signButonsPage;
