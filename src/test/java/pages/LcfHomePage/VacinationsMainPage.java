@@ -16,42 +16,46 @@ public class VacinationsMainPage {
 //    @FindBy(xpath = "(//a[normalize-space()='Rabies Vaccine'])[2]")
 //    public WebElement vaccinesMainPageRabies;
 
+    // Vaccines Main sayfasında LoyalFriendCare Logo linki
+    @FindBy(xpath = "(//img[@class='logo_sticky'])[2]")
+    public WebElement lfcLogo;
+
     // Vaccines Main sayfasında Rabies Vaccine linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[1]")
-    public WebElement vaccinesMainPageRabies;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[1]")
+    public WebElement vaccinesRabies;
 
     // Vaccines Main sayfasında DHPP Vaccine
     // (Distemper, Hepatitis, Parainfluenza, Parvovirus Vaccine) linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[2]")
-    public WebElement vaccinesMainPageDHPP;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[2]")
+    public WebElement vaccinesDHPP;
 
     // Vaccines Main sayfasında Feline Leukemia Vaccine linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[3]")
-    public WebElement vaccinesMainPageFelineLeukemia;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[3]")
+    public WebElement vaccinesFelineLeukemia;
 
     // Vaccines Main sayfasında Feline Immunodeficiency Virus (FIV) Vaccine linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[4]")
-    public WebElement vaccinesMainPageFelineImmunodeficiency;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[4]")
+    public WebElement vaccinesFelineImmunodeficiency;
 
     // Vaccines Main sayfasında Bordetella (Kennel Cough) Vaccine linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[5]")
-    public WebElement vaccinesMainPageBordetella;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[5]")
+    public WebElement vaccinesBordetella;
 
     // Vaccines Main sayfasında Feline Panleukopenia Vaccine linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[6]")
-    public WebElement vaccinesMainPageFelinePanleukopenia;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[6]")
+    public WebElement vaccinesFelinePanleukopenia;
 
     // Vaccines Main sayfasında Feline Herpesvirus Vaccine linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[7]")
-    public WebElement vaccinesMainPageFelineHerpesvirus;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[7]")
+    public WebElement vaccinesFelineHerpesvirus;
 
     // Vaccines Main sayfasında Surgical Procedure: Spaying (Ovariohysterectomy) linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[8]")
-    public WebElement vaccinesMainPageSurgicalProcedure;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[8]")
+    public WebElement vaccinesSurgicalProcedure;
 
     // Vaccines Main sayfasında Feline Viral Rhinotracheitis linki
-    @FindBy(xpath = "(//div[@class='wrapper'])[9]")
-    public WebElement vaccinesMainPageFelineViral;
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[9]")
+    public WebElement vaccinesFelineViral;
 
 
 
@@ -96,11 +100,11 @@ public class VacinationsMainPage {
 
     // Rabies Vaccine detay sayfası Title
     @FindBy(xpath = "//*[@id='description']/h1")
-    public WebElement detailedTitleRabiesVaccine;
+    public WebElement detailedTitleRabies;
 
     // DHPP Vaccine detay sayfası Title
     @FindBy(xpath = "//*[@id='description']/h1")
-    public WebElement detailedTitleDHPPVaccine;
+    public WebElement detailedTitleDHPP;
 
     // Feline Leukemia Vaccine detay sayfası Title
     @FindBy(xpath = "//*[@id='description']/h1")

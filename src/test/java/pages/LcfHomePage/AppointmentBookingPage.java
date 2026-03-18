@@ -30,6 +30,10 @@ public class AppointmentBookingPage {
     @FindBy(xpath = "//li[text()='Dermatology']")
     public WebElement dermatologySecenegi;
 
+    // Listeden seçim yapmak için
+    @FindBy(xpath = "//li[text()='Wellness']")
+    public WebElement departmentDropDownWellness;
+
 
     // 4. Doktor Seçimi (Doctor Dropdown)
 
@@ -50,10 +54,15 @@ public class AppointmentBookingPage {
     @FindBy(id = "submit-contact-detail")
     public WebElement appointmentBookingButton;
 
-    
 
+    // Randevu oluşturulduğuna dair alert mesajı
+    // Congratulations on your well-deserved success.
+    @FindBy(xpath = "//div[contains(@class,'alert-success')]")
+    public WebElement randevuAlertMesaji;
 
-
+    //Appointment formunun tamamı
+    @FindBy (xpath = "//*[@class='box_detail booking']")
+    public WebElement appointmentFormContainer;
 
 
 
