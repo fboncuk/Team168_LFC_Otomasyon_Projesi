@@ -3,12 +3,15 @@ package tests;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LcfHomePage.HomeBodySearchBoxPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+
+@Listeners(utilities.Listeners.class)
 
 public class US04 {
 
@@ -70,7 +73,6 @@ public class US04 {
                 .click();
 
         ReusableMethods.bekle(2);
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver());
 
         Assert.assertTrue(homePage.errorMessageList.size() > 0, "BUG011: Uyarı mesajı görüntülenemedi!");
     }
