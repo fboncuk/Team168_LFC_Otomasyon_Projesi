@@ -70,6 +70,13 @@ public class DashboardMedicinesPage {
     @FindBy(xpath = "//*[@class='btn btn-danger btn-cons btn-animated from-top fa  fa-remove']")
     public List<WebElement> allDeleteButtons;
 
+    // Sayfa içerisindeki "Add Medicines" butonu
+    @FindBy(xpath = "//a[contains(text(), 'Add Medicines') or contains(@class, 'add')]")
+    public WebElement addMedicinesButtonOnPage;
+
+    // Başarılı kayıt mesajı
+    @FindBy(xpath = "//*[@class='toast-message' or contains(text(), 'successfully')]")
+    public WebElement basariliEklendiMesaji;
 
 
 
