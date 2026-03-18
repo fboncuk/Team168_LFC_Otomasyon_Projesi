@@ -1,4 +1,4 @@
-package tests;
+package scenarios;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
@@ -15,17 +15,14 @@ import utilities.ReusableMethods;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
 
 @org.testng.annotations.Listeners(Listeners.class)
 
-public class US17 {
+public class SunumSenaryosu_03 {
 
-    // US17- Bir kayıtlı kullanıcı olarak,
-    // Home Page sayfasından Aşılar sayfasına erişebilmeli,
-    // Aşılar sayfasındaki aşı bilgilerini inceleyebilmeli ve
-    // seçtiğim aşının sayfasına erişerek o aşı için randevu talebi oluşturabilmeliyim
+    // RANDEVU OLUŞTURMA SENARYOSU
 
     SignButonsPage signButonsPage;
     HomeBodyPage homeBodyPage;
@@ -39,178 +36,17 @@ public class US17 {
         signButonsPage = new SignButonsPage();
         // Homepage açılır
         Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
+        ReusableMethods.bekle(3);
 
         // SignIn butonu tıklanır ve T06 Tester geçerli kullanıcı bilgileri ile giriş yapılır
         signButonsPage.signInLinki.click();
+        ReusableMethods.bekle(3);
         signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T06UserMail"));
+        ReusableMethods.bekle(3);
         signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T06UserPassword"));
+        ReusableMethods.bekle(3);
         signButonsPage.signInButtonOnay.click();
-    }
-
-
-    @Test(priority = 1)
-    public void US17_TC01_VaccinationsLinkleriHoverTesti() {
-
-        // Aşılar (Vaccinations) linki ve açılır menülerinin
-        // fare ile hover edildiğinde görsel geri bildirim verdiğini doğrulamak
-        // Bu test en uyugun şelide manuel test ile kontrol edilebilir.
-
-        homeBodyHeaderSectionPage = new HomeBodyHeaderSectionPage();
-        SoftAssert softAssert = new SoftAssert();
-        ReusableMethods.hover(homeBodyHeaderSectionPage.vaccineDdVaccine);
-        ReusableMethods.bekle(1);
-
-        List<WebElement> vaccineDpElementList = Driver.getDriver()
-                .findElements(By.xpath("//nav[@id='menu']/ul/li[6]//a"));
-
-        for (int j = 1; j < vaccineDpElementList.size(); j++) {
-
-            String hoveroncesiLocation = vaccineDpElementList.get(j).getCssValue("color");
-            ReusableMethods.hover(vaccineDpElementList.get(j));
-            ReusableMethods.bekle(1);
-            String hoversonrasiLocation =  vaccineDpElementList.get(j).getCssValue("color");
-
-            softAssert.assertNotEquals(hoveroncesiLocation, hoversonrasiLocation
-                    ,"Hover sonrası " + vaccineDpElementList.get(j).getText() + " elementi renk değiştirmedi.");
-        }
-        softAssert.assertAll();
-    }
-
-
-    @Test(priority = 2)
-    public void US17_TC02_VaccinationsLinkleriGorunurlukTesti() {
-        // Header Vaccinations açılır menüsünde,
-        // Vaccinations sayfasında kayıtlı tüm aşıların göründüğünü doğrulamak.
-        homeBodyHeaderSectionPage = new HomeBodyHeaderSectionPage();
-        SoftAssert softAssert = new SoftAssert();
-
-        // Header bölümündeki Vaccines linki locate edilip hover ile dd menü açılır
-        ReusableMethods.hover(homeBodyHeaderSectionPage.vaccineDdVaccine);
-        ReusableMethods.bekle(1);
-
-        // Header Vaccines linki altındaki aşılar listeye kaydedilir
-        List<WebElement> vaccines = Driver.getDriver()
-                .findElements(By.xpath("//nav[@id='menu']/ul/li[6]/ul/li"));
-
-        for (WebElement vaccine : vaccines) {
-            softAssert.assertTrue(vaccine.isDisplayed()
-                    , "Hover sonrası dd menüdeki aşılar görünür değil!");
-        }
-
-        softAssert.assertAll();
-    }
-
-
-    @Test(priority = 3)
-    public void US17_TC03_VaccinationsHeaderLinkleriAcilmaTesti() {
-        // Header Vaccinations açılır menüsünde,
-        // Vaccinations sayfasında kayıtlı tüm aşıların göründüğünü doğrulamak.
-        homeBodyHeaderSectionPage = new HomeBodyHeaderSectionPage();
-        vacinationsMainPage = new VacinationsMainPage();
-        SoftAssert softAssert = new SoftAssert();
-
-        Driver.getDriver().get(ConfigReader.getProperty("VacUrl"));
-        // VaccinesMainPage aşı linkleri WebElement Listesi yapılır
-        List<WebElement> vaccinesMainLists = Arrays.asList(
-                vacinationsMainPage.vaccinesBordetella,
-                vacinationsMainPage.vaccinesDHPP,
-                vacinationsMainPage.vaccinesRabies,
-                vacinationsMainPage.vaccinesFelineViral,
-                vacinationsMainPage.vaccinesSurgicalProcedure,
-                vacinationsMainPage.vaccinesFelinePanleukopenia,
-                vacinationsMainPage.vaccinesFelineImmunodeficiency,
-                vacinationsMainPage.vaccinesFelineLeukemia,
-                vacinationsMainPage.vaccinesFelineHerpesvirus
-        );
-        int vaccinesMainSize = vaccinesMainLists.size();
-
-        ReusableMethods.hover(homeBodyHeaderSectionPage.vaccineDdVaccine);
-        ReusableMethods.bekle(1);
-
-        List<WebElement> vaccineDpElementList = Driver.getDriver()
-                .findElements(By.xpath("//nav[@id='menu']/ul/li[6]/ul/li"));
-
-        int vaccinesDdSize = vaccineDpElementList.size();
-
-
-        softAssert.assertEquals(vaccinesMainSize,vaccinesDdSize,
-                " Ana aşı sayfası ile dd menüde bulunan aşı sayıları uyuşmuyor.");
-
-        softAssert.assertAll();
-    }
-
-
-    @Test(priority = 4)
-    public void US17_TC04_FooterYakinlastirmaTesti() {
-        // Footer bölümünün farklı yakınlaştırma oranlarına dinamik uyumunu doğrulamak
-        // Bu testin manuel olarak yapılması daha kesin sonuçlar vereceğinden,
-        // test kodu yazılmamıştır.
-        System.out.println("US17_TC04 testi, sadece manuel olarak yapılmıştır.");
-    }
-
-
-    @Test(priority = 5)
-    public void US17_TC05_DogruVaccinationsDetaySayfasiAcilmaTesti() {
-
-        // VaccinationsMainPage'de Vaccinations linklerine tıklandığında,
-        // ilgili aşı sayfasının açıldığını doğrulamak.
-        homeBodyHeaderSectionPage = new HomeBodyHeaderSectionPage();
-        vacinationsMainPage = new VacinationsMainPage();
-        SoftAssert softAssert = new SoftAssert();
-
-        Driver.getDriver().get(ConfigReader.getProperty("VacUrl"));
-
-        // VaccinesMainPage aşı linkleri WebElement Listesi yapılır
-        List<WebElement> vaccinesLists = Arrays.asList(
-                vacinationsMainPage.vaccinesRabies,
-                vacinationsMainPage.vaccinesDHPP,
-                vacinationsMainPage.vaccinesFelineLeukemia,
-                vacinationsMainPage.vaccinesFelineImmunodeficiency,
-                vacinationsMainPage.vaccinesBordetella,
-                vacinationsMainPage.vaccinesFelinePanleukopenia,
-                vacinationsMainPage.vaccinesFelineHerpesvirus,
-                vacinationsMainPage.vaccinesSurgicalProcedure,
-                vacinationsMainPage.vaccinesFelineViral
-        );
-
-        // Vaccines detay sayfasındaki aşıların Title Listesi
-        List<WebElement> detailVaccinesTitleList = Arrays.asList(
-                vacinationsMainPage.detailedTitleRabies,
-                vacinationsMainPage.detailedTitleDHPP,
-                vacinationsMainPage.detailedTitleFelineLeukemia,
-                vacinationsMainPage.detailedTitleFelineImmunodeficiency,
-                vacinationsMainPage.detailedTitleBordetella,
-                vacinationsMainPage.detailedTitleFelinePanleukopenia,
-                vacinationsMainPage.detailedTitleFelineHerpesvirus,
-                vacinationsMainPage.detailedTitleSurgicalProcedure,
-                vacinationsMainPage.detailedTitleFelineViral
-        );
-
-        // Aşıların tıklanan linkteki adları ile açılan sayfadaki adları döngü ile karşılaştırılır
-        for (int i = 0; i < vaccinesLists.size(); i++) {
-
-            // VaccinesMainPage'de bulunan aşıların expectedTitle'leri alınır.
-            String expectedTitle = vaccinesLists.get(i).getText();
-
-            // Aşı tıklanır ve detay sayfasına gidilir
-            vaccinesLists.get(i).click();
-
-            // Açılan sayfadaki aşı actualTitle alınır.
-            WebElement detailVaccineText = detailVaccinesTitleList.get(i);
-            String actualTitle = detailVaccineText.getText();
-
-            // actualTitle içinde expectedTitle var mı kontrol edilir.
-            softAssert.assertTrue(actualTitle.contains(expectedTitle)
-                    , "Tıklanan ve açılan sayfa başlıkları arasında farklılık bulunuyor.\n" +
-                            "Tıklanan sayfa başlığı : " + expectedTitle + "\n" +
-                            "Açılan sayfa başlığı : " + actualTitle);
-
-            // Aşı detay sayfasından VaccinesMainPage sayfasına dönülür.
-            Driver.getDriver().navigate().back();
-        }
-
-        softAssert.assertAll();
-
+        ReusableMethods.bekle(3);
     }
 
 
@@ -237,18 +73,27 @@ public class US17 {
         String randevuMetni = "Randevu açıklaması için yazılan mesaj.";
 
         // Randevu kutularına bilgiler girilir.
+        ReusableMethods.bekle(3);
         appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // tarih girilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.departmentDropdownKutusu.click(); // Department açılır menü tıklanır
+        ReusableMethods.bekle(3);
         appointmentBookingPage.dermatologySecenegi.click(); // Dermatology seçilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.doctorDropdownKutusu.click(); // Doktor açılır menü tıklanır
+        ReusableMethods.bekle(3);
         appointmentBookingPage.doktorSecenegi.click(); // Doktor seçilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.messageBox.sendKeys(randevuMetni); // Randevu metni girilir
+        ReusableMethods.bekle(3);
 //        ReusableMethods.tumSayfaResimCek(Driver.getDriver()
 //                ,"US17_TC06_Geçerli randevu giriş bilgileri");
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
+        ReusableMethods.bekle(3);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -281,7 +126,7 @@ public class US17 {
 
         // Dermatology detay sayfasına gidilir
         Driver.getDriver().get(ConfigReader.getProperty("DermUrl"));
-        // ReusableMethods.bekle(1);
+        ReusableMethods.bekle(3);
 
         // Geçerli tarih için girmek maksadıyla 10 gün sonraki tarihe randevu alınır.
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -292,13 +137,17 @@ public class US17 {
 
         // Department, Doktor ve Randevu metni girilmez
         // Sadece Randevu kutularına bilgiler girilir.
+        ReusableMethods.bekle(3);
         appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // tarih girilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
+        ReusableMethods.bekle(3);
         ReusableMethods.tumSayfaResimCek(Driver.getDriver()
                 ,"US17_TC06_Tarih-telefon no randevu giriş bilgileri");
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
+        ReusableMethods.bekle(3);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -344,8 +193,11 @@ public class US17 {
 
         // Department, Doktor ve Randevu metni girilmez
         // Sadece Randevu kutularına bilgiler girilir.
+        ReusableMethods.bekle(3);
         appointmentBookingPage.dateInput.sendKeys(gecersizDateRandevu); // tarih girilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
+        ReusableMethods.bekle(3);
         ReusableMethods.tumSayfaResimCek(Driver.getDriver()
                 ,"US17_TC08_Geçmiş tarihli randevu giriş bilgileri");
 
@@ -369,6 +221,7 @@ public class US17 {
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
+        ReusableMethods.bekle(3);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -411,8 +264,11 @@ public class US17 {
 
         // Department, Doktor ve Randevu metni girilmez
         // Sadece Randevu kutularına bilgiler girilir.
+        ReusableMethods.bekle(3);
         appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // geçerli bir tarih girilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.phoneBox.sendKeys(gecersizTelNumarasi); // telefon bilgisi girilir
+        ReusableMethods.bekle(3);
         ReusableMethods.tumSayfaResimCek(Driver.getDriver()
                 ,"US17_TC09_Geçersiz telefon no ile randevu giriş bilgileri");
 
@@ -430,6 +286,7 @@ public class US17 {
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
+        ReusableMethods.bekle(3);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -463,11 +320,13 @@ public class US17 {
 
         // VacinationsMainPage içindeki Bordetella detay sayfasına gidilir
         Driver.getDriver().get(ConfigReader.getProperty("VacUrl"));
+        ReusableMethods.bekle(3);
         vacinationsMainPage.vaccinesBordetella.click();
-        // ReusableMethods.bekle(1);
+        ReusableMethods.bekle(3);
 
         // Hiçbir bilgi girilmeden Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
+        ReusableMethods.bekle(3);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -502,7 +361,7 @@ public class US17 {
         // VacinationsMainPage içindeki Bordetella detay sayfasına gidilir
         Driver.getDriver().get(ConfigReader.getProperty("VacUrl"));
         vacinationsMainPage.vaccinesBordetella.click();
-        // ReusableMethods.bekle(1);
+        ReusableMethods.bekle(3);
 
         // Geçerli tarih için girmek maksadıyla 10 gün sonraki tarihe randevu alınır.
         DateTimeFormatter format1 = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -515,13 +374,21 @@ public class US17 {
         String randevuMetni121 = RandomStringUtils.randomAlphabetic(121);
 
         // Randevu kutularına bilgiler girilir.
+        ReusableMethods.bekle(3);
         appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // tarih girilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.departmentDropdownKutusu.click(); // Department açılır menü tıklanır
+        ReusableMethods.bekle(3);
         appointmentBookingPage.dermatologySecenegi.click(); // Dermatology departmanı seçilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.doctorDropdownKutusu.click(); // Doktor açılır menü tıklanır
+        ReusableMethods.bekle(3);
         appointmentBookingPage.doktorSecenegi.click(); // Doktor seçilir
+        ReusableMethods.bekle(3);
         appointmentBookingPage.messageBox.sendKeys(randevuMetni121); // Randevu metni girilir
+        ReusableMethods.bekle(3);
 //        ReusableMethods.tumSayfaResimCek(Driver.getDriver()
 //                ,"US17_TC11_120 karakterden uzun randevu mesajı bilgisi");
 
@@ -536,6 +403,7 @@ public class US17 {
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
+        ReusableMethods.bekle(3);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -551,59 +419,6 @@ public class US17 {
         softAssert.assertAll();
     }
 
-
-    @Test(priority = 12)
-    public void US17_TC12_VaccinationsSayfalariLogoDogrulamaTesti() {
-        // Kayıtlı kullanıcı tarafından
-        // Vaccinations ana sayfasında veya Vaccinations detay sayfalarında iken
-        // "LoyalFriendsCare" logosuna tıklayınca ana sayfa açıldığını doğrulamak
-
-        vacinationsMainPage = new VacinationsMainPage();
-        SoftAssert softAssert = new SoftAssert();
-
-        // Vaccinations sayfasına gidilir logoya tıklanarak kontrol yapılır
-        Driver.getDriver().get(ConfigReader.getProperty("VacUrl"));
-        vacinationsMainPage.lfcLogo.click();
-
-        String expectedUrl = ConfigReader.getProperty("LfcUrl");
-        softAssert.assertTrue(Driver.getDriver().getCurrentUrl().equals(expectedUrl));
-        Driver.getDriver().navigate().back();
-
-
-        // Aşı detay sayfalarındaki logo tıklama kontrolü yapılır
-        // VaccinesMainPagedeki detay aşı sayfaları WebElement Listesi yapılır
-        List<WebElement> vaccinesLists = Arrays.asList(
-                vacinationsMainPage.vaccinesRabies,
-                vacinationsMainPage.vaccinesDHPP,
-                vacinationsMainPage.vaccinesFelineLeukemia,
-                vacinationsMainPage.vaccinesFelineImmunodeficiency,
-                vacinationsMainPage.vaccinesBordetella,
-                vacinationsMainPage.vaccinesFelinePanleukopenia,
-                vacinationsMainPage.vaccinesFelineHerpesvirus,
-                vacinationsMainPage.vaccinesSurgicalProcedure,
-                vacinationsMainPage.vaccinesFelineViral
-        );
-
-        // Vaccines detay sayfalarındaki logoların
-        // görünür ve tıklanabilir olduğunu döngü ile kontrol etme
-        for (WebElement vaccinesList : vaccinesLists) {
-
-            vaccinesList.click();
-            ReusableMethods.bekle(1);
-
-            // Sayfalardaki logolar ortak locator kullandığından her sayfada yeiden locator oluşturulur.
-            Driver.getDriver()
-                    .findElement(By.xpath("(//img[@class='logo_sticky'])[2]"))
-                    .click();
-
-            expectedUrl = ConfigReader.getProperty("LfcUrl");
-            softAssert.assertTrue(Driver.getDriver().getCurrentUrl().equals(expectedUrl));
-
-            // Detay sayfasından VaccinesMainPage sayfasına dönülür.
-            Driver.getDriver().get(ConfigReader.getProperty("VacUrl"));
-        }
-        softAssert.assertAll();
-    }
 
     @AfterClass
     public void tearDown() { Driver.quitDriver();}
