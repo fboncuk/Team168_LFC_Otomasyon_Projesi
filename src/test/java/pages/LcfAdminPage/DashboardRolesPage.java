@@ -82,7 +82,7 @@ public class DashboardRolesPage {
     public WebElement rolesPageFirstDeleteButton;
 
     // Rol silindiğinde çıkan başarılı silme işlemi mesajı
-    @FindBy(xpath = "(//span[text()='Role deleted successfully']")
+    @FindBy(xpath = "//span[text()='Role deleted successfully']")
     public WebElement basariliSilindiMesaji;
 
 

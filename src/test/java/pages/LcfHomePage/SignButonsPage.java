@@ -73,7 +73,7 @@ public class SignButonsPage {
     public WebElement passwordKutusu;
 
     // Remember Me Kutusu
-    @FindBy(id = "checkbox1")
+    @FindBy( xpath = "//label[@for='checkbox1']") //id = "checkbox1")
     public WebElement rememberMeKutusu;
 
     // Forgot Password Linki
@@ -87,6 +87,14 @@ public class SignButonsPage {
     // Sitenin giris sayfasina donmek icin kullanilacak Sign Out linki
     @FindBy(id = "logout-form")
     public WebElement signOutlinki;
+
+    //login sayfasındaki logo
+    @FindBy(xpath = "//*[@alt='logo']")
+    public WebElement signInPageLogo;
+
+    //invalid passaword Message
+    @FindBy (className = "invalid-feedback")
+    public WebElement signInPageInvalidPasswordFeedbackMessage;
 
 
 
@@ -117,11 +125,11 @@ public class SignButonsPage {
 
     //Reset Email hata popup
     @FindBy(xpath = "//*[contains(text(),'Email could not be sent')]")
-    WebElement passwordResetErrorPopup;
+    public WebElement passwordResetErrorPopup;
 
     //Reset email hata popup alternatif
     @FindBy(css = ".modal-content")
-    WebElement getPasswordResetErrorPopup;
+    public WebElement getPasswordResetErrorPopup;
 
     //Reset password sayfası Login Link
     @FindBy(linkText = "Login")
