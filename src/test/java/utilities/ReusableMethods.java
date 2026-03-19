@@ -1,5 +1,6 @@
 package utilities;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -227,9 +228,13 @@ public class ReusableMethods {
      * @param linkElement ---> Tıklanacak olan 'Learn More' butonu (WebElement)
      * @param ExpectedUrlIcerik ---> URL içinde geçmesi beklenen anahtar kelime (String)
      */
-    public static void adminDashboardLinkKontrol(WebElement linkElement, String ExpectedUrlIcerik) {
+    public static void adminDashboardLinkKontrol(WebElement linkElement, String ExpectedUrlIcerik, ExtentTest extentTest) {
 
         SoftAssert softAssert = new SoftAssert();
+
+        // Rapora bilgi veriyoruz
+        extentTest.info(ExpectedUrlIcerik + " linkine tıklanıyor...");
+
         // Linke tıkla
         linkElement.click();
 
@@ -237,8 +242,17 @@ public class ReusableMethods {
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
         // URL doğrula
-        softAssert.assertTrue(actualUrl.contains(ExpectedUrlIcerik),
+        boolean isUrlCorrect = actualUrl.contains(ExpectedUrlIcerik);
+
+        if (isUrlCorrect) {
+            extentTest.pass("Yönlendirme başarılı. Gidilen URL: " + actualUrl);
+        } else {
+            extentTest.fail("HATA: Beklenen URL içeriği: " + ExpectedUrlIcerik + " | Gidilen URL: " + actualUrl);
+        }
+
+        softAssert.assertTrue(isUrlCorrect,
                 "HATA: " + ExpectedUrlIcerik + " modülüne yönlendirme yapılamadı! Gidilen URL: " + actualUrl);
+
         softAssert.assertAll();
     }
 
