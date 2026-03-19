@@ -31,22 +31,17 @@ public class US18 {
 
     @BeforeClass
     public void setUpClass() {
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
+        Driver.getDriver().manage().window().maximize();
 
         signButonsPage = new SignButonsPage();
         medicinesMainPage = new MedicinesMainPage();
         appointmentBookingPage = new AppointmentBookingPage();
 
-        Driver.getDriver().manage().deleteAllCookies();
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
-
-        signButonsPage.signInLinki
-                .click();
-        signButonsPage.emailKutusu
-                .sendKeys(ConfigReader.getProperty("T07UserMail"));
-        signButonsPage.passwordKutusu
-                .sendKeys(ConfigReader.getProperty("T07UserPassword"));
-        signButonsPage.signInButtonOnay
-                .click();
+        signButonsPage.signInLinki.click();
+        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T07UserMail"));
+        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T07UserPassword"));
+        signButonsPage.signInButtonOnay.click();
     }
 
     @BeforeMethod
