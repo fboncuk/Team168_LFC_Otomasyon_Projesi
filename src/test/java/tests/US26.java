@@ -39,7 +39,7 @@ public class US26 {
         faker = new Faker();
 
 
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         loginPage.signInLinki
                 .click();
         loginPage.emailKutusu

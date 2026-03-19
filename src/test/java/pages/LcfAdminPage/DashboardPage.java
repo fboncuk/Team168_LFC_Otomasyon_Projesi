@@ -106,7 +106,7 @@ public class DashboardPage {
 
     //DasboardPage Left Menu Bad Managers link
     @FindBy (xpath = "(//*[@class='title'])[4]")
-    public WebElement DashboardPageLeftMenuBahManagersLink;
+    public WebElement DashboardPageLeftMenuBedManagersLink;
 
     //DasboardPage Left Menu Departments link
     @FindBy (xpath = "(//*[@class='title'])[5]")

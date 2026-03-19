@@ -106,7 +106,13 @@ public class DashboardMedicinesPage {
     @FindBy(xpath = "//*[@class='alert alert-danger']")
     public WebElement deletedAlert;
 
+    // Sayfa içerisindeki "Add Medicines" butonu
+    @FindBy(xpath = "//*[contains(text(), 'Add Medicines')]")
+    public WebElement addMedicinesButtonOnPage;
 
+    // Başarılı kayıt (İlaç ekleme) mesajı
+    @FindBy(xpath = "//*[@class='toast-message' or contains(text(), 'successfully')]")
+    public WebElement basariliEklendiMesaji;
 
 
 
