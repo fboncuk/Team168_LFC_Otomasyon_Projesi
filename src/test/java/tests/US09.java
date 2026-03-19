@@ -170,7 +170,7 @@ public class US09 {
     }
 
 
-     //------------------- TC05 – TC11 Placeholder Tests -------------------
+    //------------------- TC05 – TC11 Placeholder Tests -------------------
 
     @Test(priority = 5, description = "TC_05 : Reset link yalnızca bir kez kullanılabilmeli testi TC02 sonrası BLOCKED")
     public void US09_TC05_ResetLinkOnceOnly() {
