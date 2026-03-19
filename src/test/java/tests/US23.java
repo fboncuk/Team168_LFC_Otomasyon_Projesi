@@ -23,7 +23,6 @@ public class US23 {
     SignButonsPage loginPage;
     WebDriverWait wait;
 
-
     @BeforeClass
     public void setUp() {
         dashboardRolesPage = new DashboardRolesPage();
@@ -41,7 +40,6 @@ public class US23 {
         Driver.getDriver().get("https://qa.loyalfriendcare.com/en/admin");
         ReusableMethods.bekle(3);
 
-
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
         jse.executeScript("arguments[0].click();", dashboardRolesPage.sidebarRolesMainMenu);
         ReusableMethods.bekle(2);
@@ -51,7 +49,6 @@ public class US23 {
     public void US23_TC01_RolesMenusuVeListeKontrolu() {
         SoftAssert softAssert = new SoftAssert();
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
-
 
         jse.executeScript("arguments[0].click();", dashboardRolesPage.sidebarRolesSubMenuLink);
         ReusableMethods.bekle(2);
@@ -63,7 +60,7 @@ public class US23 {
         softAssert.assertTrue(dashboardRolesPage.roleListUserText.isDisplayed(), "HATA: User rolü listede yok!");
 
         try {
-            System.out.println("NOT: AC'de istenen 'View' (Görüntüle) butonu sitede bulunmamaktadır!");
+            System.out.println("NOT: AC'de istenilen 'View' (Görüntüle) butonu sitede bulunmamaktadır!");
         } catch (Exception e) {}
 
         ReusableMethods.tumSayfaResimCek(Driver.getDriver(), "US23_TC01_Liste_Gorunumu");
@@ -75,12 +72,10 @@ public class US23 {
         SoftAssert softAssert = new SoftAssert();
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
 
-
         jse.executeScript("arguments[0].click();", dashboardRolesPage.sidebarRolesSubMenuLink);
         ReusableMethods.bekle(2);
 
         softAssert.assertTrue(dashboardRolesPage.rolesPageSearchBox.isDisplayed(), "HATA: Arama kutusu görünmüyor!");
-
 
         dashboardRolesPage.rolesPageSearchBox.clear();
         dashboardRolesPage.rolesPageSearchBox.sendKeys("admin");
@@ -97,17 +92,14 @@ public class US23 {
         SoftAssert softAssert = new SoftAssert();
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
 
-
         jse.executeScript("arguments[0].click();", dashboardRolesPage.sidebarRolesSubMenuLink);
         ReusableMethods.bekle(3);
 
-
         try {
-
-            WebElement garantiliDeleteButonu = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            WebElement deleteButton = wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.xpath("(//*[contains(@class, 'danger') or contains(text(), 'Delete') or contains(@class, 'remove')])[1]")));
 
-            jse.executeScript("arguments[0].click();", garantiliDeleteButonu);
+            jse.executeScript("arguments[0].click();", deleteButton);
             ReusableMethods.bekle(2);
 
             System.out.println("BUG: AC'de istenen 'Silme onayı/uyarı penceresi' açılmadan, sistem direkt silmektedir!");
@@ -127,7 +119,6 @@ public class US23 {
 
         softAssert.assertAll();
     }
-
 
     @AfterClass
     public void tearDown() {
