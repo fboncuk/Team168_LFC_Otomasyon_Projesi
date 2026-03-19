@@ -54,23 +54,33 @@ public class US28 {
         // Profil ismine tıklayıp Dasboard sayfasına gidilir
         signButonsPage.signInLinki.click();
 
-        // Dashboard sidebar menüsü hover edilir ve Bed Manager tıklanır
+        // Dashboard sidebar menüsü hover edilir
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
-        dashboardPage.DashboardPageLeftMenuBedManagersLink.click();
 
+        // Bed Manager linki gürünürlük kontrolü yapılır ve tıklanır
+        softAssert.assertTrue(dashboardPage.sidebarMenuBedManagersLink.isDisplayed());
+        dashboardPage.sidebarMenuBedManagersLink.click();
+        ReusableMethods.bekle(1);
 
-        ReusableMethods.hover(dashboardPage.DashboardPageLeftMenuSubmenuBedManagers);
-        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuBedManagers.isDisplayed()
+        // Bed Managers submenü görünürlük kontrolü yapılır
+        System.out.println("bmsub  " +dashboardPage.sidebarSubmenuBedManagers.getText().toLowerCase());
+
+        softAssert.assertTrue(dashboardPage.sidebarSubmenuBedManagers.isDisplayed()
+                ,"Dashboard Bed Managers butonu görünür değil.");
+        softAssert.assertTrue(dashboardPage.sidebarSubmenuBedManagers.isEnabled()
                 ,"Dashboard Bed Managers butonu görünür değil.");
 
-        ReusableMethods.hover(dashboardPage.DashboardPageLeftMenuSubmenuCreateBedManagers);
-        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateBedManagers.isDisplayed()
+        ReusableMethods.bekle(1);
+
+        // Create Bed Managers submenü görünürlük kontrolü yapılır
+        System.out.println("cbmsub  " + dashboardPage.sidebarSubmenuCreateBedManagers.getText().toLowerCase());
+
+        softAssert.assertTrue(dashboardPage.sidebarSubmenuCreateBedManagers.isDisplayed()
+                ,"Dashboard Create Bed Managers butonu görünür değil.");
+        softAssert.assertTrue(dashboardPage.sidebarSubmenuCreateBedManagers.isEnabled()
                 ,"Dashboard Create Bed Managers butonu görünür değil.");
 
-
-
-
-
+        softAssert.assertAll();
 
     }
 

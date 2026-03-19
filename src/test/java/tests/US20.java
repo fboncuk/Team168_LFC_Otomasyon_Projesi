@@ -209,7 +209,7 @@ public class US20 {
     public void US20_TC06_Admin_Dashboard_Sol_Menu_Ogeler_Test(){
 
         Actions actions = new Actions(Driver.getDriver());
-        actions.moveToElement(dashboardPage.DashboardPageLeftMenuDashboardLink);
+        actions.moveToElement(dashboardPage.sidebarMenuDashboardLink);
 
         ReusableMethods.bekle(3);
 
