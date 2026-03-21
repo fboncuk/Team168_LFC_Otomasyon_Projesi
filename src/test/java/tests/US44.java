@@ -10,33 +10,48 @@ import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+import utilities.TestBaseRapor;
 
-public class US44 {
+public class US44 extends TestBaseRapor {
     AdminBodyPage adminBodyPage;
+    SignButonsPage signButonsPage;
 
     @BeforeMethod
-    public void setup(){
+    public void setup() {
+        adminBodyPage = new AdminBodyPage();
+        signButonsPage = new SignButonsPage();
 
-        // Admin Login sayfasına gidilir
+        // 1. Admin Dashboard sayfasına git
         Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
 
-        // Geçerli admin bilgileriyle giriş yapılır
-        SignButonsPage signButonsPage = new SignButonsPage();
-        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T11AdminMail"));
-        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
-        signButonsPage.signInButtonOnay.click();
+        // HIZLANDIRMA: Beklemeyi geçici olarak kapat
+        Driver.getDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(0));
 
-        adminBodyPage = new AdminBodyPage();
+        try {
+            // 2. Eğer login kutusu varsa giriş yap
+            if (signButonsPage.emailKutusu.isDisplayed()) {
+                signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T11AdminMail"));
+                signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
+                signButonsPage.signInButtonOnay.click();
+            }
+        } catch (Exception e) {
+            // Zaten içerideyiz
+            System.out.println("Oturum aktif, login atlandı.");
+        }
+
+        // 3. GÜVENLİK: Beklemeyi normale döndür
+        Driver.getDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(15));
     }
 
     @AfterMethod
     public void tearDown() {
-        Driver.quitDriver();
+        //Driver.quitDriver();
     }
 
     @Test
     public void US44_TC01_ProfilMenusuTetiklemeTutarlilikTesti() {
 
+        extentTest = extentReports.createTest("TC01 - Profil Dropdown Menü Tetikleme ve UI Tutarlılık Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Admin kullanıcısı isim alanına tıklanarak dropdown menünün açıldığı doğrulanır (Beklenen davranış)
@@ -70,6 +85,7 @@ public class US44 {
     @Test
     public void US44_TC02_AdminLogoutVeAnaSayfaYonlendirmeTesti() {
 
+        extentTest = extentReports.createTest("TC02 - Güvenli Çıkış (Logout) ve Ana Sayfa Yönlendirme Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Profil menüsünü tetiklemek için dropdown alanına boşluk alanına tıklanır
@@ -78,7 +94,7 @@ public class US44 {
         adminBodyPage.profileLogoutOption.click();
 
         // Kullanıcının HomePage'e yönlendirilip yönlendirilmediği doğrulanır
-        String expectedUrl = ConfigReader.getProperty("LcfUrl");
+        String expectedUrl = ConfigReader.getProperty("LfcUrl");
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
         // URL doğrulaması yapılır eşleşmeme durumunda hata mesajı raporlanır
@@ -90,6 +106,7 @@ public class US44 {
     @Test
     public void US44_TC03_LogoutSonrasiGeriButonuIleYetkisizErisimTesti() {
 
+        extentTest = extentReports.createTest("TC03 - Logout Sonrası Geri Butonu ile Yetkisiz Erişim Güvenlik Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Profil menüsünü tetiklemek için dropdown alanına boşluk alanına tıklanır
@@ -110,6 +127,5 @@ public class US44 {
         softAssert.assertAll();
 
     }
-
 
 }

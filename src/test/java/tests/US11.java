@@ -12,41 +12,62 @@ import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+import utilities.TestBaseRapor;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class US11 {
+public class US11 extends TestBaseRapor {
 
-    SignButonsPage signButonsPage = new SignButonsPage();
     DepartmentsMainPage departmentsMainPage;
     AppointmentBookingPage appointmentBookingPage;
+    SignButonsPage signButonsPage;
 
     @BeforeMethod
     public void setup(){
-
         signButonsPage = new SignButonsPage();
-        // Ana sayfaya gidilir
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
-
-        // SignIn butonu tıklanır ve T06 Tester geçerli kullanıcı bilgileri ile giriş yapılır
-        signButonsPage.signInLinki.click();
-        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T11AdminMail"));
-        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
-        signButonsPage.signInButtonOnay.click();
         departmentsMainPage = new DepartmentsMainPage();
         appointmentBookingPage = new AppointmentBookingPage();
+
+        // Ana sayfaya gidilir
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
+
+        // Beklemeyi geçici olarak sıfırla
+        Driver.getDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(0));
+
+        try {
+            // Eğer SignIn linki görünüyorsa (yani login değilsek) giriş yap
+            if (signButonsPage.signInLinki.isDisplayed()) {
+                signButonsPage.signInLinki.click();
+
+                // Login bilgilerini gir
+                signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T11UserMail"));
+                signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
+                signButonsPage.signInButtonOnay.click();
+
+                // Login sonrası sayfanın oturması için kısa bir bekleme
+//                ReusableMethods.bekle(1);
+            }
+        } catch (Exception e) {
+            // Eğer SignIn linki yoksa zaten giriş yapılmıştır, devam et
+            System.out.println("Zaten giriş yapılmış, direkt teste geçiliyor.");
+        }
+
+
+        Driver.getDriver().manage().timeouts().implicitlyWait(java.time.Duration.ofSeconds(15));
     }
 
     @AfterMethod
     public void tearDown() {
-        Driver.quitDriver();
+        //signButonsPage.homePageSignOut.click();
+        //Driver.quitDriver();
     }
 
-    @Test
+    @Test(priority = 1)
     public void US11_TC01_DepartmanKartlariGorunurlukVeTiklanabilirlikTesti() {
 
+        extentTest = extentReports.createTest("TC01 - Departman Kartları Görünürlük Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Departmanlar bölümüne kaydır
@@ -73,9 +94,10 @@ public class US11 {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 2)
     public void US11_TC02_DepartmanDetaySayfalarinaYonlendirmeDogrulamasiTesti(){
 
+        extentTest = extentReports.createTest("TC02 - Departman Detay Sayfalarına Yönlendirme Testi");
         SoftAssert softAssert = new SoftAssert();
         Actions actions = new Actions(Driver.getDriver());
 
@@ -112,9 +134,10 @@ public class US11 {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 3)
     public void US11_TC03_GecerliVerilerleBasariliRandevuOlusturmaDogrulamasiTesti(){
 
+        extentTest = extentReports.createTest("TC03 - Randevu Formunda Geçerli Verilerle Randevu Oluşturma Testi");
         SoftAssert softAssert = new SoftAssert();
         departmentsMainPage.WelnessDepartments.click();
 
@@ -152,9 +175,10 @@ public class US11 {
 
     }
 
-    @Test
+    @Test(priority = 4)
     public void US11_TC04_ZorunluAlanlarBosBirakildigindaHataMesajiDogrulamasi(){
 
+        extentTest = extentReports.createTest("TC04 - Randevu Formunda Zorunlu Alanların Boş Bırakılmasıyla Hata Alma Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Randevu formuna gider
@@ -173,6 +197,7 @@ public class US11 {
             // Eğer mesaj hiç çıkmazsa hata almamak için
             System.out.println("Mesaj kutusu bulunamadı bu beklenen bir durum olabilir.");
         }
+        ReusableMethods.bekle(2);
 
         // Başarı mesajı ekranda OLMAMALI
         softAssert.assertFalse(actualMessage.contains(successMessage),
@@ -181,11 +206,12 @@ public class US11 {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(priority = 5)
     public void US11_TC05_TC06_GecersizVerilerleRandevuOlusturulamadiginiDogrulama() {
 
         // TC06'da içerisinde test edilmiştir.
 
+        extentTest = extentReports.createTest("TC05_TC06 - Randevu Formunda Geçersiz Verilerle Randevu Oluşturulamadığını Doğrulama Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Randevu formuna gider
@@ -207,7 +233,6 @@ public class US11 {
         appointmentBookingPage.departmentDropDownWellness.click();
         appointmentBookingPage.doctorDropdownKutusu.click();
         appointmentBookingPage.doktorSecenegi.click();
-
         // Randevu oluşturur
         appointmentBookingPage.appointmentBookingButton.click();
 
@@ -231,9 +256,10 @@ public class US11 {
         softAssert.assertAll();
     }
 
-    @Test
-    public void TC07_SecilenDepartmanIleRandevuFormuUyumlulukDogrulamasi() {
-        // Doğrulama sonuçları için SoftAssert
+    @Test(priority = 6)
+    public void US11_TC07_SecilenDepartmanIleRandevuFormuUyumlulukDogrulamasi() {
+
+        extentTest = extentReports.createTest("TC07 - Seçilen Departman İsminin Randevu Formunda Gözükmesi Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Ana sayfadan spesifik bir departman seçilir
@@ -254,4 +280,88 @@ public class US11 {
 
         softAssert.assertAll();
     }
+
+    @Test(priority = 7)
+    public void US11_TC08_NavigasyonSonrasiFormVerilerininKorunumuDogrulamasiTesti(){
+
+        extentTest = extentReports.createTest("TC08 - Navigasyon Sonrasi Randevu Formu Verilerinin Korunması Testi  ");
+        SoftAssert softAssert = new SoftAssert();
+
+        departmentsMainPage.WelnessDepartments.click();
+
+        // Telefon numarası oluştur
+        String expectedPhone = "0544" + (int)(Math.random() * 10000000);
+
+        // Randevu metni
+        String expectedMessage = "Köpeğimin parazit aşısını yaptırmak istiyorum";
+
+        // Randevu kutularına bilgileri girer
+        appointmentBookingPage.phoneBox.sendKeys(expectedPhone);
+        appointmentBookingPage.messageBox.sendKeys(expectedMessage);
+
+        // Geri gider ve sonra tekrar ileri gelir
+        Driver.getDriver().navigate().back();
+        Driver.getDriver().navigate().forward();
+
+        // DOĞRULAMA: Veriler hala orada mı doğrulaması yapılır
+        String actualDate = appointmentBookingPage.dateInput.getAttribute("value");
+        String actualPhone = appointmentBookingPage.phoneBox.getAttribute("value");
+        String actualMessage = appointmentBookingPage.messageBox.getAttribute("value");
+
+        softAssert.assertEquals(actualPhone, expectedPhone, "HATA: Navigasyon sonrası telefon verisi silinmiş!");
+        softAssert.assertEquals(actualMessage, expectedMessage, "HATA: Navigasyon sonrası mesaj verisi silinmiş!");
+
+        softAssert.assertAll();
+
+    }
+
+    @Test(priority = 8)
+    public void TC09_KlavyeTabNavigasyonuVeOdaklanmaKontroluDogrulamasiTesti() {
+
+        extentTest = extentReports.createTest("TC09 - Randevu Formunun 'TAB' Tuşuyla Odaklanma Kontrolü Testi");
+        SoftAssert softAssert = new SoftAssert();
+
+        // Form sayfasına gidilir
+        departmentsMainPage.WelnessDepartments.click();
+
+        // Başlangıç noktasını Telefon kutusu olarak belirliyoruz
+        appointmentBookingPage.phoneBox.click();
+
+        // Telefon kutusunun şu an odakta olduğunu doğrular
+        WebElement currentFocus = Driver.getDriver().switchTo().activeElement();
+        softAssert.assertEquals(currentFocus, appointmentBookingPage.phoneBox,
+                "HATA: Başlangıçta odak Telefon kutusunda değil!");
+
+        Actions actions = new Actions(Driver.getDriver());
+
+        // TAB tuşuna basarak Departman Dropdown'una geçer
+        actions.sendKeys(org.openqa.selenium.Keys.TAB).perform();
+
+        currentFocus = Driver.getDriver().switchTo().activeElement();
+        softAssert.assertEquals(currentFocus, appointmentBookingPage.departmentDropdownKutusu,
+                "HATA: Telefon kutusundan sonra TAB ile Departman seçimine geçilemedi!");
+
+        // TAB tuşuna basarak Doktor Dropdown'una geçer
+        actions.sendKeys(org.openqa.selenium.Keys.TAB).perform();
+
+        currentFocus = Driver.getDriver().switchTo().activeElement();
+        softAssert.assertEquals(currentFocus, appointmentBookingPage.doctorDropdownKutusu,
+                "HATA: Departman seçiminden sonra TAB ile Doktor seçimine geçilemedi!");
+
+        // TAB tuşuna basarak Mesaj kutusuna geçer
+        actions.sendKeys(org.openqa.selenium.Keys.TAB).perform();
+
+        currentFocus = Driver.getDriver().switchTo().activeElement();
+        softAssert.assertEquals(currentFocus, appointmentBookingPage.messageBox,
+                "HATA: Doktor seçiminden sonra TAB ile Mesaj kutusuna geçilemedi!");
+
+        softAssert.assertAll();
+    }
+
+    /*
+    TC10 için;
+    Admin panelinde filtreleme veya arama özelliği bulunmadığı için,
+    binlerce kayıt arasından yeni oluşturulan randevuyu bulmak testin performansını negatif etkilemektedir.
+    Bu senaryo, manuel test aşamasında 'Veritabanı kontrolü' veya 'Filtreleme geliştirme talebi' olarak değerlendirilmelidir.
+     */
 }

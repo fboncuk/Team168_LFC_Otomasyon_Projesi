@@ -39,7 +39,7 @@ public class US26 {
         faker = new Faker();
 
 
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         loginPage.signInLinki
                 .click();
         loginPage.emailKutusu
@@ -89,7 +89,7 @@ public class US26 {
             usersPage.emailBox
                     .sendKeys(faker.internet().emailAddress());
 
-            String filePath = System.getProperty("user.dir") + "/src/test/resources/avatarrrr.jfif";
+            String filePath = System.getProperty("user.dir") + "/src/test/resources/avatarrrr.jpg";
             usersPage.avatarUploadInput.sendKeys(filePath);
 
             usersPage.saveButton.click();
