@@ -209,7 +209,7 @@ public class US26 {
         Driver.getDriver().navigate().refresh();
         ReusableMethods.bekle(1);
 
-        String filePath = System.getProperty("user.dir") + "/src/test/resources/avatarrrr.jfif";
+        String filePath = System.getProperty("user.dir") + "/src/test/resources/avatarrrr.jpg";
         usersPage.avatarUploadInput
                 .sendKeys(filePath);
         ReusableMethods.bekle(2);

@@ -1,7 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
@@ -33,17 +33,12 @@ public class US20 {
 
     @BeforeMethod
     public void beforeMethod() {
-
         softAssert = new SoftAssert();
         faker = new Faker();
+        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
     }
 
-    @AfterMethod
-    public void afterMethod() {
-        softAssert.assertAll();
-    }
-
-    @AfterClass
+        @AfterClass
     public void teardown() {
 
         Driver.quitDriver();
@@ -65,6 +60,7 @@ public class US20 {
         String signInPageLinkIcerik = Driver.getDriver().getCurrentUrl();
         softAssert.assertTrue(signInPageLinkIcerik.toLowerCase().contains(signInPAgeTitleIcerik.toLowerCase()), "Link ve Title eşleşmesi");
 
+        softAssert.assertAll();
     }
 
     @Test (priority = 2, description = "Login sayfasında tümü boş bilgilerle giriş denemesi")
@@ -84,7 +80,7 @@ public class US20 {
         softAssert.assertTrue(!validationMessage.isEmpty(), "Validation Message is not Displayed");
 
         ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC02_ValidationMessage1");
-
+        softAssert.assertAll();
     }
 
     @Test (priority = 3, description = "Login sayfasında admin geçerli mail ve pass boş bilgilerle giriş denemesi")
@@ -106,7 +102,7 @@ public class US20 {
         softAssert.assertTrue(!validationMessage.isEmpty(), "Validation Message is not Displayed");
 
         ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC02_ValidationMessage2");
-
+        softAssert.assertAll();
     }
 
     @Test (priority = 4, description = "Login sayfasında boş mail ve geçerli admin yetkili maile ait pass bilgilerle giriş denemesi")
@@ -127,7 +123,7 @@ public class US20 {
         softAssert.assertTrue(!validationMessage.isEmpty(), "Validation Message is not Displayed");
 
         ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC02_ValidationMessage3");
-
+        softAssert.assertAll();
     }
 
     @Test (priority = 5, description = "Login sayfasında admin geçerli mail ve geçersiz pass ile giriş denemesi")
@@ -150,7 +146,7 @@ public class US20 {
         softAssert.assertTrue(!actualInvalidPasswordMessage.isEmpty(), "Validation Message is not Displayed");
 
         ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC03_PozitifMailNegatifPass_Test");
-
+        softAssert.assertAll();
     }
 
     @Test (priority = 6, description = "Login sayfasında admin geçerli pass ve geçersiz mail ile giriş denemesi 2")
@@ -170,10 +166,10 @@ public class US20 {
         softAssert.assertTrue(!actualInvalidPasswordMessage.isEmpty(), "Validation Message is not Displayed");
 
         ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC03_PozitifPassNegatifMail_Test");
-
+        softAssert.assertAll();
     }
 
-    @Test (priority = 7, description = "Login sayfasında admin dashboarda erişim sağlanması")
+    @Test (priority = 7, description = "Login sayfasında dashboarda erişim öncesi homepage erişim sağlanması")
     public void US20_TC05_Admin_Account_SignIn_to_Admin_Dashboard_Test() {
 
         //Email box temizle ve Geçerli admin mail adresi gir
@@ -185,35 +181,83 @@ public class US20 {
         signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T09AdminPassword"));
 
         //Sign in butonuna bas
-        signButonsPage.signInButtonOnay.click();
+        wait.until(ExpectedConditions.elementToBeClickable(signButonsPage.signInButtonOnay)).click();
 
-        String expectedTestUrl = ConfigReader.getProperty("LcfUrl");
-        System.out.println(expectedTestUrl);
-        String actualUrl = Driver.getDriver().getCurrentUrl();
+        // Login sonrası URL bekle
+        String expectedHomeUrl = ConfigReader.getProperty("LfcUrl");
+        wait.until(ExpectedConditions.urlContains(expectedHomeUrl));
 
-        softAssert.assertEquals(actualUrl,expectedTestUrl,"Login To Homepage Failed");
+        String actualHomeUrl = Driver.getDriver().getCurrentUrl().toLowerCase();
+        softAssert.assertTrue(actualHomeUrl.toLowerCase().contains(expectedHomeUrl), "Login To Homepage Failed");
 
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC05_Admin_Account_SignIn_to_Admin_Dashboard_Test");
+        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC05_Admin_Account_SignIn_to_Homepage_Test");
+//        softAssert.assertAll();
+//    }
+//
+//    @Test (priority = 8, description = "Homepage sayfasından  admin dashboarda erişim sağlanması")
+//    public void US20_TC05_Admin_Account_SignIn_to_Homepage_Test() {
+//
+//
+        // Dashboard butonu görünür olana kadar bekle
+        //wait.until(ExpectedConditions.visibilityOf(signButonsPage.headerUserName));
+        wait.until(ExpectedConditions.elementToBeClickable(signButonsPage.headerUserName)).click();
 
-        signButonsPage.headerUserName.click();
+        // Dashboard URL bekle
+        String expectedDashboardUrl = ConfigReader.getProperty("DasUrl");
+        wait.until(ExpectedConditions.urlContains(expectedDashboardUrl));
 
-        String expectedAdminDashboardUrl = ConfigReader.getProperty("DasUrl");
-        System.out.println(expectedAdminDashboardUrl);
-        String actualAdminDashboardUrl = Driver.getDriver().getCurrentUrl();
+        String actualDashboardUrl = Driver.getDriver().getCurrentUrl();
+        softAssert.assertEquals(
+                actualDashboardUrl.toLowerCase(),
+                expectedDashboardUrl.toLowerCase(),
+                "Login To Dashboard Failed"
+        );
 
-        softAssert.assertEquals(actualAdminDashboardUrl,expectedAdminDashboardUrl,"Login To Dashboard Failed");
+//        softAssert.assertAll();
+//
+//    }
+//
+//    @Test (priority = 9, description = "Dashboard panelinde menü öğelerine erişildiğini doğrulanması (Funcional Test)")
+//    public void US20_TC06_Admin_Dashboard_Sol_Menu_Ogeler_Test(){
 
-    }
+        //Sol Menü açılmasını sağla
+        ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
 
-    @Test (priority = 8, description = "Dashboard panelinde menü öğelerine erişildiğini doğrulanması (Funcional Test)")
-    public void US20_TC06_Admin_Dashboard_Sol_Menu_Ogeler_Test(){
+        //sol menüdeki dashboard menü görünürlüğü ve tıklanabilirliği
+        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuDashboardLink.isDisplayed());
+        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuDashboardLink.isEnabled());
 
-        //Actions actions = new Actions(Driver.getDriver());
-        //actions.moveToElement(dashboardPage.DashboardPageLeftMenuDashboardLink);
-        dashboardPage.dashboardPageSideBarMenu.click();
+        //sol menüdeki Roles kısmı görünür, tıklanır mı?
+        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuRolesLink.isDisplayed());
+        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuRolesLink.isEnabled());
+        dashboardPage.DashboardPageLeftMenuRolesLink.click();
 
-        ReusableMethods.bekle(3);
+        //sol menüdeki Roles altındaki Roles kısmı gürünür ve tıklanabilir mi?
+        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuRoles.isDisplayed(),"Görünür değil");
+        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuRoles.isEnabled(),"Tıklanır değil");
+        dashboardPage.DashboardPageLeftMenuSubmenuRoles.click();
+        //Driver.getDriver().navigate().back();
 
+//        Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
+//
+//        ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
+//        dashboardPage.DashboardPageLeftMenuRolesLink.click();
+//        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.isDisplayed());
+//        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.isEnabled());
+//        dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.click();
+//        Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
+//
+//        ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
+//        dashboardPage.DashboardPageLeftMenuRolesLink.click();
+//        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.isDisplayed());
+//        softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.isEnabled());
+//        dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.click();
+//        Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
+
+
+
+        ReusableMethods.bekle(5);
+        softAssert.assertAll();
 
     }
 
