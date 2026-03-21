@@ -13,6 +13,11 @@ public class DashboardPage {
     }
 
     //### Bu Bölümdeki Locateler Dashboard Anasayfa Summary Cards vs Locateleri   ###
+
+    //DashboardPageSummaryCards Logo Linki
+    @FindBy(xpath = "//div[@class='sidebar-header']//img[contains(@src, 'logo.png')]")
+    public WebElement DashboardPageLogo;
+
     //DashboardPageSummaryCards Users Panel Linki
     @FindBy(xpath = "(//a[@class='text-white'])[1]")
     public WebElement DashboardPageSummaryCardsUsersLink;
