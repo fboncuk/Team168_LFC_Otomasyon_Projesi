@@ -16,37 +16,54 @@ import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+import utilities.TestBaseRapor;
 
+import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
 
-public class US22 {
+public class US22 extends TestBaseRapor {
 
     AdminBodyPage adminBodyPage;
+    SignButonsPage signButonsPage;
 
     @BeforeMethod
-    public void setup(){
-
-        // Admin Login sayfasına gidilir
-        Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
-
-        // Geçerli admin bilgileriyle giriş yapılır
-        SignButonsPage signButonsPage = new SignButonsPage();
-        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T11AdminMail"));
-        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
-        signButonsPage.signInButtonOnay.click();
-
+    public void setup() {
+        // Objeleri oluştur
         adminBodyPage = new AdminBodyPage();
+        signButonsPage = new SignButonsPage();
+
+        // Admin Dashboard sayfasına git
+        Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
+
+        try {
+            // Eğer email kutusu görünürse (yani dışarıdaysak) giriş yap
+            if (signButonsPage.emailKutusu.isDisplayed()) {
+                signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T11AdminMail"));
+                signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T11AdminPassword"));
+                signButonsPage.signInButtonOnay.click();
+
+            }
+        } catch (Exception e) {
+            // email kutusu yoksa (yani Dashboard direkt açıldıysa) hata verme, devam et
+            System.out.println("Zaten Admin Dashboard sayfasındayız, login adımları atlandı.");
+        }
+        Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
     }
 
     @AfterMethod
     public void tearDown() {
-       Driver.quitDriver();
+//        adminBodyPage.profileDropdownButton.click();
+//        adminBodyPage.profileLogoutOption.click();
+//        signButonsPage.homePageSignOut.click();
+//       Driver.quitDriver();
     }
 
     // Devre dışı bırakmak için (enabled = false) kullan
     @Test(priority = -2)
     public void US22_TC01_AdminPaneliGoruntulemeTesti(){
+        extentTest = extentReports.createTest("TC01 - Admin Paneli Görüntüleme Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Mevcut URL'in admin Dashboard içerdiği doğrulanır
@@ -61,6 +78,7 @@ public class US22 {
     @Test(priority = -1)
     public void US22_TC02_DashboardOzetKartlariGorunurlukTesti() {
 
+        extentTest = extentReports.createTest("TC02 - Özet Kartları Görünürlük Testi");
         SoftAssert softAssert = new SoftAssert();
         // Dashboard üzerindeki tüm kartlarda linkler de olduğundan,
         // linklerle kartların görünür olduğu doğrulanır.
@@ -91,43 +109,50 @@ public class US22 {
     @Test(priority = 1)
     public void US22_TC03_DashboardLearnMoreAtUsersLinkTiklanabilirlikVeYonlendirmeTesti(){
 
-        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtUsersLink, "/Users");
+        extentTest = extentReports.createTest("TC03 - Users Link Testi");
+        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtUsersLink, "/Users", extentTest);
     }
 
     @Test(priority = 2)
     public void US22_TC03_DashboardlearnMoreAtMessagesLinkVeYonlendirmeTesti(){
 
-        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtMessagesLink, "/Messages");
+        extentTest = extentReports.createTest("TC03 - Messages Link ve Yönlendirme Testi");
+        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtMessagesLink, "/Messages",extentTest);
     }
 
     @Test(priority = 3)
     public void US22_TC03_DashboardlearnMoreAtRolesLinkLinkVeYonlendirmeTesti(){
 
-        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtRolesLink, "/Roles");
+        extentTest = extentReports.createTest("TC03 - Roles Link ve Yönlendirme Testi");
+        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtRolesLink, "/Roles",extentTest);
     }
 
     @Test(priority = 4)
     public void US22_TC03_DashboardlearnMoreAtSettingsLinkVeYonlendirmeTesti(){
 
-        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtSettingsLink, "/Settings");
+        extentTest = extentReports.createTest("TC03 - Settings Link ve Yönlendirme Testi");
+        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtSettingsLink, "/Settings",extentTest);
     }
 
     @Test(priority = 5)
     public void US22_TC03_DashboardlearnMoreAtGoogleAdvertisementLinkVeYonlendirmeTesti(){
 
-        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtGoogleAdvertisementLink, "/AdSense");
+        extentTest = extentReports.createTest("TC03 - Google Ads Link ve Yönlendirme Testi");
+        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtGoogleAdvertisementLink, "/AdSense",extentTest);
     }
 
     @Test(priority = 6)
     public void US22_TC03_DashboardlearnMoreAtBedManagersLinkVeYonlendirmeTesti(){
 
-        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtBedManagersLink, "/BedManagers");
+        extentTest = extentReports.createTest("TC03 - Bed Managers Link ve Yönlendirme Testi");
+        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtBedManagersLink, "/BedManagers",extentTest);
     }
 
     @Test(priority = 7)
     public void US22_TC03_DashboardlearnMoreAtMedicinesLinkVeYonlendirmeTesti(){
 
-        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtMedicinesLink, "/Medicines");
+        extentTest = extentReports.createTest("TC03 - Medicines Link ve Yönlendirme Testi");
+        ReusableMethods.adminDashboardLinkKontrol(adminBodyPage.learnMoreAtMedicinesLink, "/Medicines",extentTest);
     }
 
     // TC04'ün görsel testi için;
@@ -136,6 +161,7 @@ public class US22 {
     @Test(priority = 8)
     public void US22_TC04_DashboardMesajTutarlilikTesti() {
 
+        extentTest = extentReports.createTest("TC04 - Dashboard Mesaj Tutarlılık Testi");
         SoftAssert softAssert = new SoftAssert();
         // Elementi dinamik metinle bulur
         WebElement dashboardMessageElement = Driver.getDriver().findElement(
@@ -168,6 +194,8 @@ public class US22 {
 
     @Test(priority = 9)
     public void US22_TC05_SosyalMedyaIkonlariGorunurlukVeTiklanabilirlikTesti(){
+
+        extentTest = extentReports.createTest("TC05 - Sosyal Medya İkonları Testi");
         SoftAssert softAssert = new SoftAssert();
 
         // Tüm ikonları bir listeye toplar

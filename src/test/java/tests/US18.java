@@ -7,23 +7,13 @@ import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.AppointmentBookingPage;
 import pages.LcfHomePage.MedicinesMainPage;
 import pages.LcfHomePage.SignButonsPage;
-import utilities.ConfigReader;
-import utilities.Driver;
-import utilities.ReusableMethods;
-import utilities.Listeners;
-
-
+import utilities.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-//@Listeners(utilities.Listeners.class)
-
-@org.testng.annotations.Listeners(Listeners.class)
-
-
-public class US18 {
+public class US18 extends TestBaseRapor {
     SoftAssert softAssert;
     SignButonsPage signButonsPage;
     MedicinesMainPage medicinesMainPage;
@@ -31,22 +21,17 @@ public class US18 {
 
     @BeforeClass
     public void setUpClass() {
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
+        Driver.getDriver().manage().window().maximize();
 
         signButonsPage = new SignButonsPage();
         medicinesMainPage = new MedicinesMainPage();
         appointmentBookingPage = new AppointmentBookingPage();
 
-        Driver.getDriver().manage().deleteAllCookies();
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
-
-        signButonsPage.signInLinki
-                .click();
-        signButonsPage.emailKutusu
-                .sendKeys(ConfigReader.getProperty("T07UserMail"));
-        signButonsPage.passwordKutusu
-                .sendKeys(ConfigReader.getProperty("T07UserPassword"));
-        signButonsPage.signInButtonOnay
-                .click();
+        signButonsPage.signInLinki.click();
+        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T07UserMail"));
+        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T07UserPassword"));
+        signButonsPage.signInButtonOnay.click();
     }
 
     @BeforeMethod
@@ -57,6 +42,8 @@ public class US18 {
 
     @Test
     public void US18_TC01_AnaSayfadanIlaclarSayfasinaErisimKontrolu() {
+        extentTest = extentReports
+                .createTest("US18_TC01_AnaSayfadanIlaclarSayfasinaErisimKontrolu");
         //İlaçlar sayfasında bulunduğunuzu doğrulayın
 
         String expectedUrlContent = "Medicines";
@@ -69,6 +56,8 @@ public class US18 {
 
     @Test
     public void US18_TC02_IlaclarBilgileriGorunurlukKontrolu() {
+        extentTest = extentReports
+                .createTest("US18_TC02_IlaclarBilgileriGorunurlukKontrolu");
         //İlaçların listenebildiğini doğrulayın
 
         List<String> expectedMedicinesNames = Arrays.asList(
@@ -94,6 +83,9 @@ public class US18 {
 
     @Test
     public void US18_TC03_IlacSecilebilirlikKontrolu() {
+        extentTest = extentReports
+                .createTest("US18_TC03_IlacSecilebilirlikKontrolu");
+
         //Sidebar'dan "Revolution (Selamectin)" secin
         medicinesMainPage.medicinesRevolutionSideBarLink
                 .click();
@@ -109,6 +101,8 @@ public class US18 {
 
     @Test
     public void US18_TC04_IlacIcinRandevuOlusturma() {
+        extentTest = extentReports
+                .createTest("US18_TC04_IlacIcinRandevuOlusturma");
         //Medicines Body'de "Baytril (Enrofloxacin)" tıklayın
         medicinesMainPage.medicinesBodyBaytrilLink.click();
 

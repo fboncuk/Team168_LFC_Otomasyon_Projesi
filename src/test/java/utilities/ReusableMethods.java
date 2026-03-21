@@ -1,12 +1,13 @@
 package utilities;
 
+import com.aventstack.extentreports.ExtentTest;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
 import javax.imageio.ImageIO;
@@ -111,7 +112,7 @@ public class ReusableMethods {
     }
     // *********************************
 
-    public static void tarihliTumSayfaResimCek (WebDriver driver){
+    public static String tarihliTumSayfaResimCek (WebDriver driver){
 
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("_yyMMdd_HHmmss");
@@ -129,6 +130,7 @@ public class ReusableMethods {
         } catch (IOException e) {
             System.out.println("Resim çekilemedi");
         }
+        return tarihEtiketi;
     }
     // *********************************
 
@@ -227,9 +229,13 @@ public class ReusableMethods {
      * @param linkElement ---> Tıklanacak olan 'Learn More' butonu (WebElement)
      * @param ExpectedUrlIcerik ---> URL içinde geçmesi beklenen anahtar kelime (String)
      */
-    public static void adminDashboardLinkKontrol(WebElement linkElement, String ExpectedUrlIcerik) {
+    public static void adminDashboardLinkKontrol(WebElement linkElement, String ExpectedUrlIcerik, ExtentTest extentTest) {
 
         SoftAssert softAssert = new SoftAssert();
+
+        // Rapora bilgi veriyoruz
+        extentTest.info(ExpectedUrlIcerik + " linkine tıklanıyor...");
+
         // Linke tıkla
         linkElement.click();
 
@@ -237,8 +243,17 @@ public class ReusableMethods {
         String actualUrl = Driver.getDriver().getCurrentUrl();
 
         // URL doğrula
-        softAssert.assertTrue(actualUrl.contains(ExpectedUrlIcerik),
+        boolean isUrlCorrect = actualUrl.contains(ExpectedUrlIcerik);
+
+        if (isUrlCorrect) {
+            extentTest.pass("Yönlendirme başarılı. Gidilen URL: " + actualUrl);
+        } else {
+            extentTest.fail("HATA: Beklenen URL içeriği: " + ExpectedUrlIcerik + " | Gidilen URL: " + actualUrl);
+        }
+
+        softAssert.assertTrue(isUrlCorrect,
                 "HATA: " + ExpectedUrlIcerik + " modülüne yönlendirme yapılamadı! Gidilen URL: " + actualUrl);
+
         softAssert.assertAll();
     }
 
@@ -252,6 +267,23 @@ public class ReusableMethods {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
+
+    // Alert açıkken ekran görüntüsü alma
+//    public static String alertVarkenScreenshot(String dosyaAdi) {
+//        try {
+//            LocalDateTime now = LocalDateTime.now();
+//            String tarih = now.format(DateTimeFormatter.ofPattern("_yyMMdd_HHmmss"));
+//            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//            Rectangle rect = new Rectangle(screenSize);
+//            BufferedImage image = new Robot().createScreenCapture(rect);
+//            String dosyaYolu = "target/screenshots/" + dosyaAdi + tarih + ".png";
+//            ImageIO.write(image, "png", new File(dosyaYolu));
+//            System.out.println("Alert açıkken screenshot alindi: " + dosyaYolu);
+//        } catch (Exception e) {
+//            System.out.println("Alert anında screenshot alınamadı: " + e.getMessage());
+//        }
+//        return dosyaAdi;
+//    }
 
     // Alert açıkken ekran görüntüsü alma
     public static void alertVarkenScreenshot(String dosyaAdi) {
@@ -268,6 +300,52 @@ public class ReusableMethods {
             System.out.println("Alert anında screenshot alınamadı: " + e.getMessage());
         }
     }
+
+//    public static String alertVarkenScreenshot(String dosyaAdi) {
+//        try {
+//            LocalDateTime now = LocalDateTime.now();
+//            String tarih = now.format(DateTimeFormatter.ofPattern("_yyMMdd_HHmmss"));
+//            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+//            Rectangle rect = new Rectangle(screenSize);
+//            BufferedImage image = new Robot().createScreenCapture(rect);
+//            String dosyaYolu = "target/screenshots/" + dosyaAdi + tarih + ".png";
+//            ImageIO.write(image, "png", new File(dosyaYolu));
+//            return dosyaYolu;
+//        } catch (Exception e) {
+//            System.out.println("Screenshot alınamadı: " + e.getMessage());
+//            return null;
+//        }
+//    }
+
+
+
+//    public static String alertVarkenScreenshot(String isim) {
+//        String tarih = new SimpleDateFormat("_yyMMdd_HHmmss").format(new Date());
+//        // Raporun içine yazılacak relative path
+//        String relativePath = "screenshots/" + isim + tarih + ".png";
+//        // Dosyanın kaydedileceği tam yol
+//        String fullPath = System.getProperty("user.dir") + "/test-output/" + relativePath;
+//
+//        try {
+//            // SELENIUM'A HİÇBİR ŞEY SORMUYORUZ (Hatanın sebebi buydu)
+//            // Doğrudan Java Robot ile ekranı yakalıyoruz.
+//            Robot robot = new Robot();
+//
+//            // Ekran boyutunu Windows'tan alıyoruz
+//            java.awt.Rectangle screenRect = new java.awt.Rectangle(Toolkit.getDefaultToolkit().getScreenSize());
+//            BufferedImage screenFullImage = robot.createScreenCapture(screenRect);
+//
+//            File destFile = new File(fullPath);
+//            destFile.getParentFile().mkdirs(); // Klasör yoksa oluştur
+//            ImageIO.write(screenFullImage, "png", destFile);
+//
+//            System.out.println("Robot Screenshot (Tam Ekran) başarıyla alındı: " + fullPath);
+//        } catch (Exception e) {
+//            System.out.println("Robot Screenshot Hatası: " + e.getMessage());
+//        }
+//        return relativePath; // Raporun dosyayı bulması için dönen yol
+//    }
+
 
 
 
@@ -311,6 +389,23 @@ public class ReusableMethods {
         } catch (Throwable error) {
             System.out.println(
                     "Timeout waiting for Page Load Request to complete after " + timeout + " seconds");
+        }
+    }
+
+
+    public static String screenshotWithAlert(String screenshotName) {
+        try {
+            // alert açıkken ekran görüntüsü al
+            TakesScreenshot ts = (TakesScreenshot) Driver.getDriver();
+            String date = new SimpleDateFormat("ddMMyy_HHmmss").format(new Date());
+            String path = "target/screenshots/" + screenshotName + "_" + date + ".png";
+            File src = ts.getScreenshotAs(OutputType.FILE);
+            File dest = new File(path);
+            FileUtils.copyFile(src, dest);
+            return path;
+        } catch (Exception e) {
+            System.out.println("Alert varken screenshot alınamadı: " + e.getMessage());
+            return null;
         }
     }
 
