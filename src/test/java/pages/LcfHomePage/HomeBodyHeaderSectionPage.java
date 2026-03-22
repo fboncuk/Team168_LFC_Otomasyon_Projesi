@@ -16,7 +16,7 @@ public class HomeBodyHeaderSectionPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
-    @FindBy(xpath = "(//a[text()='Doctors'])[4]")
+    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Doctors']")
     public WebElement doctorsHeaderLink;
 
 

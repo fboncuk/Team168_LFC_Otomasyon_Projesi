@@ -130,72 +130,72 @@ public class DashboardPage {
 
     //DasboardPage Left Menu Vaccinations link
     @FindBy (xpath = "(//*[@class='title'])[13]")
-    public WebElement DashboardPageLeftMenuVaccinationssLink;
+    public WebElement DashboardPageLeftMenuVaccinationsLink;
+
+    //Dashboard Left Menu Logo
+    @FindBy(xpath = "//img[contains(@src,'logo.png')]")
+    public WebElement dashboardLeftMenuLogo;
+
 
 
 
     //### Bu Bölümdeki Locateler Dashboard Anasayfa Sol Açılır
     // Menülere Tıklanınca açılan submenuler Locateleri   ###
     //Dashboard Left Menu -> Roles -> Roles tıklama
-    @FindBy(linkText= "Roles")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Roles']")
     public WebElement DashboardPageLeftMenuSubmenuRoles;
 
     //Dashboard Left Menu -> Roles -> Create Role tıklama
-    @FindBy(linkText= "Create Role")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Roles/create']")
     public WebElement DashboardPageLeftMenuSubmenuCreateRole;
 
     //Dashboard Left Menu -> Users -> Users tıklama
-    @FindBy(linkText= "Users")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Users']")
     public WebElement DashboardPageLeftMenuSubmenuUsers;
 
     //Dashboard Left Menu -> Users -> Create User tıklama
-    @FindBy(linkText= "Create User")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Users/create']")
     public WebElement DashboardPageLeftMenuSubmenuCreateUser;
 
     //Dashboard Left Menu -> Bed Managers -> Bed Managers tıklama
-    @FindBy(linkText= "Bed Managers")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Posts']")
     public WebElement DashboardPageLeftMenuSubmenuBedManagers;
 
     //Dashboard Left Menu -> Bed Managers -> Creat Bed Managers  tıklama
-    @FindBy(linkText= "Create Bed Managers")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Posts/create']")
     public WebElement DashboardPageLeftMenuSubmenuCreateBedManagers;
 
     //Dashboard Left Menu -> Departments -> Departments tıklama
-    @FindBy(linkText= "Departments")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Categories']")
     public WebElement DashboardPageLeftMenuSubmenuDepartments;
 
     //Dashboard Left Menu -> Departments -> Create Departments  tıklama
-    @FindBy(linkText= "Create Departmentss")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Categories/create']")
     public WebElement DashboardPageLeftMenuSubmenuCreateDepartments;
 
     //Dashboard Left Menu -> Doctors -> Doctors tıklama
-    @FindBy(linkText= "Doctors")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Clients']")
     public WebElement DashboardPageLeftMenuSubmenuDoctors;
 
     //Dashboard Left Menu -> Doctors -> Create Doctors  tıklama
-    @FindBy(linkText= "Create Doctors")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Clients/create']")
     public WebElement DashboardPageLeftMenuSubmenuCreateDoctors;
 
     //Dashboard Left Menu -> Medicines -> Medicines tıklama
-    @FindBy(linkText= "Medicines")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Instagrams']")
     public WebElement DashboardPageLeftMenuSubmenuMedicines;
 
     //Dashboard Left Menu -> Medicines -> Create Medicines  tıklama
-    @FindBy(linkText= "Create Medicines")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Instagrams/create']")
     public WebElement DashboardPageLeftMenuSubmenuCreateMedicines;
 
     //Dashboard Left Menu -> Pets adsense -> Pets adsense tıklama
-    @FindBy(linkText= "Pets adsense")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/AdSense']")
     public WebElement DashboardPageLeftMenuSubmenuPetsAdsense;
 
     //Dashboard Left Menu -> Pets adsense -> Create Pets adsense  tıklama
-    @FindBy(linkText= "Create Pets adsense")
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/AdSense/create']")
     public WebElement DashboardPageLeftMenuSubmenuCreatePetsAdsense;
-
-
-    //Dashboard Left Menu -> Tickets tıklama
-    @FindBy(linkText= "Tickets")
-    public WebElement DashboardPageLeftMenuSubmenuTickets;
 
 
     //Dashboard Left Menu -> Vaccinations tıklama
