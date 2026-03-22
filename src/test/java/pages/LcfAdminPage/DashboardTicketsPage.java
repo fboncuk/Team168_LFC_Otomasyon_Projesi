@@ -28,9 +28,22 @@ public class DashboardTicketsPage {
     @FindBy (xpath ="(//*[@class = 'card-header clearfix'])[1]")
     public WebElement randevuKayitBilgiEkrani;
 
+<<<<<<< HEAD
+    // Olusturulan randevularin siralamasinin kontrol edilmesi
     @FindBy (xpath = "(//div[@data-social='item']//h5)[1]")
     public WebElement ilkRandevuTarihBilgisi;
 
+    // Olusturulan randevunun tarih,mesaj,doktor bilgilerinin goruntulenmesi
+    @FindBy (xpath = "(//*[@class ='card social-card share col2 m-t-30 m-b-30 m-r-30'])[1]")
+    public WebElement randevuDoktorTarihMesajGoruntuleme;
+
+
+
+=======
+    @FindBy (xpath = "(//div[@data-social='item']//h5)[1]")
+    public WebElement ilkRandevuTarihBilgisi;
+
+>>>>>>> main
 
 
 

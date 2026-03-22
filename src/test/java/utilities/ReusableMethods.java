@@ -409,7 +409,19 @@ public class ReusableMethods {
         }
     }
 
+    public static boolean isReallyClickable(WebDriver driver, WebElement element, int timeoutInSeconds) {
+        try {
+            if (!element.isDisplayed() || !element.isEnabled()) return false;
 
+            // JS üzerinden click olayı tetikle
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
 
+            // opsiyonel: tıklamadan sonra beklenen UI değişikliğini doğrula
+            // Örneğin URL değişti mi veya overlay kayboldu mu
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    }
 
-}

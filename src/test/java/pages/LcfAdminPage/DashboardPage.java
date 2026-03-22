@@ -129,13 +129,74 @@ public class DashboardPage {
 
     //DasboardPage Left Menu Vaccinations link
     @FindBy (xpath = "(//*[@class='title'])[13]")
-    public WebElement sidebarMenuVaccinationsLink;
+    public WebElement DashboardPageLeftMenuVaccinationsLink;
+
+    //Dashboard Left Menu Logo
+    @FindBy(xpath = "//img[contains(@src,'logo.png')]")
+    public WebElement dashboardLeftMenuLogo;
+
 
 
 
     //### Bu Bölümdeki Locateler Dashboard Anasayfa Sol Açılır
     // Menülere Tıklanınca açılan submenuler Locateleri   ###
     //Dashboard Left Menu -> Roles -> Roles tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Roles']")
+    public WebElement DashboardPageLeftMenuSubmenuRoles;
+
+    //Dashboard Left Menu -> Roles -> Create Role tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Roles/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateRole;
+
+    //Dashboard Left Menu -> Users -> Users tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Users']")
+    public WebElement DashboardPageLeftMenuSubmenuUsers;
+
+    //Dashboard Left Menu -> Users -> Create User tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Users/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateUser;
+
+    //Dashboard Left Menu -> Bed Managers -> Bed Managers tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Posts']")
+    public WebElement DashboardPageLeftMenuSubmenuBedManagers;
+
+    //Dashboard Left Menu -> Bed Managers -> Creat Bed Managers  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Posts/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateBedManagers;
+
+    //Dashboard Left Menu -> Departments -> Departments tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Categories']")
+    public WebElement DashboardPageLeftMenuSubmenuDepartments;
+
+    //Dashboard Left Menu -> Departments -> Create Departments  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Categories/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateDepartments;
+
+    //Dashboard Left Menu -> Doctors -> Doctors tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Clients']")
+    public WebElement DashboardPageLeftMenuSubmenuDoctors;
+
+    //Dashboard Left Menu -> Doctors -> Create Doctors  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Clients/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateDoctors;
+
+    //Dashboard Left Menu -> Medicines -> Medicines tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Instagrams']")
+    public WebElement DashboardPageLeftMenuSubmenuMedicines;
+
+    //Dashboard Left Menu -> Medicines -> Create Medicines  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Instagrams/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateMedicines;
+
+    //Dashboard Left Menu -> Pets adsense -> Pets adsense tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/AdSense']")
+    public WebElement DashboardPageLeftMenuSubmenuPetsAdsense;
+
+    //Dashboard Left Menu -> Pets adsense -> Create Pets adsense  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/AdSense/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreatePetsAdsense;
+
+
     @FindBy(linkText= "Roles")
     public WebElement sidebarSubmenuRoles;
 
@@ -207,6 +268,9 @@ public class DashboardPage {
 
 
 
+    //Dashboard Left Menu Logo
+    @FindBy (xpath = "//*[@*='brand width-60']")
+    public WebElement DashboardLeftMenuLogo1;
 
 
 
