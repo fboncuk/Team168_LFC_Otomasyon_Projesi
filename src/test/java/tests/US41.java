@@ -1,6 +1,8 @@
 package tests;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,24 +24,26 @@ public class US41 {
     SoftAssert softAssert;
     DashboardPage dashboardPage;
     DashboardTicketsPage dashboardTicketsPage;
+    Actions actions;
 
     @BeforeClass
-    public void setup(){
+    public void setup() {
         adminBodyPage = new AdminBodyPage();
-        signButonsPage= new SignButonsPage();
+        signButonsPage = new SignButonsPage();
         softAssert = new SoftAssert();
         dashboardPage = new DashboardPage();
         dashboardTicketsPage = new DashboardTicketsPage();
-
+        actions = new Actions(driver);
     }
+
     @AfterClass
-    public void teardown(){
+    public void teardown() {
         Driver.quitDriver();
     }
 
 
     @Test(priority = 1)
-    public void US41_TC001_AdminIsimBilgisineTiklayipDashboarddanTickestsSeceneginiGorebilmeli(){
+    public void US41_TC001_AdminIsimBilgisineTiklayipDashboarddanTickestsSeceneginiGorebilmeli() {
 
         //Kullanici Url' e gider
         Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
@@ -64,8 +68,8 @@ public class US41 {
 
     }
 
-    @Test (priority = 2)
-    public void US41_TC002_AdminTickectsSeceneginiTiklayabilmeli(){
+    @Test(priority = 2)
+    public void US41_TC002_AdminTickectsSeceneginiTiklayabilmeli() {
 
         // Sol tarafta açılan menüden Tickets seçeneğine tıklar
         dashboardTicketsPage.ticketsLink.click();
@@ -73,7 +77,7 @@ public class US41 {
     }
 
     @Test(priority = 3)
-    public void US41_TC003_SayfadaRandevulariSondanGeriyeDogruGoruntuleyebilmeli(){
+    public void US41_TC003_SayfadaRandevulariSondanGeriyeDogruGoruntuleyebilmeli() {
 
         // Açılan sayfada randevu bilgilerini güncel olandan geriye doğru görüntüler
         LocalDate ldt = LocalDate.now();
@@ -98,11 +102,12 @@ public class US41 {
 
     }
 
-    @Test (priority = 4)
-   public void US41_TC004_RandevuTarihiYYYYMMddDoktorBolumVarsaMesajGoruntulenebilmeli(){
+    @Test(priority = 4)
+    public void US41_TC004_RandevuTarihiYYYYMMddDoktorBolumVarsaMesajGoruntulenebilmeli() {
 
         // Randevu bilgilerinde tarih,doktor ve bölüm bilgisini ve varsa mesajı görüntüler
 
         dashboardTicketsPage.randevuDoktorTarihMesajGoruntuleme.isDisplayed();
     }
+
 }
