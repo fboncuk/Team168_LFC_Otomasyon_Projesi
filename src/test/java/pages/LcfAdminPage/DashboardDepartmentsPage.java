@@ -83,7 +83,7 @@ public class DashboardDepartmentsPage {
     public WebElement DepartmentsColorGeneric;
 
     //Create Departments başlığı içinde yer alan Create Your Departments alanında yer alan Save Butonu
-    @FindBy(xpath = "(//button[@class='btn btn-success btn-cons btn-animated from-left fa fa-save pull-right']")
+    @FindBy(xpath = "(//button[contains(@class,'fa-save')])")
     public WebElement SaveButton;
 
     //Create Departments başlığı içinde yer alan Create Your Departments alanındaki  File Drop Box alanı
