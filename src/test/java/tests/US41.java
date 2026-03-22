@@ -1,12 +1,9 @@
 package tests;
 
-<<<<<<< HEAD
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
-=======
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
->>>>>>> main
+
 import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,13 +16,10 @@ import utilities.Driver;
 import utilities.ReusableMethods;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
-
-=======
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
->>>>>>> main
+
 
 public class US41 {
 
@@ -35,7 +29,7 @@ public class US41 {
     SoftAssert softAssert;
     DashboardPage dashboardPage;
     DashboardTicketsPage dashboardTicketsPage;
-<<<<<<< HEAD
+
     Actions actions;
 
     @BeforeClass
@@ -50,36 +44,17 @@ public class US41 {
 
     @AfterClass
     public void teardown() {
-=======
 
-    @BeforeClass
-    public void setup(){
-        adminBodyPage = new AdminBodyPage();
-        signButonsPage= new SignButonsPage();
-        softAssert = new SoftAssert();
-        dashboardPage = new DashboardPage();
-        dashboardTicketsPage = new DashboardTicketsPage();
 
     }
-    @AfterClass
-    public void teardown(){
->>>>>>> main
-        Driver.quitDriver();
-    }
-
 
     @Test(priority = 1)
-<<<<<<< HEAD
-    public void US41_TC001_AdminIsimBilgisineTiklayipDashboarddanTickestsSeceneginiGorebilmeli() {
 
-        //Kullanici Url' e gider
-        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
-=======
     public void US41_TC001_AdminIsimBilgisineTiklayipDashboarddanTickestsSeceneginiGorebilmeli(){
 
         //Kullanici Url' e gider
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
->>>>>>> main
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
+
         //Sign in butonuna tıklar
         signButonsPage.signInLinki.click();
         //Geçerli mail adresini girer
@@ -101,13 +76,10 @@ public class US41 {
 
     }
 
-<<<<<<< HEAD
-    @Test(priority = 2)
-    public void US41_TC002_AdminTickectsSeceneginiTiklayabilmeli() {
-=======
+
     @Test (priority = 2)
     public void US41_TC002_AdminTickectsSeceneginiTiklayabilmeli(){
->>>>>>> main
+
 
         // Sol tarafta açılan menüden Tickets seçeneğine tıklar
         dashboardTicketsPage.ticketsLink.click();
@@ -115,11 +87,8 @@ public class US41 {
     }
 
     @Test(priority = 3)
-<<<<<<< HEAD
-    public void US41_TC003_SayfadaRandevulariSondanGeriyeDogruGoruntuleyebilmeli() {
-=======
     public void US41_TC003_SayfadaRandevulariSondanGeriyeDogruGoruntuleyebilmeli(){
->>>>>>> main
+
 
         // Açılan sayfada randevu bilgilerini güncel olandan geriye doğru görüntüler
         LocalDate ldt = LocalDate.now();
@@ -144,7 +113,6 @@ public class US41 {
 
     }
 
-<<<<<<< HEAD
     @Test(priority = 4)
     public void US41_TC004_RandevuTarihiYYYYMMddDoktorBolumVarsaMesajGoruntulenebilmeli() {
 
@@ -153,9 +121,7 @@ public class US41 {
         dashboardTicketsPage.randevuDoktorTarihMesajGoruntuleme.isDisplayed();
     }
 
+
+
 }
-=======
-   // @Test (priority = 4)
-   // public void US41_TC004_
-}
->>>>>>> main
+
