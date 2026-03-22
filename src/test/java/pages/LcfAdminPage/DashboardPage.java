@@ -207,6 +207,9 @@ public class DashboardPage {
 
 
 
+    //Dashboard Left Menu Logo
+    @FindBy (xpath = "//*[@*='brand width-60']")
+    public WebElement DashboardLeftMenuLogo1;
 
 
 
