@@ -1,5 +1,6 @@
 package tests;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -9,14 +10,18 @@ import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
+import java.time.Duration;
+
 public class US01 {
 
     HomeBodyPage homeBodyPage;
+    WebDriverWait wait;
 
     @BeforeMethod
     public void setUp() {
         homeBodyPage = new HomeBodyPage();
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
+        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
     }
 
     @Test(priority = 1, groups = "smoke", description = "SMOKE: Ana sayfa yüklendiğinde sekme isminin kontrolü")
