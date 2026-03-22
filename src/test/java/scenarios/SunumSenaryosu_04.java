@@ -1,7 +1,9 @@
-package tests;
+package scenarios;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -18,12 +20,16 @@ import java.util.*;
 
 // @org.testng.annotations.Listeners(Listeners.class)
 
-public class US28 extends TestBaseRapor{
+// TEAM168 OTOMASYON PROJESİ
+// SENARYO ESASLI TEST YAPILMASI
+
+public class SunumSenaryosu_04 extends TestBaseRapor{
 
     SignButonsPage signButonsPage;
     DashboardPage dashboardPage;
     DashboardBedManagersPage dashboardBedManagersPage;
     DepartmentsMainPage departmentsMainPage;
+    Actions actions;
 
     @BeforeClass
     public void setup() {
@@ -34,8 +40,11 @@ public class US28 extends TestBaseRapor{
 
         // SignIn butonu tıklanır ve T06 Tester geçerli kullanıcı bilgileri ile giriş yapılır
         signButonsPage.signInLinki.click();
+        ReusableMethods.bekle(5);
         signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T06AdminMail"));
+        ReusableMethods.bekle(5);
         signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T06AdminPassword"));
+        ReusableMethods.bekle(5);
         signButonsPage.signInButtonOnay.click();
         // Profil ismine tıklayıp Dasboard sayfasına gidilir
         signButonsPage.signInLinki.click();
@@ -60,22 +69,23 @@ public class US28 extends TestBaseRapor{
 
         // Dashboard sidebar menüsü hover edilir
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
+        ReusableMethods.bekle(5);
 
         // Bed Manager linki gürünürlük kontrolü yapılır ve tıklanır
         softAssert.assertTrue(dashboardPage.sidebarMenuBedManagersLink.isDisplayed());
         dashboardPage.sidebarMenuBedManagersLink.click();
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
 
         // Bed Managers submenü görünürlük kontrolü yapılır
-                softAssert.assertTrue(dashboardPage.sidebarSubmenuBedManagers.isDisplayed()
+        softAssert.assertTrue(dashboardPage.sidebarSubmenuBedManagers.isDisplayed()
                 ,"Dashboard Bed Managers butonu görünür değil.");
         softAssert.assertTrue(dashboardPage.sidebarSubmenuBedManagers.isEnabled()
                 ,"Dashboard Bed Managers butonu görünür değil.");
 
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
 
         // Create Bed Managers submenü görünürlük kontrolü yapılır
-                softAssert.assertTrue(dashboardPage.sidebarSubmenuCreateBedManagers.isDisplayed()
+        softAssert.assertTrue(dashboardPage.sidebarSubmenuCreateBedManagers.isDisplayed()
                 ,"Dashboard Create Bed Managers butonu görünür değil.");
         softAssert.assertTrue(dashboardPage.sidebarSubmenuCreateBedManagers.isEnabled()
                 ,"Dashboard Create Bed Managers butonu görünür değil.");
@@ -101,106 +111,25 @@ public class US28 extends TestBaseRapor{
 
         // Dashboard sidebar menüsü hover edilir
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
+        ReusableMethods.bekle(5);
 
         // Bed Manager linki tıklanır
         dashboardPage.sidebarMenuBedManagersLink.click();
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
 
         // Create bed managers linki tıklanır
         dashboardPage.sidebarSubmenuCreateBedManagers.click();
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
 
         String expectedTitle = "Create Bed Managers";
         String actualTitle = dashboardBedManagersPage.dashboardCreateBedManagerTitle.getText();
         softAssert.assertTrue(actualTitle.toLowerCase().trim().contains(expectedTitle.toLowerCase().trim())
-                               ,expectedTitle + " sayfası açılmadı.");
+                ,expectedTitle + " sayfası açılmadı.");
 
         softAssert.assertAll();
 
     }
 
-
-    @Test(priority = 3)
-    public void US28_TC03_CreateBedManagerYeniYatakOlusturmaTesti() {
-
-        // Dashboard Create Bed Managers sayfasında
-        // Geçerli bigiler ile yeni bir yatak oluşturulabildiğini doğrulamak
-
-        SoftAssert softAssert = new SoftAssert();
-        signButonsPage = new SignButonsPage();
-        dashboardPage = new DashboardPage();
-        dashboardBedManagersPage = new DashboardBedManagersPage();
-
-        // Dashboard sidebar menüsü hover edilir
-        ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
-
-        // Bed Manager linki tıklanır
-        dashboardPage.sidebarMenuBedManagersLink.click();
-
-        // Create bed managers linki tıklanır
-        dashboardPage.sidebarSubmenuCreateBedManagers.click();
-
-        // Geçerli Bigiler girilir
-        String newbedManagersTitle = "Tekir Cat Bed";
-        String newbedManagersContent = "Tekir Cat Bed\nThis text is for testing the Bed Managers’ Content text box.";
-        String newbedManagersPrices = "1000TL";
-        String filePath = System.getProperty("user.dir")
-                + "/src/test/java/images/US_28_TC_03_Foto_Testdata.jpg";
-
-        dashboardBedManagersPage.createBedManagerTitleKutusu.click();
-        ReusableMethods.bekle(1);
-        dashboardBedManagersPage.createBedManagerTitleKutusu
-                .sendKeys(newbedManagersTitle); // bedManagersTitle girilir
-        dashboardBedManagersPage.createBedManagerContent.click();
-        dashboardBedManagersPage.createBedManagerContent
-                .sendKeys(newbedManagersContent); // bedManagersContent girilir
-        dashboardBedManagersPage.createBedManagerDepDropdown.click(); // Department dd menü tıklanır
-        dashboardBedManagersPage.departmentDdMenuVaccinations.click(); // Vaccinations seçilir
-        dashboardBedManagersPage.createBedManagerDoctorDropdown.click(); // Doctors dd menü tıklanır
-        dashboardBedManagersPage.doctorsDdMenuDrMarcus.click(); // Dr Marcus seçilir
-        dashboardBedManagersPage.createBedManagerPriceBox.sendKeys(newbedManagersPrices); // Price girilir
-
-        // Yeni yatak kaydedilir.
-        dashboardBedManagersPage.createBedManagerSaveButonu.click();
-        ReusableMethods.bekle(1);
-
-        // Yeni oluşturulan yatağın Bed Managers altında görüldüğü kontrol edilir
-        // Bed Managers sayfasına gidilir.
-        Driver.getDriver().get(ConfigReader.getProperty("DasbedUrl"));
-
-        // Yeni yatak Dasboard Bed Managers listesinde yer alıyor mu kontrol edilir
-        // Yeni yatağın locator'ı ismi ile aratılıp kaydedilir
-        WebElement row = null;
-        try {
-            row = Driver.getDriver().findElement(
-                    By.xpath("//tr[.//p[normalize-space()='"
-                            + newbedManagersTitle
-                            + "']]")
-            );
-        } catch (Exception e) {
-            // eleman bulunamadı
-            row = null; // zaten null
-        }
-
-        // row null ise  ve görünür değilse soft assert fail
-        if (row == null ) {
-            softAssert.fail("Yeni oluşturulan yatak Bed Managers listesine eklenmemiş!");
-        }
-
-        // Delete butonunu sadece row bulunduysa tıklanır
-        if (row != null) {
-
-            try {
-                WebElement deleteButonu = row.findElement(By.xpath(".//button[@type='submit']"));
-                deleteButonu.click();
-            } catch (Exception e) {
-                softAssert.fail("HATA: Delete butonu bulunamadı!");
-            }
-        }
-
-        softAssert.assertAll();
-
-    }
 
 
     @Test(priority = 4, groups = "regression")
@@ -214,36 +143,44 @@ public class US28 extends TestBaseRapor{
         dashboardPage = new DashboardPage();
         dashboardBedManagersPage = new DashboardBedManagersPage();
         departmentsMainPage = new DepartmentsMainPage();
+        actions = new Actions(Driver.getDriver());
 
         Driver.getDriver().get(ConfigReader.getProperty("DasbedUrl"));
 
         // Geçerli Bigiler girilir
         String newbedManagersTitle = "Sarman Cat Bed";
-        String newbedManagersContent = "Sarman Cat Bed\nThis text is for testing the Bed Managers’ Content text box.";
+        String newbedManagersContent = "Sarman Cat Bed\nBu metin yatak içerik kutusu testi için girilmiştir.";
         String newbedManagersPrices = "2000TL";
 
         dashboardBedManagersPage.dashboardAddBedManagerButonu.click();
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerTitleKutusu
                 .sendKeys(newbedManagersTitle); // bedManagersTitle girilir
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerContent.click();
         dashboardBedManagersPage.createBedManagerContent
                 .sendKeys(newbedManagersContent); // bedManagersContent girilir
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerDepDropdown.click(); // Department dd menü tıklanır
         dashboardBedManagersPage.departmentDdMenuVaccinations.click(); // Vaccinations seçilir
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerDoctorDropdown.click(); // Doctors dd menü tıklanır
         dashboardBedManagersPage.doctorsDdMenuDrMarcus.click(); // Dr Marcus seçilir
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerPriceBox.sendKeys(newbedManagersPrices); // Price girilir
+        ReusableMethods.bekle(5);
 
         // Yeni yatak kaydedilir.
         dashboardBedManagersPage.createBedManagerSaveButonu.click();
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
 
         // Yeni yatak Vaccinations sayfasında Bed listesinde yer alıyor mu kontrol edilir
         Driver.getDriver().get(ConfigReader.getProperty("DepUrl"));
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
         departmentsMainPage.Vaccinations.click();
-        ReusableMethods.bekle(2);
+        ReusableMethods.bekle(1);
+        actions.sendKeys(Keys.PAGE_DOWN).perform();
+        ReusableMethods.bekle(5);
 
         WebElement row = null;
         try {
@@ -263,7 +200,7 @@ public class US28 extends TestBaseRapor{
         // Test işlemi tamamlandığı için eklenmiş olan yatak Elementi silinir.
         // Dasboard sayfasına gidilir ve test için eklenmiş olan Bed silinir.
         Driver.getDriver().get(ConfigReader.getProperty("DasbedUrl"));
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
 
         if (row != null) {
             try {
@@ -273,11 +210,12 @@ public class US28 extends TestBaseRapor{
 
                 WebElement deleteButonu = silinecekBed.findElement(By.xpath(".//button[@type='submit']"));
                 deleteButonu.click();
-                ReusableMethods.bekle(1);
+                ReusableMethods.bekle(5);
             } catch (Exception e) {
                 softAssert.fail("HATA: Delete butonu bulunamadı!");
             }
         }
+        ReusableMethods.bekle(5);
 
         softAssert.assertAll();
 
@@ -299,26 +237,31 @@ public class US28 extends TestBaseRapor{
         Driver.getDriver().get(ConfigReader.getProperty("DasbedUrl"));
 
         // Yatak adı hariç diğer bilgiler girilir
-        String newbedManagersContent = "Pamuk Cat Bed\nThis text is for testing the Bed Managers’ Content text box.";
+        String newbedManagersContent = "Pamuk Cat Bed\nBu metin aşı içerik kutusu testi için girilmiştir.";
         String newbedManagersPrices = "2000TL";
 
         dashboardBedManagersPage.dashboardAddBedManagerButonu.click();
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerContent.click();
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerContent
                 .sendKeys(newbedManagersContent); // bedManagersContent girilir
         dashboardBedManagersPage.createBedManagerDepDropdown.click(); // Department dd menü tıklanır
         dashboardBedManagersPage.departmentDdMenuVaccinations.click(); // Vaccinations seçilir
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerDoctorDropdown.click(); // Doctors dd menü tıklanır
         dashboardBedManagersPage.doctorsDdMenuDrMarcus.click(); // Dr Marcus seçilir
+        ReusableMethods.bekle(5);
         dashboardBedManagersPage.createBedManagerPriceBox.sendKeys(newbedManagersPrices); // Price girilir
+        ReusableMethods.bekle(5);
 
         // Yeni yatak kaydedilir.
         dashboardBedManagersPage.createBedManagerSaveButonu.click();
-        ReusableMethods.bekle(1);
+        ReusableMethods.bekle(5);
 
         WebElement titleKutusu = dashboardBedManagersPage.createBedManagerTitleKutusu;
         String message = titleKutusu.getAttribute("validationMessage");
+        ReusableMethods.bekle(5);
 
         // Tooltip/validation mesajı kontrolü
         String expectedMessage = "Lütfen bu alanı doldurun.";
@@ -347,9 +290,11 @@ public class US28 extends TestBaseRapor{
 
         // Dasboard sayfası açılır
         Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
+        ReusableMethods.bekle(5);
 
         // Dashboard sidebar menüsü hover edilir
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
+        ReusableMethods.bekle(5);
 
         // LFC logoso görünürlük testi yapılır
         softAssert.assertTrue(dashboardPage.dashboardPageLogo
@@ -357,17 +302,20 @@ public class US28 extends TestBaseRapor{
 
         // Logo tıklanır ve anasayfanın açıldığı kontrol edilir
         dashboardPage.dashboardPageLogo.click();
+        ReusableMethods.bekle(5);
+
         String expectedUrl = "https://qa.loyalfriendcare.com/en";
         String actualUrl = Driver.getDriver().getCurrentUrl();
         softAssert.assertEquals(actualUrl,expectedUrl
                 , "Dasboard sayfasındki LFC logosuna tıklanınca anasayfa açılmadı!");
-        ReusableMethods.bekle(1);
 
         // Bed managers sayfası açılır
         Driver.getDriver().get(ConfigReader.getProperty("DasbedUrl"));
+        ReusableMethods.bekle(5);
 
         // Dashboard sidebar menüsü hover edilir
         ReusableMethods.hover(dashboardBedManagersPage.dashboardPageSideBarMenu);
+        ReusableMethods.bekle(5);
 
         // LFC logoso görünürlük testi yapılır
         softAssert.assertTrue(dashboardBedManagersPage.dashboardPageLogo
@@ -382,7 +330,6 @@ public class US28 extends TestBaseRapor{
 
         softAssert.assertAll();
     }
-
 
     @AfterClass
     public void tearDown() { Driver.quitDriver();}

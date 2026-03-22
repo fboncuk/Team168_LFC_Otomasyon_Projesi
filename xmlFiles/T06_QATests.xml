@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<!--
+
+
+   5- Regression testi icin framework'deki tum testleri calistirin
+
+-->
+
+
+<suite name="Suite">
+    <test name="regression">
+        <classes>
+            <class name="tests.US28"/>
+            <class name="tests.US39"/>
+        </classes>
+    </test>
+</suite>
