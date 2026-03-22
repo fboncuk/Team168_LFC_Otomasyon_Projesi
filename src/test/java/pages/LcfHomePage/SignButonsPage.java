@@ -33,7 +33,7 @@ public class SignButonsPage {
     public WebElement registerPagePasswordConfirmBox;
 
     //Kayıt formu Sign Up butonu
-    @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
+    @FindBy (xpath = "//button[@type='submit']")
     public WebElement registerPageSignUpBox;
 
     //AnaSayfa header bölümü username butonu
@@ -53,8 +53,9 @@ public class SignButonsPage {
 
 
 
-
-
+    // Anasayfada sisteme giriş yapmak için kullanilacak olan Sign In linki
+    @FindBy(linkText = " Sign In")
+    public WebElement signInButton2;
 
     // Anasayfada sisteme giriş yapmak için kullanilacak olan Sign In linki
     @FindBy(xpath = "(//*[@class='btn_add'])[1]")
