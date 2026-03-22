@@ -14,7 +14,6 @@ import utilities.*;
 
 import java.lang.reflect.Method;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
 // @org.testng.annotations.Listeners(Listeners.class)
@@ -48,8 +47,8 @@ public class US28 extends TestBaseRapor{
                 "Test otomatik oluşturuldu");
     }
 
-    @Test(priority = 1)
-    public void US28_TC01_DasboardBedManagerGornurlukTesti() {
+    @Test(priority = 1, groups = "regression")
+    public void US28_TC01_DasboardBedManagerGorunurlukTesti() {
 
         // Dashboard sayfasında soldaki açılır menüde
         // Bed Managers linkinin görünür, aktif ve tıklanabilir olduğunu ve
@@ -188,7 +187,7 @@ public class US28 extends TestBaseRapor{
             softAssert.fail("Yeni oluşturulan yatak Bed Managers listesine eklenmemiş!");
         }
 
-        // Delete butonunu yalnızca row bulunduysa tıkla
+        // Delete butonunu sadece row bulunduysa tıklanır
         if (row != null) {
 
             try {
@@ -204,7 +203,7 @@ public class US28 extends TestBaseRapor{
     }
 
 
-    @Test(priority = 4)
+    @Test(priority = 4, groups = "regression")
     public void US28_TC04_YeniYatakDashboardGorunurlukTesti() {
 
         // Dashboard Bed Managers sayfasında yeni yatak eklendikten sonra,
@@ -285,8 +284,8 @@ public class US28 extends TestBaseRapor{
     }
 
 
-    @Test(priority = 5)
-    public void US28_TC05_BoşTitleIleYeniYatakOlusturamamaTesti() {
+    @Test(priority = 5, groups = "regression")
+    public void US28_TC05_BosTitleIleYeniYatakOlusturamamaTesti() {
 
         // Dashboard Bed Managers sayfasında yeni yatak eklendikten sonra,
         // Yatak adı girilmeden yeni bir yatak oluşturulamadığını doğrulamak
@@ -335,7 +334,7 @@ public class US28 extends TestBaseRapor{
     }
 
 
-    @Test(priority = 6)
+    @Test(priority = 6, groups = "regression")
     public void US28_TC06_BedManagerLogoTiklamaTesti() {
 
         // Dashboard veya Bed Managers sayfalarındayken
@@ -345,15 +344,47 @@ public class US28 extends TestBaseRapor{
         signButonsPage = new SignButonsPage();
         dashboardPage = new DashboardPage();
         dashboardBedManagersPage = new DashboardBedManagersPage();
-        departmentsMainPage = new DepartmentsMainPage();
 
+        // Dasboard sayfası açılır
+        Driver.getDriver().get(ConfigReader.getProperty("DasUrl"));
+
+        // Dashboard sidebar menüsü hover edilir
+        ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
+
+        // LFC logoso görünürlük testi yapılır
+        softAssert.assertTrue(dashboardPage.dashboardPageLogo
+                .isDisplayed(),"Dasboard sayfası LFC logosu görünmüyor!");
+
+        // Logo tıklanır ve anasayfanın açıldığı kontrol edilir
+        dashboardPage.dashboardPageLogo.click();
+        String expectedUrl = "https://qa.loyalfriendcare.com/en";
+        String actualUrl = Driver.getDriver().getCurrentUrl();
+        softAssert.assertEquals(actualUrl,expectedUrl
+                , "Dasboard sayfasındki LFC logosuna tıklanınca anasayfa açılmadı!");
+        ReusableMethods.bekle(1);
+
+        // Bed managers sayfası açılır
         Driver.getDriver().get(ConfigReader.getProperty("DasbedUrl"));
 
+        // Dashboard sidebar menüsü hover edilir
+        ReusableMethods.hover(dashboardBedManagersPage.dashboardPageSideBarMenu);
 
+        // LFC logoso görünürlük testi yapılır
+        softAssert.assertTrue(dashboardBedManagersPage.dashboardPageLogo
+                .isDisplayed(),"Dasboard sayfası LFC logosu görünmüyor!");
+
+        // Logo tıklanır ve anasayfanın açıldığı kontrol edilir
+        dashboardBedManagersPage.dashboardPageLogo.click();
+        expectedUrl = "https://qa.loyalfriendcare.com/en";
+        actualUrl = Driver.getDriver().getCurrentUrl();
+        softAssert.assertEquals(actualUrl,expectedUrl
+                , "DasboardBedManagers sayfasındki LFC logosuna  tıklanınca anasayfa açılmadı!");
+
+        softAssert.assertAll();
     }
 
 
-        @AfterClass
+    @AfterClass
     public void tearDown() { Driver.quitDriver();}
 
 }

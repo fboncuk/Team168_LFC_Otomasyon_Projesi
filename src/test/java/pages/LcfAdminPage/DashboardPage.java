@@ -16,7 +16,7 @@ public class DashboardPage {
 
     //DashboardPageSummaryCards Logo Linki
     @FindBy(xpath = "//div[@class='sidebar-header']//img[contains(@src, 'logo.png')]")
-    public WebElement DashboardPageLogo;
+    public WebElement dashboardPageLogo;
 
     //DashboardPageSummaryCards Users Panel Linki
     @FindBy(xpath = "(//a[@class='text-white'])[1]")
@@ -263,7 +263,7 @@ public class DashboardPage {
     public WebElement sidebarMenuSubmenuVaccinations;
 
     // Admin dashboard'da sol menününün locator'ı
-    @FindBy(className = "sidebar-menu")
+    @FindBy(xpath = "//*[@class='sidebar-menu']")
     public WebElement dashboardPageSideBarMenu;
 
 
