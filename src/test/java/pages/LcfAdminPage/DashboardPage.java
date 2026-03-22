@@ -12,13 +12,12 @@ public class DashboardPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
-
-
-
     //### Bu Bölümdeki Locateler Dashboard Anasayfa Summary Cards vs Locateleri   ###
+
+    //DashboardPageSummaryCards Logo Linki
+    @FindBy(xpath = "//div[@class='sidebar-header']//img[contains(@src, 'logo.png')]")
+    public WebElement DashboardPageLogo;
+
     //DashboardPageSummaryCards Users Panel Linki
     @FindBy(xpath = "(//a[@class='text-white'])[1]")
     public WebElement DashboardPageSummaryCardsUsersLink;
@@ -90,47 +89,47 @@ public class DashboardPage {
     //### Bu Bölümdeki Locateler Dashboard Anasayfa Sol Açılır Menü Locateleri   ###
     //DasboardPage Left Menu Dashboard link
     @FindBy (className = "detailed")
-    public WebElement DashboardPageLeftMenuDashboardLink;
+    public WebElement sidebarMenuDashboardLink;
 
     //DasboardPage Left Menu Dashboard link Title ile
     @FindBy (xpath = "(//*[@class='title'])[1]")
-    public WebElement DashboardPageLeftMenuDashboardLink2;
+    public WebElement sidebarMenuDashboardLink2;
 
     //DasboardPage Left Menu Roles link
     @FindBy (xpath = "(//*[@class='title'])[2]")
-    public WebElement DashboardPageLeftMenuRolesLink;
+    public WebElement sidebarMenuRolesLink;
 
     //DasboardPage Left Menu Users link
     @FindBy (xpath = "(//*[@class='title'])[3]")
-    public WebElement DashboardPageLeftMenuUsersLink;
+    public WebElement sidebarMenuUsersLink;
 
     //DasboardPage Left Menu Bad Managers link
     @FindBy (xpath = "(//*[@class='title'])[4]")
-    public WebElement DashboardPageLeftMenuBahManagersLink;
+    public WebElement sidebarMenuBedManagersLink;
 
     //DasboardPage Left Menu Departments link
     @FindBy (xpath = "(//*[@class='title'])[5]")
-    public WebElement DashboardPageLeftMenuDepartmentsLink;
+    public WebElement sidebarMenuDepartmentsLink;
 
     //DasboardPage Left Menu Doctors link
     @FindBy (xpath = "(//*[@class='title'])[6]")
-    public WebElement DashboardPageLeftMenuDoctorsLink;
+    public WebElement sidebarMenuDoctorsLink;
 
     //DasboardPage Left Menu Medicines link
     @FindBy (xpath = "(//*[@class='title'])[7]")
-    public WebElement DashboardPageLeftMenuMedicinesLink;
+    public WebElement sidebarMenuMedicinesLink;
 
     //DasboardPage Left Menu Pets Adsense link
     @FindBy (xpath = "(//*[@class='title'])[8]")
-    public WebElement DashboardPageLeftMenuPetAdsenseLink;
+    public WebElement sidebarMenuPetAdsenseLink;
 
     //DasboardPage Left Menu Tickets link
     @FindBy (xpath = "(//*[@class='title'])[12]")
-    public WebElement DashboardPageLeftMenuTicketsLink;
+    public WebElement sidebarMenuTicketsLink;
 
     //DasboardPage Left Menu Vaccinations link
     @FindBy (xpath = "(//*[@class='title'])[13]")
-    public WebElement DashboardPageLeftMenuVaccinationssLink;
+    public WebElement sidebarMenuVaccinationssLink;
 
 
 
@@ -138,69 +137,69 @@ public class DashboardPage {
     // Menülere Tıklanınca açılan submenuler Locateleri   ###
     //Dashboard Left Menu -> Roles -> Roles tıklama
     @FindBy(linkText= "Roles")
-    public WebElement DashboardPageLeftMenuSubmenuRoles;
+    public WebElement sidebarSubmenuRoles;
 
     //Dashboard Left Menu -> Roles -> Create Role tıklama
     @FindBy(linkText= "Create Role")
-    public WebElement DashboardPageLeftMenuSubmenuCreateRole;
+    public WebElement sidebarSubmenuCreateRole;
 
     //Dashboard Left Menu -> Users -> Users tıklama
     @FindBy(linkText= "Users")
-    public WebElement DashboardPageLeftMenuSubmenuUsers;
+    public WebElement sidebarSubmenuUsers;
 
     //Dashboard Left Menu -> Users -> Create User tıklama
     @FindBy(linkText= "Create User")
-    public WebElement DashboardPageLeftMenuSubmenuCreateUser;
+    public WebElement sidebarSubmenuCreateUser;
 
     //Dashboard Left Menu -> Bed Managers -> Bed Managers tıklama
-    @FindBy(linkText= "Bed Managers")
-    public WebElement DashboardPageLeftMenuSubmenuBedManagers;
+    @FindBy(xpath = "(//ul[@class='sub-menu']/li/a)[5]")
+    public WebElement sidebarSubmenuBedManagers;
 
-    //Dashboard Left Menu -> Bed Managers -> Creat Bed Managers  tıklama
-    @FindBy(linkText= "Create Bed Managers")
-    public WebElement DashboardPageLeftMenuSubmenuCreateBedManagers;
+    //Dashboard Left Menu -> Bed Managers -> Creat Bed Managers tıklama
+    @FindBy(xpath = "(//ul[@class='sub-menu']/li/a)[6]")
+    public WebElement sidebarSubmenuCreateBedManagers;
 
     //Dashboard Left Menu -> Departments -> Departments tıklama
     @FindBy(linkText= "Departments")
-    public WebElement DashboardPageLeftMenuSubmenuDepartments;
+    public WebElement sidebarSubmenuDepartments;
 
     //Dashboard Left Menu -> Departments -> Create Departments  tıklama
     @FindBy(linkText= "Create Departmentss")
-    public WebElement DashboardPageLeftMenuSubmenuCreateDepartments;
+    public WebElement sidebarSubmenuCreateDepartments;
 
     //Dashboard Left Menu -> Doctors -> Doctors tıklama
     @FindBy(linkText= "Doctors")
-    public WebElement DashboardPageLeftMenuSubmenuDoctors;
+    public WebElement sidebarSubmenuDoctors;
 
     //Dashboard Left Menu -> Doctors -> Create Doctors  tıklama
     @FindBy(linkText= "Create Doctors")
-    public WebElement DashboardPageLeftMenuSubmenuCreateDoctors;
+    public WebElement sidebarSubmenuCreateDoctors;
 
     //Dashboard Left Menu -> Medicines -> Medicines tıklama
     @FindBy(linkText= "Medicines")
-    public WebElement DashboardPageLeftMenuSubmenuMedicines;
+    public WebElement sidebarSubmenuMedicines;
 
     //Dashboard Left Menu -> Medicines -> Create Medicines  tıklama
     @FindBy(linkText= "Create Medicines")
-    public WebElement DashboardPageLeftMenuSubmenuCreateMedicines;
+    public WebElement sidebarSubmenuCreateMedicines;
 
     //Dashboard Left Menu -> Pets adsense -> Pets adsense tıklama
     @FindBy(linkText= "Pets adsense")
-    public WebElement DashboardPageLeftMenuSubmenuPetsAdsense;
+    public WebElement sidebarSubmenuPetsAdsense;
 
     //Dashboard Left Menu -> Pets adsense -> Create Pets adsense  tıklama
     @FindBy(linkText= "Create Pets adsense")
-    public WebElement DashboardPageLeftMenuSubmenuCreatePetsAdsense;
+    public WebElement SidebarSubmenuCreatePetsAdsense;
 
 
     //Dashboard Left Menu -> Tickets tıklama
     @FindBy(linkText= "Tickets")
-    public WebElement DashboardPageLeftMenuSubmenuTickets;
+    public WebElement sidebarMenuSubmenuTickets;
 
 
     //Dashboard Left Menu -> Vaccinations tıklama
     @FindBy(linkText= "Vaccinations")
-    public WebElement DashboardPageLeftMenuSubmenuVaccinations;
+    public WebElement sidebarMenuSubmenuVaccinations;
 
     // Admin dashboard'da sol menününün locator'ı
     @FindBy(className = "sidebar-menu")
@@ -208,6 +207,9 @@ public class DashboardPage {
 
 
 
+    //Dashboard Left Menu Logo
+    @FindBy (xpath = "//*[@*='brand width-60']")
+    public WebElement DashboardLeftMenuLogo1;
 
 
 

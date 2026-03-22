@@ -35,7 +35,7 @@ public class DepartmentsMainPage {
     public WebElement Diagnostics;
 
     // 6. Vaccinations
-    @FindBy(xpath = "//h3[text()='Vaccinations']")
+    @FindBy(xpath = "//h3//a[normalize-space()='Vaccinations']")
     public WebElement Vaccinations;
 
     // 7. Pain Control

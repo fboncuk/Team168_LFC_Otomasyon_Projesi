@@ -23,7 +23,7 @@ public class US04 {
 
         homePage = new HomeBodySearchBoxPage();
         loginPage = new SignButonsPage();
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
     }
 
     @Test(groups = "smoke", description = "SMOKE: Temel arama fonksiyonu kontrolü")

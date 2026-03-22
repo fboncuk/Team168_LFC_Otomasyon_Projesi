@@ -27,7 +27,7 @@ public class US15 {
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
 
         loginPage = new SignButonsPage();
         departmentsPage = new DepartmentsMainPage();

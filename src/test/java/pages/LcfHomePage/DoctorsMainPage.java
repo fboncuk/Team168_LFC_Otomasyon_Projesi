@@ -1,16 +1,20 @@
 package pages.LcfHomePage;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.List;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import utilities.Driver;
 import java.util.List;
 
 public class DoctorsMainPage {
 
-    public DoctorsMainPage(){
+    public DoctorsMainPage() {
 
-        PageFactory.initElements(Driver.getDriver(),this);
+        PageFactory.initElements(Driver.getDriver(), this);
     }
 
 
@@ -29,7 +33,6 @@ public class DoctorsMainPage {
     // Doktorlar sayfasındaki tüm doktorların görselleri
     @FindBy(xpath = "//div[@class='strip grid']//img")
     public List<WebElement> allDoctorImages;
-
 
 
     //Anasayfa Header alanında yer alan Doctors Başlığı

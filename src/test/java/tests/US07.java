@@ -7,15 +7,12 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.SignButonsPage;
-import utilities.ConfigReader;
-import utilities.Driver;
-import utilities.Listeners;
-import utilities.ReusableMethods;
-
-@org.testng.annotations.Listeners(Listeners.class)
+import utilities.*;
 
 
-public class US07 {
+
+
+public class US07 extends TestBaseRapor {
 
     WebDriver driver;
     SoftAssert softAssert;
@@ -36,6 +33,7 @@ public class US07 {
     @Test
     public void US07_TC01_RegisterFormuPozitifTest() {
 
+        extentTest = extentReports.createTest("US07_TC01_RegisterFormuPozitifTest");
 
         //Açılan sayfadaki Register formundaki User Name, E-Mail Address,Password,Confirm //Password alanlarına geçerli bilgileri girin.
 
@@ -67,7 +65,7 @@ public class US07 {
     @Test
 
     public void US07_TC02_UserNameBenzersizlikKontrolu() {
-
+        extentTest = extentReports.createTest("US07_TC02_UserNameBenzersizlikKontrolu");
 
         //Register formunun username alanına,sistemde kayıtlı bir User Name, diğer alanlara
         // geçerli veriler girin.
@@ -101,7 +99,7 @@ public class US07 {
     @Test
 
     public void US07_TC03_EmailBenzersizlikKontrolu() {
-
+        extentTest = extentReports.createTest("US07_TC03_EmailBenzersizlikKontrolu");
 
         //Register formunun email alanına,sistemde kayıtlı olan bir email adresini,
         // diğer alanlara geçerli bilgiler girin.
@@ -132,6 +130,7 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),"Kayıt işlemi gerçekleşti");
 
+
         softAssert.assertAll();
 
     }
@@ -140,6 +139,7 @@ public class US07 {
 
 
     public void US07_TC04_YetersizKarakterSayisiIlePasswordKontrolu() {
+        extentTest = extentReports.createTest("US07_TC04_YetersizKarakterSayisiIlePasswordKontrolu");
 
         //Register formunun password alanına 8 karakterden az olacak şekilde en az 1 harf,1 rakam ve 1 özel karakter
         // içeren şifre girin,diğer alanlara geçerli bilgiler girin.
@@ -174,6 +174,7 @@ public class US07 {
     @Test
 
     public void US07_TC05_LimitUstuPasswordKarakterKontrolu() {
+        extentTest = extentReports.createTest("US07_TC05_LimitUstuPasswordKarakterKontrolu");
 
     //Register formunun password alanına maximum karakter limiti olan 24'ten fazla olacak şekilde
     // en az 1 harf,1 rakam ve 1 özel karakter içeren bir şifre girin,diğer alanlara geçerli bilgiler girin.
@@ -212,7 +213,7 @@ public class US07 {
 
 
     public void US07_TC06_RakamIcermeyenPasswordKontrolu() {
-
+        extentTest = extentReports.createTest("US07_TC06_RakamIcermeyenPasswordKontrolu");
 
         //Register formunda password alanına en az 1 harf ve 1 özel karakter içeren
         // 8 karakterli bir şifre ,diğer alanlara geçerli bilgiler girin.
@@ -245,6 +246,7 @@ public class US07 {
 
 
     public void US07_TC07_HarfIcermeyenPasswordKontrolu() {
+        extentTest = extentReports.createTest("US07_TC07_HarfIcermeyenPasswordKontrolu");
 
 //Register formunda password alanına en az 1 rakam ve 1 özel karakter içeren
 // 8 karakterli bir şifre ,diğer alanlara geçerli bilgiler girin.
@@ -276,6 +278,7 @@ public class US07 {
 
 
     public void US07_TC08_GecersizEmailFormatiKontrolu() {
+        extentTest = extentReports.createTest("US07_TC08_GecersizEmailFormatiKontrolu");
 
 
 //Register formunda password alanına geçersiz formatta email adresi, diğer alanlara geçerli veriler girin.
@@ -309,6 +312,7 @@ public class US07 {
 
     @Test
     public void US07_TC09_PasswordIlePasswordConfirmUyusmazlikKontrolu() {
+        extentTest = extentReports.createTest("US07_TC09_PasswordIlePasswordConfirmUyusmazlikKontrolu");
 
 
         signButonsPage.registerPageUserNameBox.
@@ -336,6 +340,7 @@ public class US07 {
 
 
     public void US07_TC_10_BosRegisterFormKontrolu() {
+        extentTest = extentReports.createTest("US07_TC_10_BosRegisterFormKontrolu");
 
 
         //Register formundaki tüm alanları boş bırakın ve Sign Up butonuna tıklayın
@@ -358,6 +363,7 @@ public class US07 {
 
 
     public void US07_TC_11_YetersizKarakterliUserNameKontrolu() {
+        extentTest = extentReports.createTest("US07_TC_11_YetersizKarakterliUserNameKontrolu");
 
         //Register formundaki username alanına 2 karakterli bir veri girişi yapın.
         //Formdaki diğer alanları geçerli bilgilerle doldurun.
@@ -391,6 +397,7 @@ public class US07 {
 
 
     public void US07_TC_12_LimitUstuKarakterliUserNameKontrolu() {
+        extentTest = extentReports.createTest("US07_TC_12_LimitUstuKarakterliUserNameKontrolu");
 
         //Register formundaki username alanına maksimum limit olan 20 üstü karakter içeren bir veri girişi yapın.
         //Formdaki diğer alanları geçerli bilgilerle doldurun.
