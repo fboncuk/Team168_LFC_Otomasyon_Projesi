@@ -16,6 +16,19 @@ public class HomeBodyHeaderSectionPage {
     @FindBy(id = "global-search")
     public WebElement aramaKutusu;
 
+    // Anasayfa Header Alanı (Sadece header etiketini arayacak)
+    @FindBy(xpath = "//header")
+    public WebElement headerAlani;
+
+//    // Ana Sayfa Logosu
+//    @FindBy(xpath = "//img[@alt='logo']")
+//    public WebElement siteLogo;
+
+    // Ana Sayfa Logosu (Sitenin gerçek HTML koduna göre güncellendi)
+    @FindBy(xpath = "//img[@alt='LoyalFriendCare' and contains(@class, 'logo_normal')]")
+    public WebElement siteLogo;
+
+
 
 
     
