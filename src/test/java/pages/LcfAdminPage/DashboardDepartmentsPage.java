@@ -55,7 +55,7 @@ public class DashboardDepartmentsPage {
     public WebElement Sidebar;
 
     //Admin anasayfasında yer alan ''Departments'' kartı
-    @FindBy(xpath = "(//*[@class='title'])[5]")
+    @FindBy(xpath = "(//*[.='Departments '])[4]")
         public WebElement DepartmentsButonSideMenu;
 
     //Admin anasayfasında yeralan ''Deparments'' ana başlığı altındaki Departments butonu
@@ -128,6 +128,8 @@ public class DashboardDepartmentsPage {
     @FindBy (xpath = "//*[.='Create Departments']")
     public WebElement sidebarCreateDepartments;
 
+    @FindBy (xpath ="(//*[@class='fas fa-angle-right'])[4]")
+    public WebElement dermatologyLink;
 
 
 

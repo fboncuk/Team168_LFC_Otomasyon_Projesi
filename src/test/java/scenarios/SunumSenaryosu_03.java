@@ -3,16 +3,21 @@ package scenarios;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.LcfAdminPage.DashboardDepartmentsPage;
 import pages.LcfHomePage.*;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.Listeners;
 import utilities.ReusableMethods;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
@@ -29,6 +34,9 @@ public class SunumSenaryosu_03 {
     HomeBodyHeaderSectionPage homeBodyHeaderSectionPage;
     VacinationsMainPage vacinationsMainPage;
     AppointmentBookingPage appointmentBookingPage;
+    DashboardDepartmentsPage dashboardDepartmentsPage;
+    Actions actions;
+    WebDriverWait wait;
 
     @BeforeClass
     public void setup() {
@@ -57,6 +65,11 @@ public class SunumSenaryosu_03 {
         // Gecerli verilerle bir başarılı bir randevu kaydı açıldığını doğrulamak.
         appointmentBookingPage = new AppointmentBookingPage();
         SoftAssert softAssert = new SoftAssert();
+        dashboardDepartmentsPage = new DashboardDepartmentsPage();
+
+        actions = new Actions(Driver.getDriver());
+        actions.moveToElement(dashboardDepartmentsPage.DepartmentsButonSideMenu)
+                        .perform();
 
         // Dermatology detay sayfasına gidilir
         Driver.getDriver().get(ConfigReader.getProperty("DermUrl"));
