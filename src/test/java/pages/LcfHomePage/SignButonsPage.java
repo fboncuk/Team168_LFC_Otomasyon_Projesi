@@ -40,8 +40,12 @@ public class SignButonsPage {
     @FindBy (xpath = "(//*[@class='btn_add'])[1]")
     public WebElement headerUserName;
 
-    //Anasayfa signout butonu
-    @FindBy (xpath = "(//*[@class='btn_add'])[2]")
+//    //Anasayfa signout butonu
+//    @FindBy (xpath = "(//*[@class='btn_add'])[2]")
+//    public WebElement homePageSignOut;
+
+    // Anasayfadaki GÜNCEL Sign Out butonu  (Mehmet Fatih ALTUNTAŞ)
+    @FindBy(xpath = "//a[contains(@href, 'logout') and @class='btn_add']")
     public WebElement homePageSignOut;
 
     @FindBy (xpath = "//*[.='The email has already been taken.']")
@@ -96,6 +100,7 @@ public class SignButonsPage {
     //invalid passaword Message
     @FindBy (className = "invalid-feedback")
     public WebElement signInPageInvalidPasswordFeedbackMessage;
+
 
 
 
