@@ -27,8 +27,29 @@ public class AppointmentBookingPage {
     public WebElement departmentDropdownKutusu;
 
     // Listeden seçim yapmak için
+    @FindBy(xpath = "//li[text()='Wellness']")
+    public WebElement departmentDropDownWellness;
+
+    @FindBy(xpath = "//li[text()='Dental Care']")
+    public WebElement dentalCareSecenegi;
+
+    @FindBy(xpath = "//li[text()='Anaesthesia']")
+    public WebElement anaesthesiaSecenegi;
+
     @FindBy(xpath = "//li[text()='Dermatology']")
     public WebElement dermatologySecenegi;
+
+    @FindBy(xpath = "//li[text()='Diagnostics']")
+    public WebElement diagnosticsSecenegi;
+
+    @FindBy(xpath = "//li[text()='Vaccinations']")
+    public WebElement vaccinationsSecenegi;
+
+    @FindBy(xpath = "//li[text()='Pain Control']")
+    public WebElement painControlSecenegi;
+
+    @FindBy(xpath = "//li[text()='Boarding']")
+    public WebElement boardingSecenegi;
 
 
     // 4. Doktor Seçimi (Doctor Dropdown)
@@ -53,7 +74,7 @@ public class AppointmentBookingPage {
 
     // Randevu oluşturulduğuna dair alert mesajı
     // Congratulations on your well-deserved success.
-    @FindBy(xpath = "(//*[@id=\"sidebar\"]/div/div)[1]")
+    @FindBy(xpath = "//div[contains(@class,'alert-success')]")
     public WebElement randevuAlertMesaji;
 
     //Appointment formunun tamamı

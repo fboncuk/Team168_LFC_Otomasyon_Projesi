@@ -16,41 +16,45 @@ public class VacinationsMainPage {
 //    @FindBy(xpath = "(//a[normalize-space()='Rabies Vaccine'])[2]")
 //    public WebElement vaccinesMainPageRabies;
 
+    // Vaccines Main sayfasında LoyalFriendCare Logo linki
+    @FindBy(xpath = "(//img[@class='logo_sticky'])[2]")
+    public WebElement lfcLogo;
+
     // Vaccines Main sayfasında Rabies Vaccine linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[1]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[1]")
     public WebElement vaccinesRabies;
 
     // Vaccines Main sayfasında DHPP Vaccine
     // (Distemper, Hepatitis, Parainfluenza, Parvovirus Vaccine) linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[2]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[2]")
     public WebElement vaccinesDHPP;
 
     // Vaccines Main sayfasında Feline Leukemia Vaccine linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[3]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[3]")
     public WebElement vaccinesFelineLeukemia;
 
     // Vaccines Main sayfasında Feline Immunodeficiency Virus (FIV) Vaccine linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[4]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[4]")
     public WebElement vaccinesFelineImmunodeficiency;
 
     // Vaccines Main sayfasında Bordetella (Kennel Cough) Vaccine linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[5]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[5]")
     public WebElement vaccinesBordetella;
 
     // Vaccines Main sayfasında Feline Panleukopenia Vaccine linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[6]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[6]")
     public WebElement vaccinesFelinePanleukopenia;
 
     // Vaccines Main sayfasında Feline Herpesvirus Vaccine linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[7]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[7]")
     public WebElement vaccinesFelineHerpesvirus;
 
     // Vaccines Main sayfasında Surgical Procedure: Spaying (Ovariohysterectomy) linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[8]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[8]")
     public WebElement vaccinesSurgicalProcedure;
 
     // Vaccines Main sayfasında Feline Viral Rhinotracheitis linki
-    @FindBy(xpath = "(//div[@class=\"wrapper\"]/h3/a)[9]")
+    @FindBy(xpath = "(//div[@class='wrapper']/h3/a)[9]")
     public WebElement vaccinesFelineViral;
 
 

@@ -35,10 +35,11 @@ public class US08 {
     public void US08_TC_001_GirisYapabilmekIcinSignInButtonuAktifOlmali(){
 
         //Kullanici Url'e gider
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         //Sign in butonunu görüntüler
         softAssert.assertTrue(signButonsPage.signInLinki.isDisplayed());
         //Sign in butonunu tıklar
+        signButonsPage.signInLinki.isEnabled();
         signButonsPage.signInLinki.click();
         //softAssert.assertAll();
     }

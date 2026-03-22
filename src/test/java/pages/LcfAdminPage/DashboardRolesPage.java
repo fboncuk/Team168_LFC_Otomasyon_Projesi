@@ -78,8 +78,12 @@ public class DashboardRolesPage {
     public WebElement roleListyenirolText;
 
     // Rol listesinde yer alan bir rolü silmek için kullanılan "Delete" butonu
-    @FindBy(xpath = "//span[text()='Delete'])[1]")
+    @FindBy(xpath = "(//span[text()='Delete'])[1]")
     public WebElement rolesPageFirstDeleteButton;
+
+    // Rol silindiğinde çıkan başarılı silme işlemi mesajı
+    @FindBy(xpath = "//span[text()='Role deleted successfully']")
+    public WebElement basariliSilindiMesaji;
 
 
 

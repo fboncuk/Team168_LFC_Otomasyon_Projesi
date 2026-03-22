@@ -25,7 +25,7 @@ public class US06 {
     HomeBodyFooterLinksPage homeBodyFooterLinksPage;
 
     @BeforeClass
-    public void setup() {Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));}
+    public void setup() {Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));}
 
 
     @Test(priority = 1)
@@ -58,15 +58,16 @@ public class US06 {
 
         // Her bir footerTextElementin Beklenen Text ile aynı olduğunu bir döngü ile kontrol eder
         for (int i = 0; i < footerTextElements.size(); i++) {
+
             WebElement actualTextElement = footerTextElements.get(i);
 
             // WebElementteki texti alır küçük harfe çevirir
-            String actualalTextString = actualTextElement.getText().toLowerCase();
+            String actualTextString = actualTextElement.getText().toLowerCase();
             // Beklenen metni küçük harfe çevirir
             String expectedText = expectedTextList.get(i).toLowerCase();
 
             // Karşılaştırma yapar
-            softAssert.assertEquals(actualalTextString, expectedText, expectedText + " metni hatalı!");
+            softAssert.assertEquals(actualTextString, expectedText, expectedText + " metni hatalı!");
             softAssert.assertTrue(actualTextElement.isDisplayed(), expectedText + " metni görünmüyor!");
         }
         softAssert.assertAll();
@@ -79,6 +80,7 @@ public class US06 {
         // Footer bölümünün farklı yakınlaştırma oranlarına dinamik uyumunu doğrulamak
         // Bu testin manuel olarak yapılması daha kesin sonuçlar vereceğinden,
         // test kodu yazılmamıştır.
+        System.out.println("US08_TC02 testi, sadece manuel olarak yapılmıştır.");
     }
 
 

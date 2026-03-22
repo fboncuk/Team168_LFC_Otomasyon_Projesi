@@ -2,17 +2,17 @@ package tests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import pages.LcfHomePage.SignButonsPage;
-import utilities.ConfigReader;
-import utilities.Driver;
+import utilities.*;
 
 
-public class US07 {
+
+
+public class US07 extends TestBaseRapor {
 
     WebDriver driver;
     SoftAssert softAssert;
@@ -30,9 +30,10 @@ public class US07 {
     }
 
 
-    @Test(priority = 1)
+    @Test
     public void US07_TC01_RegisterFormuPozitifTest() {
 
+        extentTest = extentReports.createTest("US07_TC01_RegisterFormuPozitifTest");
 
         //Açılan sayfadaki Register formundaki User Name, E-Mail Address,Password,Confirm //Password alanlarına geçerli bilgileri girin.
 
@@ -56,17 +57,15 @@ public class US07 {
         softAssert.assertTrue(signButonsPage.headerUserName.isDisplayed(),
                 "Geçerli bilgilerle kayıt yapılmasına rağmen kullanıcı ismi header bölümünde görüntülenemedi.");
 
-        //signButonsPage.homePageSignOut.click();
-
         softAssert.assertAll();
 
     }
 
 
-    @Test(priority = 2)
+    @Test
 
     public void US07_TC02_UserNameBenzersizlikKontrolu() {
-
+        extentTest = extentReports.createTest("US07_TC02_UserNameBenzersizlikKontrolu");
 
         //Register formunun username alanına,sistemde kayıtlı bir User Name, diğer alanlara
         // geçerli veriler girin.
@@ -91,16 +90,16 @@ public class US07 {
                 "Sistemde zaten kayıtlı olan kullanıcı için tekrar kayıt yapılmasına izin verildi," +
                         "kayıt sayfasından çıkış yapılmamalıydı");
 
-
+        ReusableMethods.bekle(2);
         softAssert.assertAll();
 
 
     }
 
-    @Test(priority = 3)
+    @Test
 
     public void US07_TC03_EmailBenzersizlikKontrolu() {
-
+        extentTest = extentReports.createTest("US07_TC03_EmailBenzersizlikKontrolu");
 
         //Register formunun email alanına,sistemde kayıtlı olan bir email adresini,
         // diğer alanlara geçerli bilgiler girin.
@@ -125,17 +124,22 @@ public class US07 {
         String actualText = signButonsPage.emailTakenErrorMessage.getText();
 
         softAssert.assertTrue(actualText.contains(expectedContent),
-                "Kayıtlı bir email adresi girilmesine rağmen sistem hata mesajı vermedi," +
-                        "kayıt işlemi gerçekleşti");
+                "Kayıtlı bir email adresi girilmesine rağmen sistem hata mesajı vermedi.");
+
+        //Kayıt işleminin gerçekleşmediğini doğrulayın
+
+        softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),"Kayıt işlemi gerçekleşti");
+
 
         softAssert.assertAll();
 
     }
 
-    @Test(priority = 4)
+    @Test
 
 
     public void US07_TC04_YetersizKarakterSayisiIlePasswordKontrolu() {
+        extentTest = extentReports.createTest("US07_TC04_YetersizKarakterSayisiIlePasswordKontrolu");
 
         //Register formunun password alanına 8 karakterden az olacak şekilde en az 1 harf,1 rakam ve 1 özel karakter
         // içeren şifre girin,diğer alanlara geçerli bilgiler girin.
@@ -161,14 +165,16 @@ public class US07 {
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Sistem 8 karakterden az olan şifreyi kabul ederek kaydı tamamladı," +
                         "kayıt butonunun aktif kalması gerekiyordu.");
+
         softAssert.assertAll();
 
 
     }
 
-    @Test (priority = 5)
+    @Test
 
     public void US07_TC05_LimitUstuPasswordKarakterKontrolu() {
+        extentTest = extentReports.createTest("US07_TC05_LimitUstuPasswordKarakterKontrolu");
 
     //Register formunun password alanına maximum karakter limiti olan 24'ten fazla olacak şekilde
     // en az 1 harf,1 rakam ve 1 özel karakter içeren bir şifre girin,diğer alanlara geçerli bilgiler girin.
@@ -203,11 +209,11 @@ public class US07 {
 
     }
 
-    @Test (priority = 6)
+    @Test
 
 
     public void US07_TC06_RakamIcermeyenPasswordKontrolu() {
-
+        extentTest = extentReports.createTest("US07_TC06_RakamIcermeyenPasswordKontrolu");
 
         //Register formunda password alanına en az 1 harf ve 1 özel karakter içeren
         // 8 karakterli bir şifre ,diğer alanlara geçerli bilgiler girin.
@@ -232,13 +238,15 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Şifre en az bir rakam içermediği halde sistem kayıt işlemini gerçekleştirdi.");
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
-    @Test (priority = 7)
+    @Test
 
 
     public void US07_TC07_HarfIcermeyenPasswordKontrolu() {
+        extentTest = extentReports.createTest("US07_TC07_HarfIcermeyenPasswordKontrolu");
 
 //Register formunda password alanına en az 1 rakam ve 1 özel karakter içeren
 // 8 karakterli bir şifre ,diğer alanlara geçerli bilgiler girin.
@@ -262,13 +270,15 @@ public class US07 {
 
         softAssert.assertTrue(signButonsPage.registerPageSignUpBox.isDisplayed(),
                 "Şifre en az bir harf içermediği halde sistem kayıt işlemini gerçekleştirdi.");
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
-    @Test (priority = 8)
+    @Test
 
 
     public void US07_TC08_GecersizEmailFormatiKontrolu() {
+        extentTest = extentReports.createTest("US07_TC08_GecersizEmailFormatiKontrolu");
 
 
 //Register formunda password alanına geçersiz formatta email adresi, diğer alanlara geçerli veriler girin.
@@ -300,8 +310,9 @@ public class US07 {
 
     }
 
-    @Test(priority = 9)
+    @Test
     public void US07_TC09_PasswordIlePasswordConfirmUyusmazlikKontrolu() {
+        extentTest = extentReports.createTest("US07_TC09_PasswordIlePasswordConfirmUyusmazlikKontrolu");
 
 
         signButonsPage.registerPageUserNameBox.
@@ -322,13 +333,14 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem şifre uyuşmazlığına rağmen kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
-    @Test (priority = 10)
+    @Test
 
 
     public void US07_TC_10_BosRegisterFormKontrolu() {
+        extentTest = extentReports.createTest("US07_TC_10_BosRegisterFormKontrolu");
 
 
         //Register formundaki tüm alanları boş bırakın ve Sign Up butonuna tıklayın
@@ -342,15 +354,16 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem boş register form ile kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
     }
 
 
-    @Test (priority = 11)
+    @Test
 
 
     public void US07_TC_11_YetersizKarakterliUserNameKontrolu() {
+        extentTest = extentReports.createTest("US07_TC_11_YetersizKarakterliUserNameKontrolu");
 
         //Register formundaki username alanına 2 karakterli bir veri girişi yapın.
         //Formdaki diğer alanları geçerli bilgilerle doldurun.
@@ -375,15 +388,16 @@ public class US07 {
 
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem,user name 3 karakterden az olduğu halde kayıt işlemini gerçekleştirdi.");
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
 
     }
 
-    @Test (priority = 12)
+    @Test
 
 
     public void US07_TC_12_LimitUstuKarakterliUserNameKontrolu() {
+        extentTest = extentReports.createTest("US07_TC_12_LimitUstuKarakterliUserNameKontrolu");
 
         //Register formundaki username alanına maksimum limit olan 20 üstü karakter içeren bir veri girişi yapın.
         //Formdaki diğer alanları geçerli bilgilerle doldurun.
@@ -409,7 +423,7 @@ public class US07 {
         softAssert.assertTrue(actualUrl.contains(expectedUrlContent),
                 "Sistem,user name 20 karakterden fazla olduğu halde kayıt işlemini gerçekleştirdi.");
 
-
+        ReusableMethods.bekle(1);
         softAssert.assertAll();
 
     }

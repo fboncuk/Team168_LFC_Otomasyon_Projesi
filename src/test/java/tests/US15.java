@@ -1,8 +1,10 @@
 package tests;
+
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.LcfHomePage.AppointmentBookingPage;
 import pages.LcfHomePage.DepartmentsMainPage;
@@ -10,10 +12,10 @@ import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
-
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+
+@Listeners(utilities.Listeners.class)
 
 public class US15 {
 
@@ -25,7 +27,7 @@ public class US15 {
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
 
         loginPage = new SignButonsPage();
         departmentsPage = new DepartmentsMainPage();
@@ -33,14 +35,17 @@ public class US15 {
         actions = new Actions(Driver.getDriver());
 
         ReusableMethods.bekle(1);
-        loginPage.signInLinki.click();
-        loginPage.emailKutusu.sendKeys(ConfigReader.getProperty("T04UserMail"));
-        loginPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T04UserPassword"));
-        loginPage.signInButtonOnay.click();
+        loginPage.signInLinki
+                .click();
+        loginPage.emailKutusu
+                .sendKeys(ConfigReader.getProperty("T04UserMail"));
+        loginPage.passwordKutusu
+                .sendKeys(ConfigReader.getProperty("T04UserPassword"));
+        loginPage.signInButtonOnay
+                .click();
 
         ReusableMethods.bekle(2);
     }
-
 
     @Test(groups = {"smoke", "regression"}, description = "Geçerli verilerle başarılı randevu oluşturma testi")
     public void TC001_PositiveAppointmentTest() {
@@ -51,7 +56,6 @@ public class US15 {
         );
 
         List<String> actualDepartments = ReusableMethods.stringListeDondur(departmentsPage.allDepartments);
-
 
         Assert.assertTrue(actualDepartments.containsAll(expectedDepartments),
                 "HATA: Beklenen kategorilerden bazıları sayfada bulunamadı!");
@@ -74,8 +78,6 @@ public class US15 {
                 .click();
         appointmentPage.messageBox
                 .sendKeys("Test Message");
-
-
         appointmentPage.appointmentBookingButton
                 .click();
 
@@ -83,8 +85,8 @@ public class US15 {
         Assert.assertTrue(Driver.getDriver().getPageSource().contains(successMessage));
     }
 
-    @Test(groups={"regression"},description ="Zorunlu alanlar(TarihveTelefon)boş bırakıldığında hata mesajı doğrulama")
-    public void tc002_NegativeMissingDataTest() throws IOException {
+    @Test(groups={"regression"}, description ="Zorunlu alanlar (Tarih ve Telefon) boş bırakıldığında hata mesajı doğrulama")
+    public void tc002_NegativeMissingDataTest() {
 
         departmentsPage.Dermatology
                 .click();
@@ -101,18 +103,13 @@ public class US15 {
         appointmentPage.appointmentBookingButton
                 .click();
 
-        try {
-            Assert.assertTrue(Driver.getDriver().getPageSource().contains("This field is required."),
-                    "Bug012:Hata mesajı görüntülenemedi!");
 
-        } catch (AssertionError | Exception e) {
-            ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "Bug_012_Eksik_Veri_Raporu");
-            throw e;
-        }
+        Assert.assertTrue(Driver.getDriver().getPageSource().contains("This field is required."),
+                "Bug012: Hata mesajı görüntülenemedi!");
     }
 
-    @Test(groups={"regression"},description="Geçmiş bir tarih seçildiğinde sistemin randevu oluşturmadığını doğrulama")
-    public void tc003_NegativePastDateTest() throws IOException {
+    @Test(groups={"regression"}, description="Geçmiş bir tarih seçildiğinde sistemin randevu oluşturmadığını doğrulama")
+    public void tc003_NegativePastDateTest() {
 
         departmentsPage.Dermatology
                 .click();
@@ -126,23 +123,11 @@ public class US15 {
 
         boolean isSuccessVisible = Driver.getDriver().getPageSource().contains("Congratulations");
 
-        try {
-
-            Assert.assertFalse(isSuccessVisible, "BUG013: Sistem geçmiş tarihe randevu oluşturdu!");
-        } catch (AssertionError e) {
-
-            ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "Bug_013_Gecmis_Tarih_Kabul_Edildi");
-
-            throw e;
-        }
+        Assert.assertFalse(isSuccessVisible, "BUG013: Sistem geçmiş tarihe randevu oluşturdu!");
     }
-
 
     @AfterMethod(alwaysRun = true)
     public void teardown() {
         Driver.quitDriver();
-
     }
 }
-
-

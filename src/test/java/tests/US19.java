@@ -31,7 +31,7 @@ public class US19 {
     @Test (priority = 1)
     public void US19_TC_001_SistemeKullaniciOlarakGirisYapilabilmeli(){
         //Kullanici Url'e gider
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         //Sign in butonuna tıklar
         signButonsPage.signInLinki.click();
         //Geçerli mail adresini girer

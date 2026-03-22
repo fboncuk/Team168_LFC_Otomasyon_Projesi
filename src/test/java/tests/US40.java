@@ -10,8 +10,10 @@ import pages.LcfAdminPage.DashboardVaccinationsPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.TestBaseRapor;
 
-public class US40 {
+
+public class US40 extends TestBaseRapor {
 
     WebDriver driver;
     SoftAssert softAssert;
@@ -41,6 +43,8 @@ public class US40 {
 
     @Test
     public void US40_TC01_AsiEklemeFonksiyonuKontrolu (){
+        extentTest = extentReports
+                .createTest("US40_TC01_AsiEklemeFonksiyonuKontrolu");
 
 
         //Admin sayfasında sol açılır dashboard alanına hover over edin.
@@ -50,23 +54,30 @@ public class US40 {
 
         //Vaccinations butonunun görünür ve aktif olduğunu doğrulayın.
 
-        softAssert.assertTrue(dashboardVaccinationsPage.dashboardVaccinationsTitle.isDisplayed());
-        softAssert.assertTrue(dashboardVaccinationsPage.dashboardVaccinationsTitle.isEnabled());
+        softAssert.assertTrue(dashboardVaccinationsPage.dashboardVaccinationsTitle
+                .isDisplayed());
+        softAssert.assertTrue(dashboardVaccinationsPage.dashboardVaccinationsTitle
+                .isEnabled());
 
         //Vaccinations butonunun tıklayın.
-        dashboardVaccinationsPage.dashboardVaccinationsTitle.click();
+        dashboardVaccinationsPage.dashboardVaccinationsTitle
+                .click();
 
         //Açılan sayfada Add Vaccinations butonunun görünür ve aktif olduğunu doğrulayın.
 
-        dashboardVaccinationsPage.addVaccinationButton.isDisplayed();
-        dashboardVaccinationsPage.addVaccinationButton.isEnabled();
+        dashboardVaccinationsPage.addVaccinationButton
+                .isDisplayed();
+        dashboardVaccinationsPage.addVaccinationButton
+                .isEnabled();
 
         //Add vaccinations butonuna tıklayın.
-        dashboardVaccinationsPage.addVaccinationButton.click();
+        dashboardVaccinationsPage.addVaccinationButton
+                .click();
 
         //Add vaccinations sayfasında olduğunuzu doğrulayın.
         String expectedTitle ="Vaccination Add";
-        String actualTitle = dashboardVaccinationsPage.addVaccinationFormHeaderTitle.getText();
+        String actualTitle = dashboardVaccinationsPage.addVaccinationFormHeaderTitle
+                .getText();
 
         softAssert.assertEquals(actualTitle,expectedTitle,
                 "Aşı Ekle butonuna basıldığında yanlış sayfaya yönlendirme yapıldı." +

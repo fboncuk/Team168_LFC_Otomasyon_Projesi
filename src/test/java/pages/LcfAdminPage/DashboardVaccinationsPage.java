@@ -33,15 +33,15 @@ public class DashboardVaccinationsPage {
     public WebElement addVaccinationFormHeaderTitle;
 
     //Aşı ekleme formu title kutusu
-    @FindBy (id = "Title_en")
+    @FindBy (xpath = "//input[@name='Title_en']")
     public WebElement addVaccinationFormTitleBox;
 
     //Aşı ekleme formu content kutusu
-    @FindBy (id = "body_en")
+    @FindBy (xpath = "//input[@name='body_en']")
     public WebElement addVaccinationFormContentBox;
 
     //Aşı ekleme formu price kutusu
-    @FindBy (id = "price")
+    @FindBy (xpath = "//input[@name='price']")
     public WebElement addVaccinationFormPriceBox;
 
     //Aşı ekleme sayfası save butonu
@@ -183,6 +183,15 @@ public class DashboardVaccinationsPage {
     //Admin dashboard vaccination ikonu
     @FindBy (xpath = "(//*[@class='bg-complete icon-thumbnail'])[11]")
     public WebElement sideBarDashboardvaccinationsIcon;
+
+    //Admin dashboard vaccination arama kutusu
+    @FindBy(xpath = "//input[@id='search-table']")
+    public WebElement vaccinationsAramaKutusu;
+
+    //Admin dashboard vaccination edit sayfası Dont Change Image checkbox
+    @FindBy( xpath = "//input[@type='checkbox']")
+    public WebElement editDontChangeImageCheckBox;
+
 
 
 }
