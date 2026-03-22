@@ -121,7 +121,45 @@ public class US41 {
         dashboardTicketsPage.randevuDoktorTarihMesajGoruntuleme.isDisplayed();
     }
 
+    @Test(priority = 5)
+    public void US41_TC005_RandevularArasıTabIleGecisYapilabilmeli() {
 
+        // Randevular arasında TAB tuşu ile geçiş yapar
+
+        dashboardTicketsPage.randevuDoktorTarihMesajGoruntuleme.isEnabled();
+        dashboardTicketsPage.randevuDoktorTarihMesajGoruntuleme.click();
+        actions.sendKeys(Keys.TAB).perform();
+    }
+
+    @Test(priority = 6)
+    public void US41_TC006_RandevuDetaySayfasinaTiklayarakVeyaEnterYaparakUlasabilmeli() {
+
+        // Diledigi randevu bilgisine tıklayarak veya ENTER yaparak detay sayfasına ulaşır
+
+        dashboardTicketsPage.randevuDoktorTarihMesajGoruntuleme.click();
+
+        actions.sendKeys(Keys.ENTER).perform();
+
+    }
+
+    @Test(priority = 7)
+    public void US41_TC007_LogOutTusuIleSiteninAnasayfasinaDonusYapabilmeli() {
+
+        // İsim bilgisinin yanindaki kutucuğa tiklayarak Log Out seçeneğine tiklar
+        //Kayıtlı sayfasından cikis yaparak sitenin anasayfasına donus yapar
+
+        adminBodyPage.profileDropdownButton.click();
+        adminBodyPage.profileLogoutOption.click();
+
+    }
+
+    @Test(priority = 8)
+    public void US41_TC008_YoneticiTickestUrliniGirdigindeAnasayfayaYonlendirilmeli(){
+
+        // Kullanıcı giriş yapabilmesi için Login sayfasına yönlendirilir
+
+        Driver.getDriver().get(ConfigReader.getProperty(""));
+    }
 
 }
 
