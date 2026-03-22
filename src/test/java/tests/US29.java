@@ -7,17 +7,14 @@ import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
 import pages.LcfAdminPage.DashboardDepartmentsPage;
 import pages.LcfHomePage.SignButonsPage;
-import utilities.ConfigReader;
-import utilities.Driver;
-import utilities.Listeners;
-import utilities.ReusableMethods;
+import utilities.*;
+
+
 import java.util.Arrays;
 import java.util.List;
 
-//@Listeners(Listeners.class)
-@org.testng.annotations.Listeners(Listeners.class)
 
-public class US29 {
+public class US29 extends TestBaseRapor {
 
     SoftAssert softAssert;
     SignButonsPage signButonsPage;
@@ -45,6 +42,8 @@ public class US29 {
 
     @Test
     public void US29_TC01_DepartmantsVeAltMenuErisilebilirlikKontrolu() {
+        extentTest = extentReports
+                .createTest("US29_TC01_DepartmantsVeAltMenuErisilebilirlikKontrolu");
 
         Actions actions = new Actions(Driver.getDriver());
 
@@ -73,9 +72,12 @@ public class US29 {
 
     @Test
     public void US29_TC02_DepartmantsSayfasininGoruntulenebilirlikKontrolu() {
+        extentTest = extentReports
+                .createTest("US29_TC02_DepartmantsSayfasininGoruntulenebilirlikKontrolu");
 
         //Depatrments sayfasında olduğunuz doğrulayın.
-        softAssert.assertTrue(dashboardDepartmentsPage.departmentsMainTitle.isDisplayed(),
+        softAssert.assertTrue(dashboardDepartmentsPage.departmentsMainTitle
+                        .isDisplayed(),
                 "Başlık görünmüyor.");
         //Sayfada departmanların listelendiğini doğrulayın.
         List<String> expectedDepartmentNames = Arrays.asList(
@@ -85,27 +87,35 @@ public class US29 {
                 "Dermatology",
                 "Diagnostics"
         );
-        List<String> actualDepartmentsNames = ReusableMethods.stringListeDondur(dashboardDepartmentsPage.departmentNamesList);
+        List<String> actualDepartmentsNames = ReusableMethods
+                .stringListeDondur(dashboardDepartmentsPage.departmentNamesList);
 
-        softAssert.assertTrue(actualDepartmentsNames.containsAll(expectedDepartmentNames),
+        softAssert.assertTrue(actualDepartmentsNames
+                        .containsAll(expectedDepartmentNames),
                 "Mevcut liste beklenen tüm departmanları içermiyor");
         softAssert.assertAll();
     }
 
     @Test
     public void US29_T03_GecerliDepartmanAdiIleAramaFonksiyonuKontrolu() {
+        extentTest = extentReports
+                .createTest("US29_T03_GecerliDepartmanAdiIleAramaFonksiyonuKontrolu");
 
         //Geçerli bir departman adıyla arama yapın
         dashboardDepartmentsPage.departmentsSearchBox
                 .sendKeys("Wellness");
         //Arama sonucu departmanın listelendiğini doğrulayın
-        softAssert.assertTrue(dashboardDepartmentsPage.departmantsDetailPageWellness.isDisplayed(),
+        softAssert.assertTrue(dashboardDepartmentsPage.departmantsDetailPageWellness
+                        .isDisplayed(),
                 "Aranan departmant bulunamadı.");
+
         softAssert.assertAll();
     }
 
     @Test
-    public void US29_04_GecersizDepartmanAdiylaAramaFonksiyonuKontrolu() {
+    public void US29_T04_GecersizDepartmanAdiylaAramaFonksiyonuKontrolu() {
+        extentTest = extentReports
+                .createTest("US29_04_GecersizDepartmanAdiylaAramaFonksiyonuKontrolu");
 
         //Geçersiz bir departman adıyla arama yapın
         dashboardDepartmentsPage.departmentsSearchBox
@@ -117,7 +127,9 @@ public class US29 {
     }
 
     @Test
-    public void US29_05_SayfalamadanBagimsizAramaFonksiyonuKontrolu() {
+    public void US29_T05_SayfalamadanBagimsizAramaFonksiyonuKontrolu() {
+        extentTest = extentReports
+                .createTest("US29_05_SayfalamadanBagimsizAramaFonksiyonuKontrolu");
 
         //Sayfa 1’de departmanın adını arayın
         dashboardDepartmentsPage.departmentsSearchBox
@@ -144,6 +156,8 @@ public class US29 {
 
     @Test
     public void US29_TC06_HerSatirdaDuzenlemeButonuDogrulamaTesti() {
+        extentTest = extentReports
+                .createTest("US29_TC06_HerSatirdaDuzenlemeButonuDogrulamaTesti");
 
         //Departmants liste elemanlarının bulunduğu her satırda edit butonunun
         // görünür ve aktif olduğunu doğrulayın
@@ -164,6 +178,8 @@ public class US29 {
 
     @Test
     public void US29_TC07_HerSatirdaSilmeButonuDogrulamaTesti() {
+        extentTest = extentReports
+                .createTest("US29_TC07_HerSatirdaSilmeButonuDogrulamaTesti");
 
         //Departmants liste elemanlarının bulunduğu her satırda delete butonunun
         // görünür ve aktif olduğunu doğrulayın

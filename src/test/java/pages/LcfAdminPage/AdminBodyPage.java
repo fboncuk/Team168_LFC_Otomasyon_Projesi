@@ -91,6 +91,9 @@ public class AdminBodyPage {
     @FindBy(className = "semi-bold")
     public WebElement profileNameText;
 
+    @FindBy(xpath = "//*[@class='fas fa-cog']")
+    public WebElement userName;
+
 
 
 
