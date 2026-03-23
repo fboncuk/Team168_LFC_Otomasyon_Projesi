@@ -135,6 +135,10 @@ public class VacinationsMainPage {
     public WebElement detailedTitleFelineViral;
 
 
+    @FindBy(xpath = "(//*[text()=' Bordetella (Kennel Cough) Vaccine'])[3]")
+    public WebElement bordetellaLink;
+
+
 
 
 

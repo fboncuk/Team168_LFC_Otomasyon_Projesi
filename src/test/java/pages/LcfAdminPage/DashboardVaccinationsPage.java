@@ -57,6 +57,8 @@ public class DashboardVaccinationsPage {
 
 
 
+
+
     // Admin dashboard Vaccinations sayfası Vaccination listesi
     @FindBy(xpath = "(//td[@class='v-align-middle semi-bold'])[1]")
     public WebElement dashboardVaccinationsUrun1;

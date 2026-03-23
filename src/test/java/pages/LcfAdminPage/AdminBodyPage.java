@@ -94,6 +94,9 @@ public class AdminBodyPage {
     @FindBy(xpath = "//*[@class='fas fa-cog']")
     public WebElement userName;
 
+    @FindBy(xpath = "(//*[.='Vaccinations'])[7]")
+    public WebElement anasayfaVaccinationsButton;
+
 
 
 

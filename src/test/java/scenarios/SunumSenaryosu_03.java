@@ -2,6 +2,7 @@ package scenarios;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,12 +11,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.LcfAdminPage.AdminBodyPage;
 import pages.LcfAdminPage.DashboardDepartmentsPage;
 import pages.LcfHomePage.*;
-import utilities.ConfigReader;
-import utilities.Driver;
-import utilities.Listeners;
-import utilities.ReusableMethods;
+import utilities.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -25,7 +24,7 @@ import java.util.List;
 
 @org.testng.annotations.Listeners(Listeners.class)
 
-public class SunumSenaryosu_03 {
+public class SunumSenaryosu_03 extends TestBaseRapor {
 
     // RANDEVU OLUŞTURMA SENARYOSU
 
@@ -36,7 +35,7 @@ public class SunumSenaryosu_03 {
     AppointmentBookingPage appointmentBookingPage;
     DashboardDepartmentsPage dashboardDepartmentsPage;
     Actions actions;
-    WebDriverWait wait;
+
 
     @BeforeClass
     public void setup() {
@@ -44,17 +43,17 @@ public class SunumSenaryosu_03 {
         signButonsPage = new SignButonsPage();
         // Homepage açılır
         Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(1);
 
         // SignIn butonu tıklanır ve T06 Tester geçerli kullanıcı bilgileri ile giriş yapılır
         signButonsPage.signInLinki.click();
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T06UserMail"));
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T06UserPassword"));
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         signButonsPage.signInButtonOnay.click();
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
     }
 
 
@@ -63,14 +62,16 @@ public class SunumSenaryosu_03 {
         // Kayıtlı kullanıcı tarafından
         // Vaccinations listesinde yer alan bir aşı detay sayfasından
         // Gecerli verilerle bir başarılı bir randevu kaydı açıldığını doğrulamak.
+        extentTest =extentReports.createTest("US17_TC06_Gecerli verilerle randevu olusturuldu");
         appointmentBookingPage = new AppointmentBookingPage();
         SoftAssert softAssert = new SoftAssert();
         dashboardDepartmentsPage = new DashboardDepartmentsPage();
 
         actions = new Actions(Driver.getDriver());
+        ReusableMethods.bekle(2);
         actions.moveToElement(dashboardDepartmentsPage.DepartmentsButonSideMenu)
                         .perform();
-
+        ReusableMethods.bekle(3);
         // Dermatology detay sayfasına gidilir
         Driver.getDriver().get(ConfigReader.getProperty("DermUrl"));
         // ReusableMethods.bekle(1);
@@ -92,21 +93,21 @@ public class SunumSenaryosu_03 {
         appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
         ReusableMethods.bekle(3);
         appointmentBookingPage.departmentDropdownKutusu.click(); // Department açılır menü tıklanır
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.dermatologySecenegi.click(); // Dermatology seçilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.doctorDropdownKutusu.click(); // Doktor açılır menü tıklanır
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.doktorSecenegi.click(); // Doktor seçilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.messageBox.sendKeys(randevuMetni); // Randevu metni girilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
 //        ReusableMethods.tumSayfaResimCek(Driver.getDriver()
 //                ,"US17_TC06_Geçerli randevu giriş bilgileri");
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -134,12 +135,13 @@ public class SunumSenaryosu_03 {
         // Kayıtlı kullanıcı tarafından
         // Vaccinations listesinde yer alan bir aşı detay sayfasından
         // Geçerli randevu kaydı için tarih ve telefon numarasının yeterli olduğunu doğrulamak
+        extentTest = extentReports.createTest("US17_TC07_Tarih ve telefon bilgisiyle randevu olusturma");
         appointmentBookingPage = new AppointmentBookingPage();
         SoftAssert softAssert = new SoftAssert();
 
         // Dermatology detay sayfasına gidilir
         Driver.getDriver().get(ConfigReader.getProperty("DermUrl"));
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
 
         // Geçerli tarih için girmek maksadıyla 10 gün sonraki tarihe randevu alınır.
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -190,6 +192,7 @@ public class SunumSenaryosu_03 {
         // Randevu talebi modülünde, geçmiş tarih seçilemediğini ve
         // gecmis tarih secilse bile randevu olusturulamadigini doğrulamak
         // Negatif test
+        extentTest =extentReports.createTest("US17_TC08_Gecmis tarih ile randevu olusturulamadigini dogrulama");
         appointmentBookingPage = new AppointmentBookingPage();
         SoftAssert softAssert = new SoftAssert();
 
@@ -208,9 +211,9 @@ public class SunumSenaryosu_03 {
         // Sadece Randevu kutularına bilgiler girilir.
         ReusableMethods.bekle(3);
         appointmentBookingPage.dateInput.sendKeys(gecersizDateRandevu); // tarih girilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         ReusableMethods.tumSayfaResimCek(Driver.getDriver()
                 ,"US17_TC08_Geçmiş tarihli randevu giriş bilgileri");
 
@@ -234,7 +237,7 @@ public class SunumSenaryosu_03 {
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(7);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -261,6 +264,7 @@ public class SunumSenaryosu_03 {
         // Kayıtlı kullanıcı tarafından
         // Telefon numarası kutusuna rakam harici karakter girilemediğini doğrulamak
         // Negatif test
+        extentTest = extentReports.createTest("US17_TC09_Hatali telefon bilgisi ile randevu olusturulamadigini dogrulama");
         appointmentBookingPage = new AppointmentBookingPage();
         SoftAssert softAssert = new SoftAssert();
 
@@ -279,9 +283,9 @@ public class SunumSenaryosu_03 {
         // Sadece Randevu kutularına bilgiler girilir.
         ReusableMethods.bekle(3);
         appointmentBookingPage.dateInput.sendKeys(gecerliDateRandevu); // geçerli bir tarih girilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.phoneBox.sendKeys(gecersizTelNumarasi); // telefon bilgisi girilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         ReusableMethods.tumSayfaResimCek(Driver.getDriver()
                 ,"US17_TC09_Geçersiz telefon no ile randevu giriş bilgileri");
 
@@ -299,7 +303,7 @@ public class SunumSenaryosu_03 {
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(6);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -327,19 +331,20 @@ public class SunumSenaryosu_03 {
         // tarih veya telefon numarası boş bırakıldığında, sistemin randevu oluşturmaması ve
         // hata mesajı vermesini doğrulamak
         // Negatif test
+        extentTest = extentReports.createTest("Bos tarih ve telefon ile randevu olusturamama");
         vacinationsMainPage = new VacinationsMainPage();
         appointmentBookingPage = new AppointmentBookingPage();
         SoftAssert softAssert = new SoftAssert();
 
+
         // VacinationsMainPage içindeki Bordetella detay sayfasına gidilir
         Driver.getDriver().get(ConfigReader.getProperty("VacUrl"));
-        ReusableMethods.bekle(3);
         vacinationsMainPage.vaccinesBordetella.click();
         ReusableMethods.bekle(3);
 
         // Hiçbir bilgi girilmeden Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(6);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
@@ -366,7 +371,7 @@ public class SunumSenaryosu_03 {
         // Kayıtlı kullanıcı tarafından
         // Randevu mesajı kutusuna 120 karakterden daha fazla metin girilemediğini doğrulamak
         // Negatif test
-
+        extentTest = extentReports.createTest("US17_TC11_Maksimum mesaj yazma limiti dogrulama");
         vacinationsMainPage = new VacinationsMainPage();
         appointmentBookingPage = new AppointmentBookingPage();
         SoftAssert softAssert = new SoftAssert();
@@ -393,15 +398,15 @@ public class SunumSenaryosu_03 {
         appointmentBookingPage.phoneBox.sendKeys(gecerliTelNumarasi); // telefon numarası girilir
         ReusableMethods.bekle(3);
         appointmentBookingPage.departmentDropdownKutusu.click(); // Department açılır menü tıklanır
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.dermatologySecenegi.click(); // Dermatology departmanı seçilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.doctorDropdownKutusu.click(); // Doktor açılır menü tıklanır
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.doktorSecenegi.click(); // Doktor seçilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
         appointmentBookingPage.messageBox.sendKeys(randevuMetni121); // Randevu metni girilir
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(2);
 //        ReusableMethods.tumSayfaResimCek(Driver.getDriver()
 //                ,"US17_TC11_120 karakterden uzun randevu mesajı bilgisi");
 
@@ -416,7 +421,7 @@ public class SunumSenaryosu_03 {
 
         // Appointment Booking butonu tıklanır
         appointmentBookingPage.appointmentBookingButton.click();
-        ReusableMethods.bekle(3);
+        ReusableMethods.bekle(6);
 
         // Ekrana çıkan alert mesajı kaydedilir
         String actualAletText = appointmentBookingPage.randevuAlertMesaji.getText();
