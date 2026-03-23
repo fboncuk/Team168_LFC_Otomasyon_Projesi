@@ -35,10 +35,12 @@ public class US23 {
         loginPage.emailKutusu.sendKeys(ConfigReader.getProperty("T01AdminMail"));
         loginPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T01AdminPassword"));
         loginPage.signInButtonOnay.click();
-        ReusableMethods.bekle(2);
+        //ReusableMethods.bekle(2);
+        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
 
         Driver.getDriver().get("https://qa.loyalfriendcare.com/en/admin");
-        ReusableMethods.bekle(3);
+        //ReusableMethods.bekle(3);
+        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(15));
 
         JavascriptExecutor jse = (JavascriptExecutor) Driver.getDriver();
         jse.executeScript("arguments[0].click();", dashboardRolesPage.sidebarRolesMainMenu);

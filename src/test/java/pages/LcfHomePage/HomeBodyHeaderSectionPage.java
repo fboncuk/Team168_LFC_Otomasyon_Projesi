@@ -29,7 +29,7 @@ public class HomeBodyHeaderSectionPage {
     public WebElement siteLogo;
 
 
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Doctors']")
+    @FindBy(xpath = "(//a[@href='https://qa.loyalfriendcare.com/Doctors'])[3]")
     public WebElement doctorsHeaderLink;
 
 

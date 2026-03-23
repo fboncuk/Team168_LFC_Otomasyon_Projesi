@@ -155,6 +155,7 @@ public class US20 {
         signButonsPage.passwordKutusu.clear();
         signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T09AdminPassword"));
         signButonsPage.signInButtonOnay.click();
+        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
 
         String actualInvalidPasswordMessage = signButonsPage.signInPageInvalidPasswordFeedbackMessage.getText();
 

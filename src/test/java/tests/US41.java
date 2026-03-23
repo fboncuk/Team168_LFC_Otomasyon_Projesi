@@ -30,7 +30,7 @@ public class US41 {
     DashboardPage dashboardPage;
     DashboardTicketsPage dashboardTicketsPage;
 
-    Actions actions;
+    //Actions actions;
 
     @BeforeClass
     public void setup() {
@@ -39,7 +39,7 @@ public class US41 {
         softAssert = new SoftAssert();
         dashboardPage = new DashboardPage();
         dashboardTicketsPage = new DashboardTicketsPage();
-        actions = new Actions(driver);
+        //actions = new Actions(driver);
     }
 
     @AfterClass

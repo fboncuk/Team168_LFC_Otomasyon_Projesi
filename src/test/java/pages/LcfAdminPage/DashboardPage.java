@@ -274,7 +274,53 @@ public class DashboardPage {
 
 
 
+    @FindBy (className = "detailed")
+    public WebElement DashboardPageLeftMenuDashboardLink;
 
+    //DasboardPage Left Menu Dashboard link Title ile
+    @FindBy (xpath = "(//*[@class='title'])[1]")
+    public WebElement DashboardPageLeftMenuDashboardLink2;
+
+    //DasboardPage Left Menu Roles link
+    @FindBy (xpath = "(//*[@class='title'])[2]")
+    public WebElement DashboardPageLeftMenuRolesLink;
+
+    //DasboardPage Left Menu Users link
+    @FindBy (xpath = "(//*[@class='title'])[3]")
+    public WebElement DashboardPageLeftMenuUsersLink;
+
+    //DasboardPage Left Menu Bad Managers link
+    @FindBy (xpath = "(//*[@class='title'])[4]")
+    public WebElement DashboardPageLeftMenuBedManagersLink;
+
+    //DasboardPage Left Menu Departments link
+    @FindBy (xpath = "(//*[@class='title'])[5]")
+    public WebElement DashboardPageLeftMenuDepartmentsLink;
+
+    //DasboardPage Left Menu Doctors link
+    @FindBy (xpath = "(//*[@class='title'])[6]")
+    public WebElement DashboardPageLeftMenuDoctorsLink;
+
+    //DasboardPage Left Menu Medicines link
+    @FindBy (xpath = "(//*[@class='title'])[7]")
+    public WebElement DashboardPageLeftMenuMedicinesLink;
+
+    //DasboardPage Left Menu Pets Adsense link
+    @FindBy (xpath = "(//*[@class='title'])[8]")
+    public WebElement DashboardPageLeftMenuPetAdsenseLink;
+
+    //DasboardPage Left Menu Tickets link
+    @FindBy (xpath = "(//*[@class='title'])[12]")
+    public WebElement DashboardPageLeftMenuTicketsLink;
+
+    //Dashboard Left Menu -> Vaccinations tıklama
+    @FindBy(linkText= "Vaccinations")
+    public WebElement DashboardPageLeftMenuSubmenuVaccinations;
+
+
+    //DasboardPage Left Menu Vaccinations link
+    @FindBy (xpath = "(//*[@class='title'])[13]")
+    public WebElement sidebarMenuVaccinationsLink;
 
 
 

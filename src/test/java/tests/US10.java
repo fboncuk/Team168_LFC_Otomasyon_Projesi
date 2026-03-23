@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LcfHomePage.HomeBodyHeaderSectionPage;
 import pages.LcfHomePage.SignButonsPage;
+import utilities.ConfigReader;
 import utilities.Driver;
 import java.time.Duration;
 
@@ -35,7 +36,7 @@ public class US10 {
     public void TC01_ZiyaretciHeaderGorunurlukTesti() {
 
         // 1. Siteye (anasayfaya) gidiyoruz
-        Driver.getDriver().get(anasayfaUrl);
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
 
         // 2. Logonun görünürlüğünü bekleyip doğruluyoruz
         wait.until(ExpectedConditions.visibilityOf(headerPage.siteLogo));
@@ -53,7 +54,7 @@ public class US10 {
     public void TC02_BasariliGirisTesti() {
 
         // 1. Anasayfaya gidiyoruz
-        Driver.getDriver().get(anasayfaUrl);
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
 
         // 2. Header'daki Sign In butonuna tıklıyoruz
         wait.until(ExpectedConditions.elementToBeClickable(signPage.signInLinki)).click();
@@ -71,17 +72,7 @@ public class US10 {
     }
 
 
-        // =========================================================================
-        // YARDIMCI METOT: Tekrardan Kurtarıcı Ortak Giriş Metodumuz
-        // =========================================================================
-        private void basariliGirisYap() {
-            Driver.getDriver().get(anasayfaUrl);
-            wait.until(ExpectedConditions.elementToBeClickable(signPage.signInLinki)).click();
-            wait.until(ExpectedConditions.visibilityOf(signPage.emailKutusu)).sendKeys("mehmet.user@loyalfriendcare.com");
-            signPage.passwordKutusu.sendKeys("Loyal.123123");
-            signPage.signInButtonOnay.click();
-            wait.until(ExpectedConditions.visibilityOf(signPage.homePageSignOut));
-        }
+
 
         // =========================================================================
         // TC03 (AC3): Kullanıcı girişi sonrası Header elementlerinin görünürlüğü
@@ -190,7 +181,7 @@ public class US10 {
     @Test(priority = 7)
     public void TC07_KullaniciNegatifGirisTesti() {
 
-        Driver.getDriver().get(anasayfaUrl);
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         wait.until(ExpectedConditions.elementToBeClickable(signPage.signInLinki)).click();
 
         // Doğru KULLANICI e-postası ama KASTEN YANLIŞ bir şifre giriyoruz!
@@ -215,5 +206,17 @@ public class US10 {
     @org.testng.annotations.AfterMethod
     public void tearDown() {
         Driver.quitDriver(); // Eğer kırmızı yanarsa "Driver.closeDriver();" yapabilirsin
+    }
+
+    // =========================================================================
+    // YARDIMCI METOT: Tekrardan Kurtarıcı Ortak Giriş Metodumuz
+    // =========================================================================
+    private void basariliGirisYap() {
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
+        wait.until(ExpectedConditions.elementToBeClickable(signPage.signInLinki)).click();
+        wait.until(ExpectedConditions.visibilityOf(signPage.emailKutusu)).sendKeys("mehmet.user@loyalfriendcare.com");
+        signPage.passwordKutusu.sendKeys("Loyal.123123");
+        signPage.signInButtonOnay.click();
+        wait.until(ExpectedConditions.visibilityOf(signPage.homePageSignOut));
     }
 }
