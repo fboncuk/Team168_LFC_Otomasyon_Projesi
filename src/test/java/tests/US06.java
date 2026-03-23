@@ -25,7 +25,7 @@ public class US06 {
     HomeBodyFooterLinksPage homeBodyFooterLinksPage;
 
     @BeforeClass
-    public void setup() {Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));}
+    public void setup() {Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));}
 
 
     @Test(priority = 1)

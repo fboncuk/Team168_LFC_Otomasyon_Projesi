@@ -33,15 +33,19 @@ public class SignButonsPage {
     public WebElement registerPagePasswordConfirmBox;
 
     //Kayıt formu Sign Up butonu
-    @FindBy (xpath = "//*[@class='btn btn-primary btn-cons m-t-10']")
+    @FindBy (xpath = "//button[@type='submit']")
     public WebElement registerPageSignUpBox;
 
     //AnaSayfa header bölümü username butonu
     @FindBy (xpath = "(//*[@class='btn_add'])[1]")
     public WebElement headerUserName;
 
-    //Anasayfa signout butonu
-    @FindBy (xpath = "(//*[@class='btn_add'])[2]")
+//    //Anasayfa signout butonu
+//    @FindBy (xpath = "(//*[@class='btn_add'])[2]")
+//    public WebElement homePageSignOut;
+
+    // Anasayfadaki GÜNCEL Sign Out butonu  (Mehmet Fatih ALTUNTAŞ)
+    @FindBy(xpath = "//a[contains(@href, 'logout') and @class='btn_add']")
     public WebElement homePageSignOut;
 
     @FindBy (xpath = "//*[.='The email has already been taken.']")
@@ -53,8 +57,9 @@ public class SignButonsPage {
 
 
 
-
-
+    // Anasayfada sisteme giriş yapmak için kullanilacak olan Sign In linki
+    @FindBy(linkText = " Sign In")
+    public WebElement signInButton2;
 
     // Anasayfada sisteme giriş yapmak için kullanilacak olan Sign In linki
     @FindBy(xpath = "(//*[@class='btn_add'])[1]")
@@ -95,6 +100,7 @@ public class SignButonsPage {
     //invalid passaword Message
     @FindBy (className = "invalid-feedback")
     public WebElement signInPageInvalidPasswordFeedbackMessage;
+
 
 
 

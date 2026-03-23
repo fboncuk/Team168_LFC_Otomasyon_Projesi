@@ -16,7 +16,7 @@ public class DashboardPage {
 
     //DashboardPageSummaryCards Logo Linki
     @FindBy(xpath = "//div[@class='sidebar-header']//img[contains(@src, 'logo.png')]")
-    public WebElement DashboardPageLogo;
+    public WebElement dashboardPageLogo;
 
     //DashboardPageSummaryCards Users Panel Linki
     @FindBy(xpath = "(//a[@class='text-white'])[1]")
@@ -129,13 +129,74 @@ public class DashboardPage {
 
     //DasboardPage Left Menu Vaccinations link
     @FindBy (xpath = "(//*[@class='title'])[13]")
-    public WebElement sidebarMenuVaccinationssLink;
+    public WebElement DashboardPageLeftMenuVaccinationsLink;
+
+    //Dashboard Left Menu Logo
+    @FindBy(xpath = "//img[contains(@src,'logo.png')]")
+    public WebElement dashboardLeftMenuLogo;
+
 
 
 
     //### Bu Bölümdeki Locateler Dashboard Anasayfa Sol Açılır
     // Menülere Tıklanınca açılan submenuler Locateleri   ###
     //Dashboard Left Menu -> Roles -> Roles tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Roles']")
+    public WebElement DashboardPageLeftMenuSubmenuRoles;
+
+    //Dashboard Left Menu -> Roles -> Create Role tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Roles/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateRole;
+
+    //Dashboard Left Menu -> Users -> Users tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Users']")
+    public WebElement DashboardPageLeftMenuSubmenuUsers;
+
+    //Dashboard Left Menu -> Users -> Create User tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Users/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateUser;
+
+    //Dashboard Left Menu -> Bed Managers -> Bed Managers tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Posts']")
+    public WebElement DashboardPageLeftMenuSubmenuBedManagers;
+
+    //Dashboard Left Menu -> Bed Managers -> Creat Bed Managers  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Posts/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateBedManagers;
+
+    //Dashboard Left Menu -> Departments -> Departments tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Categories']")
+    public WebElement DashboardPageLeftMenuSubmenuDepartments;
+
+    //Dashboard Left Menu -> Departments -> Create Departments  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Categories/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateDepartments;
+
+    //Dashboard Left Menu -> Doctors -> Doctors tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Clients']")
+    public WebElement DashboardPageLeftMenuSubmenuDoctors;
+
+    //Dashboard Left Menu -> Doctors -> Create Doctors  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Clients/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateDoctors;
+
+    //Dashboard Left Menu -> Medicines -> Medicines tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Instagrams']")
+    public WebElement DashboardPageLeftMenuSubmenuMedicines;
+
+    //Dashboard Left Menu -> Medicines -> Create Medicines  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/Instagrams/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreateMedicines;
+
+    //Dashboard Left Menu -> Pets adsense -> Pets adsense tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/AdSense']")
+    public WebElement DashboardPageLeftMenuSubmenuPetsAdsense;
+
+    //Dashboard Left Menu -> Pets adsense -> Create Pets adsense  tıklama
+    @FindBy(xpath = "//*[@href='https://qa.loyalfriendcare.com/Dashboard/AdSense/create']")
+    public WebElement DashboardPageLeftMenuSubmenuCreatePetsAdsense;
+
+
     @FindBy(linkText= "Roles")
     public WebElement sidebarSubmenuRoles;
 
@@ -202,7 +263,7 @@ public class DashboardPage {
     public WebElement sidebarMenuSubmenuVaccinations;
 
     // Admin dashboard'da sol menününün locator'ı
-    @FindBy(className = "sidebar-menu")
+    @FindBy(xpath = "//*[@class='sidebar-menu']")
     public WebElement dashboardPageSideBarMenu;
 
 
@@ -213,7 +274,53 @@ public class DashboardPage {
 
 
 
+    @FindBy (className = "detailed")
+    public WebElement DashboardPageLeftMenuDashboardLink;
 
+    //DasboardPage Left Menu Dashboard link Title ile
+    @FindBy (xpath = "(//*[@class='title'])[1]")
+    public WebElement DashboardPageLeftMenuDashboardLink2;
+
+    //DasboardPage Left Menu Roles link
+    @FindBy (xpath = "(//*[@class='title'])[2]")
+    public WebElement DashboardPageLeftMenuRolesLink;
+
+    //DasboardPage Left Menu Users link
+    @FindBy (xpath = "(//*[@class='title'])[3]")
+    public WebElement DashboardPageLeftMenuUsersLink;
+
+    //DasboardPage Left Menu Bad Managers link
+    @FindBy (xpath = "(//*[@class='title'])[4]")
+    public WebElement DashboardPageLeftMenuBedManagersLink;
+
+    //DasboardPage Left Menu Departments link
+    @FindBy (xpath = "(//*[@class='title'])[5]")
+    public WebElement DashboardPageLeftMenuDepartmentsLink;
+
+    //DasboardPage Left Menu Doctors link
+    @FindBy (xpath = "(//*[@class='title'])[6]")
+    public WebElement DashboardPageLeftMenuDoctorsLink;
+
+    //DasboardPage Left Menu Medicines link
+    @FindBy (xpath = "(//*[@class='title'])[7]")
+    public WebElement DashboardPageLeftMenuMedicinesLink;
+
+    //DasboardPage Left Menu Pets Adsense link
+    @FindBy (xpath = "(//*[@class='title'])[8]")
+    public WebElement DashboardPageLeftMenuPetAdsenseLink;
+
+    //DasboardPage Left Menu Tickets link
+    @FindBy (xpath = "(//*[@class='title'])[12]")
+    public WebElement DashboardPageLeftMenuTicketsLink;
+
+    //Dashboard Left Menu -> Vaccinations tıklama
+    @FindBy(linkText= "Vaccinations")
+    public WebElement DashboardPageLeftMenuSubmenuVaccinations;
+
+
+    //DasboardPage Left Menu Vaccinations link
+    @FindBy (xpath = "(//*[@class='title'])[13]")
+    public WebElement sidebarMenuVaccinationsLink;
 
 
 

@@ -12,9 +12,9 @@ public class DashboardBedManagersPage {
         PageFactory.initElements(Driver.getDriver(),this);
     }
 
-    // Aşağıdaki locator ornektir
-    @FindBy(id = "global-search")
-    public WebElement aramaKutusu;
+    //DashboardPageSummaryCards Logo Linki
+    @FindBy(xpath = "//div[@class='sidebar-header']//img[contains(@src, 'logo.png')]")
+    public WebElement dashboardPageLogo;
 
 
     //BedManager sayfasi Title text
@@ -188,7 +188,9 @@ public class DashboardBedManagersPage {
     @FindBy (xpath = "//li[@class='select2-results__option'][5]")
     public WebElement medicinesDdMenuMetacam;
 
-
+    // Admin BedmanagersDashboard'da sol menününün locator'ı
+    @FindBy(xpath = "//*[@class='sidebar-menu']")
+    public WebElement dashboardPageSideBarMenu;
 
 }
 

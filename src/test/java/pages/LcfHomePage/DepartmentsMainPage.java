@@ -58,19 +58,19 @@ public class DepartmentsMainPage {
     public WebElement DepartmentsMainButton;
 
     //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Wellness Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/wellness'])[2]")
+    @FindBy(xpath = "(//a[contains(@href,'wellness') and text()='Wellness'])")
     public WebElement WellnesLinkButton;
 
     //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Dental Care Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/dental-care'])[2]")
+    @FindBy(xpath = "(//a[contains(@href,'dental-care') and text()='Dental Care'])")
     public WebElement DentalCareLinkButton;
 
     //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Anaesthesia Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/anaesthesia'])[2]")
+    @FindBy(xpath = "(//a[contains(@href,'anaesthesia') and text()='Anaesthesia'])")
     public WebElement AnaesthesiaLinkButton;
 
     //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Dermatology Linki
-    @FindBy(xpath = "//a[@href='https://qa.loyalfriendcare.com/Departments/dermatology'])[2]")
+    @FindBy(xpath = "(//a[contains(@href,'dermatology') and text()='Dermatology'])")
     public WebElement DermatologyLinkButton;
 
     //Anasayfa Header alanında yer alan Departments Butonu içinde yer alan Diagnostics Linki
