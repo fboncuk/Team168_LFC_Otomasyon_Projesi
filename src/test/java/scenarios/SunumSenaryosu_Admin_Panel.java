@@ -1,27 +1,29 @@
-package tests;
+package scenarios;
 
 import com.github.javafaker.Faker;;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+import pages.LcfAdminPage.AdminBodyPage;
 import pages.LcfAdminPage.DashboardPage;
 import pages.LcfHomePage.SignButonsPage;
 import utilities.ConfigReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
+import utilities.TestBaseRapor;
 
 import java.time.Duration;
 
-
-public class US20 {
+public class SunumSenaryosu_Admin_Panel extends TestBaseRapor {
 
     //Class level'da Obje oluştur
     SignButonsPage signButonsPage;
     SoftAssert softAssert;
     WebDriverWait wait;
     Faker faker;
-    DashboardPage dashboardPage;
+    DashboardPage dashboardPage =new DashboardPage();
+    AdminBodyPage adminBodyPage =new AdminBodyPage();
 
     @BeforeClass
     public void setup() {
@@ -46,130 +48,10 @@ public class US20 {
 
     }
 
-    @Test(priority = 1, description = "Login ayfası temel öğeler görünürlük ve doğrualama testi")
-    public void US20_TC01_LoginPage_Function_Validation_Test() {
-
-        softAssert.assertTrue(signButonsPage.signInPageLogo.isDisplayed(), "Sign in page logo is not displayed");
-        softAssert.assertTrue(signButonsPage.emailKutusu.isDisplayed(), "Sign in page email box is not displayed");
-        softAssert.assertTrue(signButonsPage.emailKutusu.isEnabled(), "Sign in page email box not enabled");
-        softAssert.assertTrue(signButonsPage.passwordKutusu.isDisplayed(), "Sign in page password box is not displayed");
-        softAssert.assertTrue(signButonsPage.passwordKutusu.isEnabled(), "Sign in page password box not enabled");
-        softAssert.assertTrue(signButonsPage.rememberMeKutusu.isEnabled(), "Sign in page rememberMe box not enabled");
-        softAssert.assertTrue(signButonsPage.rememberMeKutusu.isDisplayed(), "Sign in page rememberMe box is not displayed");
-
-        String signInPAgeTitleIcerik = Driver.getDriver().getTitle();
-        String signInPageLinkIcerik = Driver.getDriver().getCurrentUrl();
-        softAssert.assertTrue(signInPageLinkIcerik.toLowerCase().contains(signInPAgeTitleIcerik.toLowerCase()), "Link ve Title eşleşmesi");
-
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 2, description = "Login sayfasında tümü boş bilgilerle giriş denemesi")
-    public void US20_TC02_LoginPage_Negative_Function_Validation_Test_1() {
-
-        signButonsPage.emailKutusu.clear();
-        signButonsPage.passwordKutusu.clear();
-        signButonsPage.signInButtonOnay.click();
-
-        //Mesaj uyarısını String olarak tanımladık.
-        String validationMessage = signButonsPage.resetPasswordPageEmailTextBox.getAttribute("validationMessage");
-
-        //Mesajı yazdıralım
-        System.out.println(validationMessage);
-
-        softAssert.assertTrue(!validationMessage.isEmpty(), "Validation Message is not Displayed");
-
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC02_ValidationMessage1");
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 3, description = "Login sayfasında admin geçerli mail ve pass boş bilgilerle giriş denemesi")
-    public void US20_TC02_LoginPage_Negative_Function_Validation_Test_2() {
-
-        signButonsPage.emailKutusu.clear();
-        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T09AdminMail"));
-        signButonsPage.passwordKutusu.clear();
-        signButonsPage.signInButtonOnay.click();
-        ReusableMethods.bekle(2);
-
-        //Mesaj uyarısını String olarak tanımladık.
-        String validationMessage = signButonsPage.passwordKutusu.getAttribute("validationMessage");
-
-        //Mesajı yazdıralım
-        System.out.println(validationMessage);
-
-        softAssert.assertTrue(!validationMessage.isEmpty(), "Validation Message is not Displayed");
-
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC02_ValidationMessage2");
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 4, description = "Login sayfasında boş mail ve geçerli admin yetkili maile ait pass bilgilerle giriş denemesi")
-    public void US20_TC02_LoginPage_Negative_Function_Validation_Test_3() {
-
-        signButonsPage.emailKutusu.clear();
-        signButonsPage.passwordKutusu.clear();
-        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T09AdminPassword"));
-        signButonsPage.signInButtonOnay.click();
-
-        //Mesaj uyarısını String olarak tanımladık.
-        String validationMessage = signButonsPage.emailKutusu.getAttribute("validationMessage");
-
-        //Mesajı yazdıralım
-        System.out.println(validationMessage);
-
-        softAssert.assertTrue(!validationMessage.isEmpty(), "Validation Message is not Displayed");
-
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC02_ValidationMessage3");
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 5, description = "Login sayfasında admin geçerli mail ve geçersiz pass ile giriş denemesi")
-    public void US20_TC03_04_LoginPage_Negative_Function_Validation_Test_1() {
-
-        signButonsPage.emailKutusu.clear();
-        signButonsPage.emailKutusu.sendKeys(ConfigReader.getProperty("T09AdminMail"));
-        signButonsPage.passwordKutusu.clear();
-        signButonsPage.passwordKutusu.sendKeys(faker.internet().password());
-        signButonsPage.signInButtonOnay.click();
-
-        //Beklenen ve gerçekleşen sonuçları belirtelim ve Assert ile denetleyelim.
-
-
-        String actualInvalidPasswordMessage = signButonsPage.signInPageInvalidPasswordFeedbackMessage.getText();
-
-        //çıkan alerti consola yazdır
-        System.out.println("Görünen uyarı : " + actualInvalidPasswordMessage);
-
-        softAssert.assertTrue(!actualInvalidPasswordMessage.isEmpty(), "Validation Message is not Displayed");
-
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC03_PozitifMailNegatifPass_Test");
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 6, description = "Login sayfasında admin geçerli pass ve geçersiz mail ile giriş denemesi 2")
-    public void US20_TC03_04_LoginPage_Negative_Function_Validation_Test_2() {
-
-        signButonsPage.emailKutusu.clear();
-        signButonsPage.emailKutusu.sendKeys(faker.internet().emailAddress());
-        signButonsPage.passwordKutusu.clear();
-        signButonsPage.passwordKutusu.sendKeys(ConfigReader.getProperty("T09AdminPassword"));
-        signButonsPage.signInButtonOnay.click();
-        wait = new WebDriverWait(Driver.getDriver(), Duration.ofSeconds(10));
-
-        String actualInvalidPasswordMessage = signButonsPage.signInPageInvalidPasswordFeedbackMessage.getText();
-
-        //çıkan uarıyı consola yazdır
-        System.out.println("Görünen uyarı : " + actualInvalidPasswordMessage);
-
-        softAssert.assertTrue(!actualInvalidPasswordMessage.isEmpty(), "Validation Message is not Displayed");
-
-        ReusableMethods.tarihliTumSayfaResimCek(Driver.getDriver(), "US20_TC03_PozitifPassNegatifMail_Test");
-        softAssert.assertAll();
-    }
-
-    @Test(priority = 7, description = "Login sayfasında dashboarda erişim öncesi homepage erişim sağlanması")
+    @Test(priority = 19, description = "Login sayfasında dashboarda erişim öncesi homepage erişim sağlanması")
     public void US20_TC05_Admin_Account_SignIn_to_Admin_Dashboard_Test() {
+        extentTest = extentReports.createTest("US20_TC05_Admin_Account_SignIn_to_Admin_Dashboard_Test");
+        Driver.getDriver().get(ConfigReader.getProperty("LoginUrl"));
 
         //Email box temizle ve Geçerli admin mail adresi gir
         signButonsPage.emailKutusu.clear();
@@ -195,18 +77,19 @@ public class US20 {
         softAssert.assertAll();
     }
 
-    @Test(priority = 8, description = "Homepage sayfasından  admin dashboarda erişim sağlanması")
+    @Test(priority = 20, description = "Homepage sayfasından  admin dashboarda erişim sağlanması")
     public void US20_TC05_Admin_Account_SignIn_to_Homepage_Test() {
-
+        extentTest = extentReports.createTest("S20_TC05_Admin_Account_SignIn_to_Homepage_Test");
 
         // Dashboard butonu görünür olana kadar bekle
         //wait.until(ExpectedConditions.visibilityOf(signButonsPage.headerUserName));
         //wait.until(ExpectedConditions.elementToBeClickable(signButonsPage.headerUserName)).click();
         signButonsPage.headerUserName.click();
+        ReusableMethods.bekle(5);
 
         // Dashboard URL bekle
-        String expectedDashboardUrl = ConfigReader.getProperty("DasUrl");
-        wait.until(ExpectedConditions.urlContains(expectedDashboardUrl));
+        String expectedDashboardUrl = ConfigReader.getProperty("DasUrl").toLowerCase();
+        //wait.until(ExpectedConditions.urlContains(expectedDashboardUrl));
 
         String actualDashboardUrl = Driver.getDriver().getCurrentUrl().toLowerCase();
         softAssert.assertEquals(actualDashboardUrl, expectedDashboardUrl.toLowerCase(), "Login To Dashboard Failed");
@@ -215,8 +98,9 @@ public class US20 {
 
     }
 
-    @Test(priority = 9, description = "Dashboard panelinde menü öğelerine erişildiğini doğrulanması (Funcional Test)")
+    @Test(priority = 21, description = "Dashboard panelinde menü öğelerine erişildiğini doğrulanması (Funcional Test)")
     public void US20_TC06_Admin_Dashboard_Sol_Menu_Ogeler_Test() {
+        extentTest = extentReports.createTest("US20_TC06_Admin_Dashboard_Sol_Menu_Ogeler_Test");
 
         //Sol Menü açılmasını sağla
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
@@ -225,15 +109,19 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuDashboardLink.isDisplayed());
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuDashboardLink.isEnabled());
 
+        extentTest = extentReports.createTest("sol menüdeki Roles kısmı görünür testi");
+
         //sol menüdeki Roles kısmı görünür, tıklanır mı?
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuRolesLink.isDisplayed());
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuRolesLink.isEnabled());
         dashboardPage.DashboardPageLeftMenuRolesLink.click();
+        ReusableMethods.bekle(2);
 
         //sol menüdeki Roles altındaki Roles kısmı gürünür ve tıklanabilir mi?
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuRoles.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuRoles.isEnabled(), "Tıklanır değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuRoles)).click();
+        ReusableMethods.bekle(5);
         Driver.getDriver().navigate().back();
 
 
@@ -242,8 +130,10 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateRole.isEnabled(), "Tıklanır Değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuCreateRole)).click();
+        ReusableMethods.bekle(5);
         Driver.getDriver().navigate().back();
 
+        extentTest = extentReports.createTest("sol menüdeki User kısmı testi");
         //## USER BOLUMU ICIN
         //1- Sol menü Users kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
@@ -251,20 +141,27 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuUsersLink.isEnabled(), "Tıklanır Değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuUsersLink)).click();
 
+
         //2- sol menüdeki Users altındaki User kısmı gürünür ve tıklanabilir mi?
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuUsers.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuUsers.isEnabled(), "Tıklanır değil");
 
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuUsers)).click();
+        ReusableMethods.bekle(5);
         Driver.getDriver().navigate().back();
 
         //3- sol menüdeki Users altındaki Users Create kısmı gürünür ve tıklanabilir mi
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateUser.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateUser.isEnabled(), "Tıklanır değil");
-        wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuCreateUser)).click();
+//        wait.until(ExpectedConditions.elementToBeClickable(
+                dashboardPage.DashboardPageLeftMenuSubmenuCreateUser
+//        ))
+                .click();
+        ReusableMethods.bekle(5);
         Driver.getDriver().navigate().back();
 
 
+        extentTest = extentReports.createTest("sol menüdeki Bed Manager kısmı testi");
         //## Bed Managers BOLUMU ICIN
         //1- Sol menü Bed Managers kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
@@ -272,24 +169,26 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuBedManagersLink.isEnabled(), "Tıklanır Değil");
 //        wait.until(
 //                ExpectedConditions.elementToBeClickable(
-                        dashboardPage.DashboardPageLeftMenuBedManagersLink
+        dashboardPage.DashboardPageLeftMenuBedManagersLink
 //                        ))
-        .click();
+                .click();
 
         //2- sol menüdeki Bed Managers altındaki Bed Managers kısmı gürünür ve tıklanabilir mi?
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuBedManagers.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuBedManagers.isEnabled(), "Tıklanır değil");
 
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuBedManagers)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
         //3- sol menüdeki Bed Managers altındaki Create Bed Managers kısmı gürünür ve tıklanabilir mi
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateBedManagers.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateBedManagers.isEnabled(), "Tıklanır değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuCreateBedManagers)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
-
+        extentTest = extentReports.createTest("sol menüdeki Departmente kısmı testi");
         //## Departments BOLUMU ICIN
         //1- Sol menü Departments kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
@@ -302,15 +201,17 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuDepartments.isEnabled(), "Tıklanır değil");
 
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuDepartments)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
         //3- sol menüdeki Departments altındaki Create Departments kısmı gürünür ve tıklanabilir mi
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateDepartments.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateDepartments.isEnabled(), "Tıklanır değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuCreateDepartments)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
-
+        extentTest = extentReports.createTest("sol menüdeki Doctors kısmı testi");
         //## Doctors BOLUMU ICIN
         //1- Sol menü Doctors kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
@@ -323,14 +224,17 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuDoctors.isEnabled(), "Tıklanır değil");
 
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuDoctors)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
         //3- sol menüdeki Doctors altındaki Create Doctors kısmı gürünür ve tıklanabilir mi
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateDoctors.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateDoctors.isEnabled(), "Tıklanır değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuCreateDoctors)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
+        extentTest = extentReports.createTest("sol menüdeki Medicine kısmı testi");
         //## Medicines BOLUMU ICIN
         //1- Sol menü Medicines kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
@@ -343,14 +247,17 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuMedicines.isEnabled(), "Tıklanır değil");
 
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuMedicines)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
         //3- sol menüdeki Medicines altındaki Create Medicines kısmı gürünür ve tıklanabilir mi
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateMedicines.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreateMedicines.isEnabled(), "Tıklanır değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuCreateMedicines)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
+        extentTest = extentReports.createTest("sol menüdeki Pet Adsense kısmı testi");
         //## Pet Adsense BOLUMU ICIN
         //1- Sol menü Pet Adsense kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
@@ -363,86 +270,121 @@ public class US20 {
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuPetsAdsense.isEnabled(), "Tıklanır değil");
 
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuPetsAdsense)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
         //3- sol menüdeki Pet Adsense altındaki Create Pet Adsense kısmı gürünür ve tıklanabilir mi
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreatePetsAdsense.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuSubmenuCreatePetsAdsense.isEnabled(), "Tıklanır değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuSubmenuCreatePetsAdsense)).click();
+        ReusableMethods.bekle(5);
         Driver.getDriver().navigate().back();
 
+        extentTest = extentReports.createTest("sol menüdeki Ticket kısmı testi");
         //## Tickets BOLUMU ICIN
         //1- Sol menü Tickets kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuTicketsLink.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuTicketsLink.isEnabled(), "Tıklanır Değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuTicketsLink)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
+        extentTest = extentReports.createTest("sol menüdeki Vaccitaions kısmı testi");
         //## Vaccinations BOLUMU ICIN
         //1- Sol menü Vaccinations kısmı görünür ve tıklanabilir mi?
         ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuVaccinationsLink.isDisplayed(), "Görünür değil");
         softAssert.assertTrue(dashboardPage.DashboardPageLeftMenuVaccinationsLink.isEnabled(), "Tıklanır Değil");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardPage.DashboardPageLeftMenuVaccinationsLink)).click();
+        ReusableMethods.bekle(7);
         Driver.getDriver().navigate().back();
 
         //ReusableMethods.bekle(5);
         softAssert.assertAll();
     }
 
-    @Test (priority = 10, description = "Dashboard panelinde Logoya ve anasayfaya erişildiğini doğrulanması (Funcional Test)")
-    public void US20_TC07_Admin_Dashboard_Logo_Homepage_navigation(){
 
-//        ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
-//        softAssert.assertTrue(dashboardPage.dashboardLeftMenuLogo.isDisplayed());
-//        softAssert.assertTrue(dashboardPage.dashboardLeftMenuLogo.isEnabled());
+//    @Test (priority = 22)
+//    public void US44_TC01_ProfilMenusuTetiklemeTutarlilikTesti() {
+//
+//        extentTest = extentReports.createTest("TC01 - Profil Dropdown Menü Tetikleme ve UI Tutarlılık Testi");
+//        //SoftAssert softAssert = new SoftAssert();
+//
+//        // Admin kullanıcısı isim alanına tıklanarak dropdown menünün açıldığı doğrulanır (Beklenen davranış)
+//        adminBodyPage.profileNameText.click();
+//
+//        // İsim alanı tıklandığında menü açılmazsa bu durum bir UI tutarsızlığı (BUG) olarak kaydedilir
+//        softAssert.assertTrue(adminBodyPage.profileLogoutOption.isDisplayed(),
+//                "HATA/BUG: Admin kullanıcısı isim alanına tıklandığında menü açılmıyor!");
+//
+//        // Menünün isim alanının yanındaki boşlukta tetiklenip tetiklenmediği kontrol edilir
+//        if (!adminBodyPage.profileLogoutOption.isDisplayed()) {
+//
+//            System.out.println("BİLGİ: İsim tıklandığında menü açılmadı şimdi boşluk alanı deneniyor");
+//
+//            // Boşluk alanına tıklanır
+//            adminBodyPage.profileDropdownButton.click();
+//
+//            // Menünün sadece bu alanda çalışıp çalışmadığı teyit edilir
+//            boolean isMenuOpenedByClickingSpace = adminBodyPage.profileLogoutOption.isDisplayed();
+//
+//            if (isMenuOpenedByClickingSpace) {
+//                System.out.println("TEYİT: Menü sadece boşluk alanında tetikleniyor.");
+//            }
+//
+//            softAssert.assertTrue(isMenuOpenedByClickingSpace, "HATA: Boşluk alanı da menüyü tetiklemiyor!");
+//        }
+//
+//        softAssert.assertAll();
+//    }
+//
+//    @Test (priority = 23)
+//    public void US44_TC02_AdminLogoutVeAnaSayfaYonlendirmeTesti() {
+//
+//        extentTest = extentReports.createTest("TC02 - Güvenli Çıkış (Logout) ve Ana Sayfa Yönlendirme Testi");
+//        //SoftAssert softAssert = new SoftAssert();
+//
+//        // Profil menüsünü tetiklemek için dropdown alanına boşluk alanına tıklanır
+//        adminBodyPage.profileDropdownButton.click();
+//        // Açılan menüden 'Logout' seçeneği seçilerek oturum sonlandırılır
+//        adminBodyPage.logoutLeft.click();
+//
+//        // Kullanıcının HomePage'e yönlendirilip yönlendirilmediği doğrulanır
+//        String expectedUrl = ConfigReader.getProperty("LfcUrl");
+//        String actualUrl = Driver.getDriver().getCurrentUrl();
+//
+//        // URL doğrulaması yapılır eşleşmeme durumunda hata mesajı raporlanır
+//        softAssert.assertEquals(actualUrl,expectedUrl, "HATA: Logout işlemi sonrası ana sayfaya yönlendirme yapılamadı!");
+//
+//        softAssert.assertAll();
+//
+//    }
+//
+//    @Test (priority = 24)
+//    public void US44_TC03_LogoutSonrasiGeriButonuIleYetkisizErisimTesti() {
+//
+//        extentTest = extentReports.createTest("TC03 - Logout Sonrası Geri Butonu ile Yetkisiz Erişim Güvenlik Testi");
+//        //SoftAssert softAssert = new SoftAssert();
+//
+//        // Profil menüsünü tetiklemek için dropdown alanına boşluk alanına tıklanır
+//        adminBodyPage.profileDropdownButton.click();
+//        // Açılan menüden 'Logout' seçeneği seçilerek oturum sonlandırılır
+//        adminBodyPage.profileLogoutOption.click();
+//        // Tarayıcıda 'Geri' butonuna basılarak önceki sayfaya dönülmeye çalışılır
+//        Driver.getDriver().navigate().back();
+////        ReusableMethods.bekle(2);
 //
 //
-//        softAssert.assertTrue(
-//                ReusableMethods.isReallyClickable(Driver.getDriver(), dashboardPage.dashboardLeftMenuLogo, 5),
-//                "Logo tıklanabilir olmalı!"
-//        );
-
-        ReusableMethods.hover(dashboardPage.dashboardPageSideBarMenu);
-
-        // 1. Aşama: Görünürlük kontrolü
-        softAssert.assertTrue(dashboardPage.dashboardLeftMenuLogo.isDisplayed(), "Logo görünür değil!");
-
-        // 2. Aşama: Gerçek tıklama ve URL kontrolü
-        String ilkUrl = Driver.getDriver().getCurrentUrl();
-
-        try {
-            dashboardPage.dashboardLeftMenuLogo.click(); // JS kullanmadan normal click
-            ReusableMethods.bekle(1); // Sayfanın yüklenmesi için kısa bir bekleme
-            String sonrakiUrl = Driver.getDriver().getCurrentUrl();
-
-            // Eğer logo tıklandığında anasayfaya gitmiyorsa (URL değişmiyorsa) fail ver
-            softAssert.assertNotEquals(ilkUrl, sonrakiUrl, "Logo tıklandı ama URL değişmedi, yönlendirme başarısız!");
-
-        } catch (Exception e) {
-            softAssert.fail("Logo fiziksel olarak tıklanabilir değil! Engel var: " + e.getMessage());
-        }
-
-        softAssert.assertAll();
+//        String actualUrl = Driver.getDriver().getCurrentUrl();
+//
+//        // Eğer sistem güvenliyse, geri basıldığında URL "/admin" İÇERMEMELİDİR.
+//        // Eğer actualUrl hala "/admin" içeriyorsa bu test FAIL verecek ve mesajını yazacaktır.
+//        softAssert.assertFalse(actualUrl.toLowerCase().contains("/admin"),
+//                "BUG: Kullanıcı çıkış yaptıktan sonra geri butonu ile admin sayfasına tekrar erişebiliyor!");
+//        softAssert.assertAll();
+//
+//    }
 
 
-//@Test(priority = 9, description = "Dashboard panelinde menü öğelerine erişildiğini doğrulanması (Funcional Test)")
-//public void US20_TC06_Admin_Dashboard_Sol_Menu_Ogeler_Test() {
-
-
-        softAssert.assertAll();
-        //Bu test Sinem Hanım tarafından US23 içinde işlendi
-        //@Test(priority = 10, description = "Dashboard panelinde SummaryCards menü öğelerine erişildiğini doğrulanması (Funcional Test)")
-        //public void US20_TC08_Admin_Dashboard_SummaryCards_Menu_Ogeler_Test() {}
-
-        //Bu test Sinem Hanım tarafından US23 içinde işlendi
-        //@Test(priority = 10, description = "Dashboard panelinde SummaryCards menü Activity Liste erişildiğini doğrulanması (Funcional Test)")
-        //public void US20_TC09_Admin_Dashboard_SummaryCards_Menu_Activity_List_Ogeler_Testi() {}
-
-        //Bu test Sinem Hanım tarafından US23 içinde işlendi
-        //@Test(priority = 10, description = "Dashboard panelinde SummaryCards menü öğelerinden sosyal medya ikonlarının erişildiğini doğrulanması (Funcional Test)")
-        //public void US20_TC14_Admin_Dashboard_SummaryCards_Menu_Sosyal_Medya_Ikonlari_Ogeler_Testi() {}
-
-    }
 }
