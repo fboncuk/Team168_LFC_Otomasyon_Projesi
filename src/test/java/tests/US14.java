@@ -54,7 +54,7 @@ public class US14 {
     @Test(priority = 2, description = "Kayıtlı kullanıcı yataklı departman sayfasına ve bilgilerine erişebilmelidir")
     public void US14_TC02_KullaniciDepartmanSayfasiErisim() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         ReusableMethods.bekle(1);
 
         // Kayıtlı kullanıcı girişi
@@ -81,7 +81,7 @@ public class US14 {
     @Test(priority = 3, description = "Kayıtlı kullanıcı farklı yataklı departmanlar için sayfa bilgilerine erişebilmelidir")
     public void US14_TC03_FarklıDepartmanBilgisiErisim() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         ReusableMethods.bekle(1);
 
         // Dental Care departmanına git
@@ -100,7 +100,7 @@ public class US14 {
     @Test(priority = 4, description = "Kayıtlı kullanıcı yataklı departman için randevu talebi oluşturabilmelidir")
     public void US14_TC04_RandevuTalebiOlusturma() {
 
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         ReusableMethods.bekle(1);
 
         // Wellness departman sayfasına git (randevu formu departman sayfasında bulunuyor)

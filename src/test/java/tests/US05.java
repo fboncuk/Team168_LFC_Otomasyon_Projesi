@@ -26,7 +26,7 @@ public class US05 {
         homeBodyPage = new HomeBodyPage();
         vacinationsMainPage = new VacinationsMainPage();
         softAssert = new SoftAssert();
-        Driver.getDriver().get(ConfigReader.getProperty("LcfUrl"));
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         ReusableMethods.bekle(2);
     }
 

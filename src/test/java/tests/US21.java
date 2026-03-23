@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.LcfHomePage.HomeBodyHeaderSectionPage;
 import pages.LcfHomePage.SignButonsPage;
+import utilities.ConfigReader;
 import utilities.Driver;
 
 import java.time.Duration;
@@ -27,7 +28,7 @@ public class US21 {
     // YARDIMCI METOT: ADMIN GİRİŞİ
     // =========================================================================
     private void basariliAdminGirisYap() {
-        Driver.getDriver().get(anasayfaUrl);
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         wait.until(ExpectedConditions.elementToBeClickable(signPage.signInLinki)).click();
 
         wait.until(ExpectedConditions.visibilityOf(signPage.emailKutusu)).sendKeys("mehmet.admin@loyalfriendcare.com");
@@ -40,7 +41,7 @@ public class US21 {
 
     @Test(priority = 1)
     public void TC01_AdminZiyaretciGorunumuTesti() {
-        Driver.getDriver().get(anasayfaUrl);
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         Assert.assertTrue(headerPage.siteLogo.isDisplayed(), "HATA: Logo görünmüyor!");
         Assert.assertTrue(signPage.signInLinki.isDisplayed(), "HATA: Sign In butonu görünmüyor!");
     }
@@ -48,7 +49,7 @@ public class US21 {
     @Test(priority = 2)
     public void TC02_AdminBasariliGirisTesti() {
         // 1. Giriş adımlarını manuel olarak burada yapıyoruz
-        Driver.getDriver().get(anasayfaUrl);
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         wait.until(ExpectedConditions.elementToBeClickable(signPage.signInLinki)).click();
 
         wait.until(ExpectedConditions.visibilityOf(signPage.emailKutusu)).sendKeys("mehmet.admin@loyalfriendcare.com");
@@ -110,7 +111,7 @@ public class US21 {
     @Test(priority = 6)
     public void TC06_AdminNegatifGirisTesti() {
 
-        Driver.getDriver().get(anasayfaUrl);
+        Driver.getDriver().get(ConfigReader.getProperty("LfcUrl"));
         wait.until(ExpectedConditions.elementToBeClickable(signPage.signInLinki)).click();
 
         // Doğru e-posta ama KASTEN YANLIŞ bir şifre giriyoruz!
